@@ -11,11 +11,13 @@ Feature: As a registered user with valid email and password I will be able to lo
     And I should see my account information
 
   Scenario: Staying in the Login Page as result of unregistered email address
-    When I insert an unregistered email and a valid password
+    When I insert an unregistered email
+    And I insert a valid password
     And I click on the login button
     Then I will stay in the Login Page
 
   Scenario: Staying in the Login Page as result of invalid password
-    When I insert a registered email and an invalid password
+    When I insert a registered email
+    And I insert an invalid password
     And I click on the login button
     Then I will stay in the Login Page
