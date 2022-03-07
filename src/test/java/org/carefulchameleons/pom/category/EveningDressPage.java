@@ -1,4 +1,12 @@
 package org.carefulchameleons.pom.category;
 
-public class EveningDressPage extends DressesPage {
+import org.openqa.selenium.WebDriver;
+
+public class EveningDressPage extends CategoryPage {
+
+    public EveningDressPage(WebDriver webDriver) {
+        super(webDriver, 10);
+    }
+
+
 }
