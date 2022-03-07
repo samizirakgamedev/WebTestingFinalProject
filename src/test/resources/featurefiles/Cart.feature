@@ -32,15 +32,15 @@ Feature: Access and manipulate Cart page
     Then Item's quantity should increase from 1 to 2
 
   Scenario: Decrease item's quantity
-    Given Given I am in the Cart Page
+    Given I am in the Cart Page
     And An item has been added and its quantity increased
     When I click on the minus button next to the item
     Then Item's quantity should be 1
 
   Scenario: Edit item's quantity though text box
-    Given Given I am in the Cart Page
+    Given I am in the Cart Page
     And An item has been added and its quantity increased
-    When I edit quantity textbox with number 4
+    When I edit quantity text box with number 4
     Then Item's quantity should be 4 and total should be updated
     And Total number of products should be 4
 
