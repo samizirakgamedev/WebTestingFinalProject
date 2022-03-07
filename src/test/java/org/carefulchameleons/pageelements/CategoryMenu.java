@@ -36,6 +36,21 @@ public class CategoryMenu{
             webDriver.findElement(summerDressesNav).click();
             return new SummerDressPage(webDriver);
         }
+
+        public DressesMenu assignCasualDressesNav(By casualDressesNav) {
+            this.casualDressesNav = casualDressesNav;
+            return this;
+        }
+
+        public DressesMenu assignEveningDressesNav(By eveningDressesNav) {
+            this.eveningDressesNav = eveningDressesNav;
+            return this;
+        }
+
+        public DressesMenu assignSummerDressesNav(By summerDressesNav) {
+            this.summerDressesNav = summerDressesNav;
+            return this;
+        }
     }
 
     public class WomenMenu{
@@ -88,6 +103,47 @@ public class CategoryMenu{
             webDriver.findElement(rootElement).findElement(eveningDresses);
             return new EveningDressPage(webDriver);
         }
+
+        public WomenMenu assignRootElement(By rootElement) {
+            this.rootElement = rootElement;
+            return this;
+
+        }
+
+        public WomenMenu assignBlouses(By blouses) {
+            this.blouses = blouses;
+            return this;
+        }
+
+        public WomenMenu assignTops(By tops) {
+            this.tops = tops;
+            return this;
+
+        }
+
+        public WomenMenu assignDresses(By dresses) {
+            this.dresses = dresses;
+            return this;
+
+        }
+
+        public WomenMenu assignCasualDresses(By casualDresses) {
+            this.casualDresses = casualDresses;
+            return this;
+
+        }
+
+        public WomenMenu assignEveningDresses(By eveningDresses) {
+            this.eveningDresses = eveningDresses;
+            return this;
+
+        }
+
+        public WomenMenu assignSummerDresses(By summerDresses) {
+            this.summerDresses = summerDresses;
+            return this;
+
+        }
     }
 
     private WebDriver webDriver;
@@ -129,5 +185,22 @@ public class CategoryMenu{
         actions.perform();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         return new WomenMenu(webDriver);
+    }
+
+    public CategoryMenu assignDressesNav(By dressesNav) {
+        this.dressesNav = dressesNav;
+        return this;
+    }
+
+    public CategoryMenu assigntShirtsNav(By tShirtsNav) {
+        this.tShirtsNav = tShirtsNav;
+        return this;
+
+    }
+
+    public CategoryMenu assignWomenNav(By womenNav) {
+        this.womenNav = womenNav;
+        return this;
+
     }
 }
