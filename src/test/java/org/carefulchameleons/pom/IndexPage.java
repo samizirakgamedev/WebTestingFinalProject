@@ -1,4 +1,7 @@
 package org.carefulchameleons.pom;
 
-public class IndexPage {
+public class IndexPage extends Page {
+
+
+
 }
