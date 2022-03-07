@@ -158,17 +158,17 @@ public class CartSummaryPage extends CartPage {
         return new IndexPage(getWebDriver());
     }
 
-    public IndexPage proceedToCheckoutLoggedIn(){
-        getWebDriver().findElement(By.className("cart_navigation"))
-                .findElement(By.className("button"))
-                .click();
-        return new IndexPage(getWebDriver());
-    }
-
-    public CartAddressPage proceedToCheckoutNotLoggedIn(){
+    public CartAddressPage proceedToCheckoutLoggedIn(){
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button"))
                 .click();
         return new CartAddressPage(getWebDriver());
+    }
+
+    public CartSingInPage proceedToCheckoutNotLoggedIn(){
+        getWebDriver().findElement(By.className("cart_navigation"))
+                .findElement(By.className("button"))
+                .click();
+        return new CartSingInPage(getWebDriver());
     }
 }
