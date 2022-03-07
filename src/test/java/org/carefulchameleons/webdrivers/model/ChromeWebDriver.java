@@ -11,11 +11,11 @@ public class ChromeWebDriver extends WebDriverManager{
     private ChromeDriverService chromeDriverService;
 
     @Override
-    protected void startService() {
+    protected void startService(String filepath) {
         if (null == chromeDriverService) {
             try {
                 chromeDriverService = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File("src/test/resources/chromedriver.exe"))
+                        .usingDriverExecutable(new File(filepath))
                         .usingAnyFreePort()
                         .build();
                 chromeDriverService.start();
@@ -23,6 +23,11 @@ public class ChromeWebDriver extends WebDriverManager{
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void startService() {
+        startService("src/test/resources/drivers/chromedriver.exe");
     }
 
     @Override

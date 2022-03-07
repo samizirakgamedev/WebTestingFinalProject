@@ -11,11 +11,11 @@ public class FirefoxWebDriver extends WebDriverManager{
     private GeckoDriverService firefoxDriverService;
 
     @Override
-    protected void startService() {
+    protected void startService(String filepath) {
         if (null == firefoxDriverService) {
             try {
                 firefoxDriverService = new GeckoDriverService.Builder()
-                        .usingDriverExecutable(new File("src/test/resources/geckodriver.exe"))
+                        .usingDriverExecutable(new File(filepath))
                         .usingAnyFreePort()
                         .build();
                 firefoxDriverService.start();
@@ -23,6 +23,11 @@ public class FirefoxWebDriver extends WebDriverManager{
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void startService() {
+        startService("src/test/resources/drivers/geckodriver.exe");
     }
 
     @Override

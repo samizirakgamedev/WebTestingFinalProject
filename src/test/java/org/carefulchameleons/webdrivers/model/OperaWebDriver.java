@@ -11,11 +11,11 @@ public class OperaWebDriver extends WebDriverManager{
     private OperaDriverService operaDriverService;
 
     @Override
-    protected void startService() {
+    protected void startService(String filepath) {
         if (null == operaDriverService) {
             try {
                 operaDriverService = new OperaDriverService.Builder()
-                        .usingDriverExecutable(new File("src/test/resources/operadriver.exe"))
+                        .usingDriverExecutable(new File(filepath))
                         .usingAnyFreePort()
                         .build();
                 operaDriverService.start();
@@ -23,6 +23,11 @@ public class OperaWebDriver extends WebDriverManager{
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void startService() {
+        startService("src/test/resources/drivers/operadriver.exe");
     }
 
     @Override

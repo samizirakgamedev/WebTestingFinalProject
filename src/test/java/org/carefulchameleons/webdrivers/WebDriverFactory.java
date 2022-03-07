@@ -10,6 +10,7 @@ public class WebDriverFactory {
             case CHROME -> driverManager = new ChromeWebDriver();
             case FIREFOX -> driverManager = new FirefoxWebDriver();
             case OPERA -> driverManager = new OperaWebDriver();
+            case SAFARI -> driverManager = new SafariWebDriver();
         }
         return driverManager;
     }
