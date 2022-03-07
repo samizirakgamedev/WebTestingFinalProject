@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class SignInPage extends Page {
 
-    private WebDriver webDriver;
-
     private final By EMAIL = new By.ById("email");
     private final By PASSWORD = new By.ById("passwd");
     private final By LOGIN_BUTTON = new By.ById("SubmitLogin");
@@ -16,7 +14,7 @@ public class SignInPage extends Page {
     private final By CREATE_BUTTON = new By.ById("SubmitCreate");
 
     public SignInPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
     public SignInPage enterLoginEmail(String emailString) {
