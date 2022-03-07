@@ -11,11 +11,13 @@ import java.util.List;
 public class ProductSelection {
     private WebDriver webDriver;
     private Page sourcePage;
-    private static final By PRODUCT_CONTAINER = new By.ByClassName("product-container");
-    private static final By PRODUCT_NAME = new By.ByClassName("product-name");
-    private static final By ADD_TO_CART_BUTTON = new By.ByClassName("ajax_add_to_cart_button");
-    private static final By CONTINUE_SHOPPING = new By.ByClassName("continue");
-    private static final By PROCEED_TO_CHECKOUT = new By.ByLinkText("Proceed to checkout");
+    private static final By
+            PRODUCT_CONTAINER = new By.ByClassName("product-container"),
+            PRODUCT_NAME = new By.ByClassName("product-name"),
+            ADD_TO_CART_BUTTON = new By.ByLinkText("Add to cart"),
+            PRICE = new By.ByClassName("product-price"),
+            CONTINUE_SHOPPING = new By.ByClassName("continue"),
+            PROCEED_TO_CHECKOUT = new By.ByLinkText("Proceed to checkout");
 
     public ProductSelection(WebDriver webDriver, Page sourcePage) {
         this.webDriver = webDriver;
@@ -35,6 +37,28 @@ public class ProductSelection {
             }
         }
         return false;
+    }
+
+    public double getPrice(String productName) {
+        List<WebElement> products = getProducts(webDriver);
+        double price = -1;
+        for(WebElement product : products) {
+            if(getProductName(product).equals(productName)) {
+                price = Double.parseDouble(product.findElement(PRICE).getText().substring(1));
+            }
+        }
+        return price;
+    }
+
+    public ProductPage goToProductPage(String productName) {
+        WebElement link = webDriver.findElement(By.linkText(productName));
+        String href = link.getAttribute("href");
+        link.click();
+        return new ProductPage(webDriver, href);
+    }
+
+    public Page returnToSource() {
+        return sourcePage;
     }
 
     public Page continueShopping() {
