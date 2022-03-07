@@ -21,6 +21,8 @@ public abstract class Page {
     private final By CART_SHIPPING_COST = new By.ByClassName("ajax_cart_shipping_cost");
     private final By CART_TOTAL_COST = new By.ByClassName("ajax_block_cart_total");
     private final By CART_CHECKOUT_BUTTON = new By.ById("button_order_cart");
+    private final By NEWSLETTER_TEXT_BOX = new By.ById("newsletter-input");
+    private final By NEWSLETTER_SUBMIT_BUTTON = new By.ByName("submitNewsletter");
     private final String EXPECTED_URL;
 
     public Page(WebDriver webDriver, String expected_url) {
@@ -111,5 +113,10 @@ public abstract class Page {
     public void clickCartCheckOutButton(){
         hoverCartButton();
         webDriver.findElement(CART_CHECKOUT_BUTTON).click();
+    }
+
+    public void enterNewsletterEmailAndClickSubmit(String email){
+        webDriver.findElement(NEWSLETTER_TEXT_BOX).sendKeys(email);
+        webDriver.findElement(NEWSLETTER_SUBMIT_BUTTON).click();
     }
 }
