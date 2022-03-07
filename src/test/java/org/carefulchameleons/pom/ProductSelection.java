@@ -24,7 +24,11 @@ public class ProductSelection {
         this.sourcePage = sourcePage;
     }
 
-    public List<WebElement> getProducts(WebDriver webDriver) {
+    /**
+     * Retrieves the products that are on the page.
+     * @return a list of WebElements representing the product containers.
+     */
+    public List<WebElement> getProducts() {
         return webDriver.findElements(PRODUCT_CONTAINER);
     }
 
