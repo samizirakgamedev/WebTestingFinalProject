@@ -20,7 +20,7 @@ public class LoginStepdefs {
     //@Before will only be staying in one StepDef
     @Before
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
         System.out.println("setup");
     }
 
@@ -28,7 +28,7 @@ public class LoginStepdefs {
     public void iAmOnTheLoginPage() {
         //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
         //webDriver = manager.getDriver();
-        webDriver.get("https://www.saucedemo.com");
+        webDriver.get("http://automationpractice.com/index.php");
 
         //homePage = new homePage(webDriver);
         //homePage.clickSignInButton();
@@ -53,7 +53,7 @@ public class LoginStepdefs {
     @Then("I will go to the My Account page")
     public void iWillGoToTheMyAccountPage() {
         //myAccountPage = new MyAccountPage(webdriver);
-        //Assertions.assertEquals("", myAccountPage.getCurrentURL());
+        //Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getCurrentURL());
     }
 
     @And("I should see my account information")
@@ -74,7 +74,7 @@ public class LoginStepdefs {
 
     @Then("I will stay in the Login Page")
     public void iWillStayInTheLoginPage() {
-        //Assertions.assertEquals("", loginPage.getCurrentURL());
+        //Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", loginPage.getCurrentURL());
     }
 
     @When("I insert a registered email")
@@ -92,7 +92,7 @@ public class LoginStepdefs {
     public static void tearDown() {
         if(webDriver != null) {
             //    manager.quitDriver();
-            System.out.println("tearDown li");
+            System.out.println("tearDown login");
         }
     }
 }
