@@ -5,6 +5,9 @@
 *.exe
 drivers/
 
+# Resource Files
+resources/
+
 # Log file
 *.log
 
