@@ -1,9 +1,6 @@
 package org.carefulchameleons.webdrivers;
 
-import org.carefulchameleons.webdrivers.model.ChromeWebDriver;
-import org.carefulchameleons.webdrivers.model.FirefoxWebDriver;
-import org.carefulchameleons.webdrivers.model.WebDriverManager;
-import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.carefulchameleons.webdrivers.model.*;
 
 public class WebDriverFactory {
     public static WebDriverManager getManager(WebDriverType type){
@@ -12,6 +9,7 @@ public class WebDriverFactory {
         switch (type){
             case CHROME -> driverManager = new ChromeWebDriver();
             case FIREFOX -> driverManager = new FirefoxWebDriver();
+            case OPERA -> driverManager = new OperaWebDriver();
         }
         return driverManager;
     }
