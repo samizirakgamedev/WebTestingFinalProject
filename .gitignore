@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# Drivers
+*.exe
+drivers/
+
 # Log file
 *.log
 
