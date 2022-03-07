@@ -23,4 +23,11 @@ public abstract class WebDriverManager {
         }
         return driver;
     }
+    public WebDriver getDriverWithCustomPath(String filePath) {
+        if (null == driver) {
+            startService(filePath);
+            createDriver();
+        }
+        return driver;
+    }
 }
