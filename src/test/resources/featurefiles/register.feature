@@ -2,7 +2,7 @@ Feature: As a customer, I want to be able to register an acccount on automationp
   Scenario: As a customer, I want to be able to navigate to the sign up page
     Given I open the Home Page
     When I click on Sign in button
-    Then The registration page opens
+    Then The registration page is open
 
   Scenario: As a customer I want to be able to create an account using a valid email address
     Given The registration page is open
