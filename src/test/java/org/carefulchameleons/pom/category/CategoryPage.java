@@ -1,9 +1,10 @@
 package org.carefulchameleons.pom.category;
 
 import org.carefulchameleons.pom.Page;
+import org.carefulchameleons.pom.ProductSelection;
 import org.openqa.selenium.WebDriver;
 
-public class CategoryPage extends Page implements HasProducts{
+public class CategoryPage extends Page {
     private static final String URL_BASE = "http://automationpractice.com/index.php?id_category=%d&controller=category";
 
     public CategoryPage(WebDriver webDriver, int categoryId) {
@@ -14,7 +15,7 @@ public class CategoryPage extends Page implements HasProducts{
         return String.format(URL_BASE, categoryID);
     }
 
-    public void addToCart(Product p) {
-        
+    public ProductSelection getProductSelection() {
+        return new ProductSelection(webDriver, this);
     }
 }
