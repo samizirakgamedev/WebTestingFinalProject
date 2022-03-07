@@ -12,7 +12,7 @@ Feature: As a customer, I want to be able to register an acccount on automationp
 
   Scenario Outline: As a customer I can't create an account if the email is incorrect format
     Given The registration page is open
-    When I type an invalid <email> address
+    When I type an invalid <email> email
     And I click the Create an account button
     Then The error <message> should be displayed
     Examples:
@@ -24,9 +24,9 @@ Feature: As a customer, I want to be able to register an acccount on automationp
 
   Scenario Outline: As a customer I can't create another account with the same email address
     Given The registration page is open
-    When I type a valid <email> address
+    When I type a valid <email> email address
     And I click the Create an account button
-    Then the error <message> should be displayed
+    Then The error <message> should be displayed on the screen
     Examples:
       | email         | message                                                           |
       | test@test.com | An account using this email address has already been registered.  |
@@ -37,25 +37,25 @@ Feature: As a customer, I want to be able to register an acccount on automationp
     And I type my last name
     And I type my address
     And I type my city
-    And I select my state
-    And I type my zip code
+    And I select my state from the list
+    And I type my 12345 zipcode
     And I type my mobile phone
     And I click the Register button
     Then The My Account page should open
 
     Scenario Outline: As a customer I shouldn't be able to create an account if one of the required fields is missing
       Given The Create an account page is open
-      When I type my <firstname>
-      And I type my <lastname>
-      And I type my <address>
-      And I type my <city>
-      And I select my <state>
-      And I type my <zipcode>
-      And I type my <mobilephone>
+      When I type my <firstname> first name
+      And I type my <lastname> last name
+      And I type my <address> address
+      And I type my <city> city
+      And I choose my <state> state
+      And I type my <zipcode> zipcode
+      And I type my <mobilephone> mobile phone
       And I click the Register button
-      Then The <error> message should be displayed
+      Then The <errormessage> message should be displayed
       Examples:
-        | firstname | lastname | address | city | state   | zipcode | mobilephone | error                                                                           |
+        | firstname | lastname | address | city | state   | zipcode | mobilephone | errormessage                                                                    |
         | test      | test     | test    | test |         | 12345   | 12345678    | This country requires you to choose a State.                                    |
         | test      | test     | test    | test | Florida | 12345   | 12345678    | firstname is required.                                                          |
         | test      |          | test    | test | Florida | 12345   | 12345678    | lastname is required.                                                           |
