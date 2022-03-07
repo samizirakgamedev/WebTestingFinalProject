@@ -24,18 +24,15 @@ public class ChromeWebDriver extends WebDriverManager{
             }
         }
     }
-
     @Override
     protected void startService() {
         startService("src/test/resources/drivers/chromedriver.exe");
     }
-
     @Override
     protected void stopService() {
         if (null != chromeDriverService && chromeDriverService.isRunning())
             chromeDriverService.stop();
     }
-
     @Override
     protected void createDriver() {
         ChromeOptions options = new ChromeOptions();

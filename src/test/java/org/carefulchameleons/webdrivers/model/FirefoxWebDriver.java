@@ -24,18 +24,15 @@ public class FirefoxWebDriver extends WebDriverManager{
             }
         }
     }
-
     @Override
     protected void startService() {
         startService("src/test/resources/drivers/geckodriver.exe");
     }
-
     @Override
     protected void stopService() {
         if (null != firefoxDriverService && firefoxDriverService.isRunning())
             firefoxDriverService.stop();
     }
-
     @Override
     protected void createDriver() {
         FirefoxOptions options = new FirefoxOptions();

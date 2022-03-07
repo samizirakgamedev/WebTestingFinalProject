@@ -24,18 +24,15 @@ public class OperaWebDriver extends WebDriverManager{
             }
         }
     }
-
     @Override
     protected void startService() {
         startService("src/test/resources/drivers/operadriver.exe");
     }
-
     @Override
     protected void stopService() {
         if (null != operaDriverService && operaDriverService.isRunning())
             operaDriverService.stop();
     }
-
     @Override
     protected void createDriver() {
         OperaOptions options = new OperaOptions();

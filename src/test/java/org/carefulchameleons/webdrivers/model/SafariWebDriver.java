@@ -11,7 +11,6 @@ public class SafariWebDriver extends WebDriverManager{
     protected void startService(String filepath) {
         startService();
     }
-
     @Override
     protected void startService() {
         if (null == safariDriverService) {
@@ -25,13 +24,11 @@ public class SafariWebDriver extends WebDriverManager{
             }
         }
     }
-
     @Override
     protected void stopService() {
         if (null != safariDriverService && safariDriverService.isRunning())
             safariDriverService.stop();
     }
-
     @Override
     protected void createDriver() {
         driver = new SafariDriver();
