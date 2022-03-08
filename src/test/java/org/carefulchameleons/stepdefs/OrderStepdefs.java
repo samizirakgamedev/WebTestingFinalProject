@@ -49,7 +49,8 @@ public class OrderStepdefs {
 
     @And("I click on the sub menu T-shirts")
     public void iClickOnTheSubMenuTShirts() {
-        //add the method call
+        //WomensPage womensPage = new WomensPage(webdriver);
+        //womensPage.clickTShirts();
     }
 
     @And("I hover over the first product displayed")
@@ -59,61 +60,69 @@ public class OrderStepdefs {
 
     @And("I click on the More button")
     public void iClickOnTheMoreButton() {
-        //add the method call
+        ////womensPage.clickMore();
     }
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-        //add the method call
+        //ItemPage itemPage = new ItemPage(webdriver);
+        //itemPage.clickPlus();
     }
 
     @And("I select size M")
     public void iSelectSizeM() {
-        //add the method call
+        //itemPage.clickSizeDropdown();
+        //itemPage.clickM();
     }
 
     @And("I click on the Add to cart blue button")
     public void iClickOnTheAddToCartBlueButton() {
-        //add the method call
+        //itemPage.clickAddToCart();
     }
 
     @And("I click on the green Proceed to checkout button")
     public void iClickOnTheGreenProceedToCheckoutButton() {
-        //add the method call
+        //itemPage.clickProceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
-        //add the method call
+        //SummaryPage summaryPage = new SummaryPage(webdriver);
+        //summaryPage.clickProceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
-        //add the method call
+        //AddressPage addressPage = new AddressPage(webdriver);
+        //addressPage.clickProceedToCheckout();
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        //add the method call
+        //ShippingPage shippingPage = new ShippingPage(webdriver);
+        //shippingPage.clickTermsAndConditions();
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
     public void iClickOnTheProceedToCheckoutButtonOnTheShippingPage() {
-        //add the method call
+        //shippingPage.clickProceedToCheckout();
     }
 
     @And("I click on the Pay by bank wire button")
     public void iClickOnThePayByBankWireButton() {
-        //add the method call
+
+        //paymentPage.clickPayByBankWire();
     }
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        //add the method call
+        //PaymentPage paymentPage = new PaymentPage(webdriver);
+        //paymentPage.clickConfirmMyOrder();
     }
 
     @Then("Your order on My Store is complete. should be displayed")
     public void yourOrderOnMyStoreIsCompleteShouldBeDisplayed() {
+        //CheckoutFinal checkoutFinal = new CheckoutFinal(webdriver);
         //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle());
     }
 

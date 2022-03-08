@@ -1,18 +1,19 @@
 package org.carefulchameleons.pom.myaccounts;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MyAddressPage extends AccountDetailsPage {
+public class MyAddressPage extends MyAccountSharedPage {
 
     private final By ADDRESSES = new By.ByClassName("addresses");
     private final By ALERT = new By.ByClassName("alert-warning");
 
     public MyAddressPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, "http://automationpractice.com/index.php?controller=addresses");
     }
 
     public WebElement getAddress(int index) {

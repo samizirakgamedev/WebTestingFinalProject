@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MyPersonalInfoPage extends AccountDetailsPage {
+public class MyPersonalInfoPage extends MyAccountSharedPage {
 
     private final By SOCIAL_TITLE_MR = new By.ById("id_gender1");
     private final By SOCIAL_TITLE_MRS = new By.ById("id_gender2");
@@ -25,7 +25,7 @@ public class MyPersonalInfoPage extends AccountDetailsPage {
     private final By SAVE_BUTTON = new By.ByName("submitIdentity");
 
     public MyPersonalInfoPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, "http://automationpractice.com/index.php?controller=identity");
     }
 
     public MyPersonalInfoPage chooseSocialTitleAsMr(){
