@@ -16,6 +16,20 @@ public class CartShippingPage extends CartPage {
             return false;
     }
 
+    public void clickTOS(){
+        getWebDriver().findElement(By.className("iframe")).click();
+    }
+
+    // only works after using clickTOS()
+    public String getTOSTitle(){
+        String title = getWebDriver().
+                    findElement(By.className("cms")).
+                    findElement(By.className("page-heading")).
+                    getText();
+        getWebDriver().findElement(By.className("fancybox-close")).click();
+        return title;
+    }
+
     public CartSummaryPage continueShopping(){
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))

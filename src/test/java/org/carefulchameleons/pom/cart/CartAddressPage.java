@@ -1,6 +1,7 @@
 package org.carefulchameleons.pom.cart;
 
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,6 +27,29 @@ public class CartAddressPage extends CartPage {
             return true;
         else
             return false;
+    }
+
+    public MyAddressPage updateDeliveryAddress(){
+        getWebDriver().findElement(By.id("address_delivery")).findElement(By.className("button")).click();
+        return new MyAddressPage(getWebDriver());
+    }
+
+    public MyAddressPage updateBillingAddress(){
+        getWebDriver().findElement(By.id("address_invoice")).findElement(By.className("button")).click();
+        return new MyAddressPage(getWebDriver());
+    }
+
+    public MyAddressPage addAddress(){
+        getWebDriver().findElement(By.className("address_add")).findElement(By.className("button")).click();
+        return new MyAddressPage(getWebDriver());
+    }
+
+    public void enterTextToTextArea(String text){
+        getWebDriver().findElement(By.tagName("textarea")).sendKeys(text);
+    }
+
+    public String getTextFromTextArea(){
+        return getWebDriver().findElement(By.tagName("textarea")).getText();
     }
 
     public CartSummaryPage continueShopping(){

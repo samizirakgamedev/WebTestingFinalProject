@@ -1,6 +1,8 @@
 package org.carefulchameleons.pom.cart;
 
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.category.CategoryPage;
+import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,10 +36,41 @@ public class CartSummaryPage extends CartPage {
         return getProduct(index).findElement(By.partialLinkText("color")).getText();
     }
 
+    // only works when there is no discount
     public double getProductUnitPrice(int index) {
         String priceString = getProduct(index)
                 .findElement(By.className("cart_unit")).
                 findElement(By.className("price")).getText();
+        priceString = priceString.replaceAll("[$]", "");
+        double price = Double.parseDouble(priceString);
+        return price;
+    }
+
+    // only works when there is a discount
+    public double getProductOldPrice(int index) {
+        String priceString = getProduct(index)
+                .findElement(By.className("cart_unit")).
+                findElement(By.className("old-price")).getText();
+        priceString = priceString.replaceAll("[$]", "");
+        double price = Double.parseDouble(priceString);
+        return price;
+    }
+
+    // only works when there is a discount
+    public double getProductSpecialPrice(int index) {
+        String priceString = getProduct(index)
+                .findElement(By.className("cart_unit")).
+                findElement(By.className("special-price")).getText();
+        priceString = priceString.replaceAll("[$]", "");
+        double price = Double.parseDouble(priceString);
+        return price;
+    }
+
+    // only works when there is a discount
+    public double getProductDiscount(int index) {
+        String priceString = getProduct(index)
+                .findElement(By.className("cart_unit")).
+                findElement(By.className("price-percent-reduction")).getText();
         priceString = priceString.replaceAll("[$]", "");
         double price = Double.parseDouble(priceString);
         return price;
@@ -149,6 +182,33 @@ public class CartSummaryPage extends CartPage {
         return getWebDriver().
                 findElement(By.id("summary_products_quantity"))
                 .getText();
+    }
+
+    public CategoryPage clickProductImage(int index){
+        getProduct(index).findElement(By.tagName("img")).click();
+        String idSubstring = getProduct(index)
+                .findElement(By.className("cart_ref")).toString();
+        idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
+        int id = Integer.parseInt(idSubstring);
+        return new CategoryPage(getWebDriver(), 0);
+    }
+
+    public CategoryPage clickProductName(int index){
+        getProduct(index).findElement(By.className("product_name")).click();
+        String idSubstring = getProduct(index)
+                .findElement(By.className("cart_ref")).toString();
+        idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
+        int id = Integer.parseInt(idSubstring);
+        return new CategoryPage(getWebDriver(), 0);
+    }
+
+    public CategoryPage clickProductDescription(int index){
+        getProduct(index).findElement(By.partialLinkText("color")).click();
+        String idSubstring = getProduct(index)
+                .findElement(By.className("cart_ref")).toString();
+        idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
+        int id = Integer.parseInt(idSubstring);
+        return new CategoryPage(getWebDriver(), 0);
     }
 
     public IndexPage continueShopping(){
