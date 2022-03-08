@@ -1,12 +1,16 @@
 package org.carefulchameleons.pom;
 
+import org.carefulchameleons.pom.enums.ColourSelection;
+import org.carefulchameleons.pom.enums.SizeSelection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class ProductPage extends Page{
     private static final By
             QUANTITY_UP = new By.ByClassName("product_quantity_up"),
             QUANTITY_DOWN = new By.ByClassName("product_quantity_down"),
+            SIZE_DROPDOWN = new By.ById("group_1"),
             ADD_TO_WISHLIST = new By.ById("wishlist_button"),
             SEND_TO_A_FRIEND = new By.ById("send_friend_button"),
             NAME_OF_YOUR_FRIEND = new By.ById("friend_name"),
@@ -39,11 +43,23 @@ public class ProductPage extends Page{
         return this;
     }
 
-    public ProductPage selectSize() {
+    /**
+     * Selects the given size from the dropdown list
+     * @param s The size to select
+     * @return this, for fluidity
+     */
+    public ProductPage selectSize(SizeSelection s) {
+        (new Select(webDriver.findElement(SIZE_DROPDOWN))).selectByValue(String.format("%d", s.ID));
         return this;
     }
 
-    public ProductPage selectColour() {
+    /**
+     * Selects the given colour from the right
+     * @param c The colour to select
+     * @return this, for fluidity
+     */
+    public ProductPage selectColour(ColourSelection c) {
+        webDriver.findElement(new By.ById(String.format("color_%d", c.ID))).click();
         return this;
     }
 
