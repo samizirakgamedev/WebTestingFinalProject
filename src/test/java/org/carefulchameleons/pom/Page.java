@@ -1,44 +1,42 @@
 package org.carefulchameleons.pom;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 
 public abstract class Page {
 
     protected WebDriver webDriver;
-    private final By HEADER_IMAGE = new By.ByClassName("img-responsive");
-    private final By CONTACT_US_LINK = new By.ByLinkText("Contact us");
-    private final By SIGN_IN = new By.ByClassName("login");
-    private final By LOGO = new By.ByClassName("logo");
-    private final By SEARCH_BOX = new By.ById("search_query_top");
-    private final By SEARCH_BUTTON = new By.ByName("submit_search");
-    private final By CART_BUTTON = new By.ByLinkText("Cart");
-    private final By CART_ITEM_IMAGES = new By.ByClassName("cart-images");
-    private final By CART_QUANTITY = new By.ByClassName("ajax_cart_quantity");
-    private final By CART_ITEM_QUANTITIES = new By.ByClassName("quantity");
-    private final By CART_PRODUCT_NAMES = new By.ByClassName("cart_block_product_name");
-    private final By CART_SHIPPING_COST = new By.ByClassName("ajax_cart_shipping_cost");
-    private final By CART_TOTAL_COST = new By.ByClassName("ajax_block_cart_total");
-    private final By CART_CHECKOUT_BUTTON = new By.ById("button_order_cart");
+    private final PageHeader PAGE_HEADER;
+    private final PageFooter PAGE_FOOTER;
+
     private final String EXPECTED_URL;
 
     public Page(WebDriver webDriver, String expected_url) {
         this.webDriver = webDriver;
         EXPECTED_URL = expected_url;
+        PAGE_HEADER = new PageHeader(webDriver);
+        PAGE_FOOTER = new PageFooter(webDriver);
     }
 
-    public WebDriver getWebDriver(){
+    public WebDriver getWebDriver() {
         return webDriver;
     }
 
-    public String getCurrentURL(){
+    public PageHeader getPageHeader(){
+        return PAGE_HEADER;
+    }
+
+    public PageFooter getPageFooter() {
+        return PAGE_FOOTER;
+    }
+
+    public String getCurrentURL() {
         return webDriver.getCurrentUrl();
     }
 
-    public boolean isUrlCorrect(){
+    public boolean isUrlCorrect() {
         return getCurrentURL().equals(EXPECTED_URL);
     }
+<<<<<<< HEAD
 
     public void clickHeaderImage(){
         webDriver.findElement(HEADER_IMAGE).click();
