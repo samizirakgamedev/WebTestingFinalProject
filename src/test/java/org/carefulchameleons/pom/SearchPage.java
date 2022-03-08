@@ -1,6 +1,5 @@
 package org.carefulchameleons.pom;
 
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,11 +8,11 @@ import java.util.List;
 
 public class SearchPage extends Page {
 
-    private final By searchBar = new By.ById("search_query_top");
-    private final By sortByDropDown = new By.ById("selectProductSort");
-    private final By sortByOptions = new By.ByTagName("option");
-    private final By gridView = new By.ByClassName("icon-th-large");
-    private final By listView = new By.ByClassName("icon-th-list");
+    private final By SEARCH_BAR = new By.ById("search_query_top");
+    private final By SORT_BY_DROP_DOWN = new By.ById("selectProductSort");
+    private final By SORT_BY_OPTIONS = new By.ByTagName("option");
+    private final By GRID_VIEW = new By.ByClassName("icon-th-large");
+    private final By LIST_VIEW = new By.ByClassName("icon-th-list");
 
     public SearchPage(WebDriver webDriver, String expected_url) {
         super(webDriver, null);
@@ -24,22 +23,22 @@ public class SearchPage extends Page {
     }
 
     public String getTextInSearchBox(){
-        return webDriver.findElement(searchBar).getAttribute("value");
+        return webDriver.findElement(SEARCH_BAR).getAttribute("value");
     }
 
     public SearchPage clickGridView(){
-        webDriver.findElement(gridView).click();
+        webDriver.findElement(GRID_VIEW).click();
         return new SearchPage(webDriver, null);
     }
 
     public SearchPage clickListView(){
-        webDriver.findElement(listView).click();
+        webDriver.findElement(LIST_VIEW).click();
         return new SearchPage(webDriver, null);
     }
 
     public SearchPage sortByPriceLowestToHighest(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("price:asc")){
@@ -50,8 +49,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByPriceHighestToLowest(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("price:desc")){
@@ -62,8 +61,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByProductNameAToZ(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("name:asc")){
@@ -74,8 +73,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByProductNameZToA(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("name:desc")){
@@ -86,8 +85,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByQuantityInDesc(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("quantity:desc")){
@@ -98,8 +97,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByReferenceLowestFirst(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("reference:asc")){
@@ -110,8 +109,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage sortByReferenceHighestFirst(){
-        webDriver.findElement(sortByDropDown).click();
-        List<WebElement> sortOptions = webDriver.findElements(sortByOptions);
+        webDriver.findElement(SORT_BY_DROP_DOWN).click();
+        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
         for (WebElement element : sortOptions) {
             if (element.getAttribute("value").equals("reference:desc")){
