@@ -98,7 +98,7 @@ public class MyAccountStepdefs {
 
     @When("I click on the My Wishlist button")
     public void iClickOnTheMyWishlistButton() {
-        myAccountPage.goToMyWishListPage();
+        myAccountPage.goToMyWishListsPage();
     }
 
     @Then("The My Wishlist page should open")
@@ -238,7 +238,7 @@ public class MyAccountStepdefs {
 
     @Given("I am on My Wishlist page")
     public void iAmOnMyWishlistPage() {
-        myAccountPage.goToMyWishListPage();
+        myAccountPage.goToMyWishListsPage();
     }
 
     @When("I fill the name field for my wishlist")
