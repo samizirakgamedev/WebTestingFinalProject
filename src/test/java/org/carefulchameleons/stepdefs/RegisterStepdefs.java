@@ -10,6 +10,7 @@ public class RegisterStepdefs {
 
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
+        webDriver.navigate().to("http://automationpractice.com/");
     }
 
     @When("I click on Sign in button")
@@ -18,9 +19,9 @@ public class RegisterStepdefs {
 
     @Given("The registration page is open")
     public boolean theRegistrationPageIsOpen() {
-        boolean isOpen = false;
-
-        return isOpen;
+        boolean theRegistrationPageOpen = false;
+        if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication")) theRegistrationPageOpen = true;
+        return theRegistrationPageOpen;
     }
 
     @And("I click the Create an account button")
@@ -28,7 +29,10 @@ public class RegisterStepdefs {
     }
 
     @Then("The Create an account page should open")
-    public void theCreateAnAccountPageShouldOpen() {
+    public boolean theCreateAnAccountPageShouldOpen() {
+        boolean createAccountPageOpen = false;
+        if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")) createAccountPageOpen = true;
+        return createAccountPageOpen;
     }
 
     @When("I type an invalid <email> address")
@@ -44,7 +48,10 @@ public class RegisterStepdefs {
     }
 
     @Given("The Create an account page is open")
-    public void theCreateAnAccountPageIsOpen() {
+    public boolean theCreateAnAccountPageIsOpen() {
+        boolean createAccountPageOpen = false;
+        if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")) createAccountPageOpen = true;
+        return createAccountPageOpen;
     }
 
     @When("I type my test first name")
@@ -112,7 +119,10 @@ public class RegisterStepdefs {
     }
 
     @Then("The My Account page should open")
-    public void theMyAccountPageShouldOpen() {
+    public boolean theMyAccountPageShouldOpen() {
+        boolean myAccountPageOpen = false;
+        if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
+        return myAccountPageOpen;
     }
 
     @When("I type my <firstname>")
