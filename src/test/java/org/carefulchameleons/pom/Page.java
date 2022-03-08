@@ -52,8 +52,9 @@ public abstract class Page {
         webDriver.findElement(SIGN_IN).click();
     }
 
-    public void clickLogo(){
+    public IndexPage clickLogo(){
         webDriver.findElement(LOGO).click();
+        return new IndexPage(webDriver);
     }
 
     public void enterTextInSearchBox(String text){

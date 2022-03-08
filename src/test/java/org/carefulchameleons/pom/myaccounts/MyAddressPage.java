@@ -1,4 +1,4 @@
 package org.carefulchameleons.pom.myaccounts;
 
-public class MyAddressPage extends AccountDetailsPage {
-}
+//public class MyAddressPage extends AccountDetailsPage {
+//}

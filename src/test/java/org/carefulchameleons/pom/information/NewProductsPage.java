@@ -1,9 +1,6 @@
 package org.carefulchameleons.pom.information;
 
-import org.carefulchameleons.pageelements.CartMenu;
-import org.carefulchameleons.pageelements.CategoryMenu;
-import org.carefulchameleons.pageelements.LogoButton;
-import org.carefulchameleons.pageelements.SearchBar;
+import org.carefulchameleons.pageelements.*;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.Page;
 import org.carefulchameleons.pom.SearchPage;
@@ -16,15 +13,14 @@ import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
 
 public class NewProductsPage extends Page {
-//
+
 //    public static void main(String[] args) {
 //        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 //
 //        WebDriver webDriver = new ChromeDriver();
 //        webDriver.get("http://automationpractice.com/index.php?controller=new-products");
-////        new NewProductsPage(webDriver).clickOnTShirtsInWomen();
-//        new CartMenu(webDriver).hoverOnShoppingCart().clickCheckout();
-//
+//        //new NewProductsPage(webDriver).;
+//        new LeftColumn(webDriver).ourStoresBlock().clickOurStores();
 //        //webDriver.close();
 //        //webDriver.quit();
 //    }
@@ -108,6 +104,7 @@ public class NewProductsPage extends Page {
     public TShirtsPage clickOnTShirtsInWomen(){
         return new CategoryMenu(webDriver).hoverOverWomen().clickOnTShirts();
     }
+
 //    public BlousesPage clickOnBlousesInWomen(){
 //        return new CategoryMenu(webDriver).hoverOverWomen().clickOnBlouses();
 //    }

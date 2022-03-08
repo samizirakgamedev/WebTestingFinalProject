@@ -1,4 +1,4 @@
 package org.carefulchameleons.pom.cart;
 
-public class CheckPaymentPage extends CartPage {
-}
+//public class CheckPaymentPage extends CartPage {
+//}
