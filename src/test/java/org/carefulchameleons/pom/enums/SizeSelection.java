@@ -5,20 +5,17 @@ import org.openqa.selenium.WebDriver;
 
 public enum SizeSelection {
 
-    S("layered_id_attribute_group_1"),
-    M("layered_id_attribute_group_2"),
-    L("layered_id_attribute_group_3");
+    S(1),
+    M(2),
+    L(3);
 
-    public String ID;
+    public int ID;
 
-    SizeSelection(String id) {
+    SizeSelection(int id) {
         ID = id;
     }
 
     public void clickCheckbox(WebDriver webDriver){
-        webDriver.findElement(new By.ById(S.ID)).click();
-        webDriver.findElement(new By.ById(M.ID)).click();
-        webDriver.findElement(new By.ById(L.ID)).click();
-
+        webDriver.findElement(new By.ById(String.format("layered_id_attribute_group_%d", ID))).click();
     }
 }

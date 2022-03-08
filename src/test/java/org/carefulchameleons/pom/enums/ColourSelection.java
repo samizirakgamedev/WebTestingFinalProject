@@ -5,34 +5,23 @@ import org.openqa.selenium.WebDriver;
 
 public enum ColourSelection {
 
-//    GREEN("green"),
-//    YELLOW("yellow"),
-//    BLUE("blue"),
-//    ORANGE("orange"),
-//    BEIGE("beige"),
-//    WHITE("white"),
-//    PINK("pink"),
-//    BLACK("black");
-//
-//    public String NAME;
+    GREEN(15),
+    YELLOW(16),
+    BLUE(14),
+    ORANGE(13),
+    BEIGE(7),
+    WHITE(8),
+    PINK(24),
+    BLACK(11);
 
-    GREEN("layered_id_attribute_group_15"),
-    YELLOW("layered_id_attribute_group_16"),
-    BLUE("layered_id_attribute_group_14"),
-    ORANGE("layered_id_attribute_group_13"),
-    BEIGE("layered_id_attribute_group_7"),
-    WHITE("layered_id_attribute_group_8"),
-    PINK("layered_id_attribute_group_24"),
-    BLACK("layered_id_attribute_group_11");
+    public int ID;
 
-    public String ID;
-
-    ColourSelection(String id) {
+    ColourSelection(int id) {
         ID = id;
     }
 
     public void clickCheckbox(WebDriver webDriver){
-        webDriver.findElement(new By.ById(ID)).click();
+        webDriver.findElement(new By.ById(String.format("layered_id_attribute_group_%d", ID))).click();
 
     }
 }
