@@ -1,7 +1,7 @@
 package org.carefulchameleons.pom;
 
 import io.cucumber.java.ro.Si;
-import org.carefulchameleons.pom.category.WomenPage;
+import org.carefulchameleons.pom.category.CategoryPage;
 import org.carefulchameleons.pom.information.*;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.MyAddressPage;
@@ -42,9 +42,9 @@ public class PageFooter {
         webDriver.findElement(NEWSLETTER_SUBMIT_BUTTON).click();
     }
 
-    public WomenPage goToWomenCategory() {
+    public CategoryPage goToWomenCategory() {
         webDriver.findElement(WOMEN_CATEGORY_LINK).click();
-        return new WomenPage();
+        return new CategoryPage(webDriver, 3);
         // TODO - Need to update arguments when cart summary page is done
     }
 
@@ -56,7 +56,7 @@ public class PageFooter {
 
     public NewProductsPage goToNewProducts() {
         webDriver.findElement(NEW_PRODUCTS_LINK).click();
-        return new NewProductsPage();
+        return new NewProductsPage(webDriver);
         // TODO - Need to update arguments when new products page is done
     }
 

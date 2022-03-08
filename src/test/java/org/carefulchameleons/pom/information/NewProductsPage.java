@@ -36,7 +36,7 @@ public class NewProductsPage extends Page {
     private By homeNavIcon;
     private By womenNav;
     private By topsNav;
-    NewProductsPage(WebDriver webDriver){
+    public NewProductsPage(WebDriver webDriver){
         super(webDriver, "http://automationpractice.com/index.php?controller=new-products");
         this.webDriver = webDriver;
 
