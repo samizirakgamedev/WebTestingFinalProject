@@ -67,7 +67,7 @@ public class PageHeader {
 
     public CartSummaryPage clickCartButton() {
         webDriver.findElement(CART_BUTTON).click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(webDriver);
         // TODO - Need to update arguments when cart summary page is done
     }
 
@@ -110,7 +110,7 @@ public class PageHeader {
     public CartSummaryPage clickCartCheckOutButton() {
         hoverCartButton();
         webDriver.findElement(CART_CHECKOUT_BUTTON).click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(webDriver);
         // TODO - Need to update arguments when cart summary page is done
     }
 }

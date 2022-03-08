@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MyAddressPageMy extends MyAccountSharedPage {
+public class MyAddressPage extends MyAccountSharedPage {
 
     private final By ADDRESSES = new By.ByClassName("addresses");
     private final By ALERT = new By.ByClassName("alert-warning");
 
-    public MyAddressPageMy(WebDriver webDriver) {
+    public MyAddressPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=addresses");
     }
 
@@ -21,17 +21,17 @@ public class MyAddressPageMy extends MyAccountSharedPage {
         return addresses.get(index);
     }
 
-    public AddressSharedPageMy updateAddressDetails(int index) {
+    public AddressDetailsPage updateAddressDetails(int index) {
 
         getAddress(index)
                 .findElement(By.className("address_update"))
                 .findElement(By.xpath("//a[title='Update']"))
                 .click();
 
-        return new AddressSharedPageMy(webDriver);
+        return new AddressDetailsPage(webDriver);
     }
 
-    public MyAddressPageMy deleteAddress(int index) {
+    public MyAddressPage deleteAddress(int index) {
 
         getAddress(index)
                 .findElement(By.className("address_update"))
@@ -41,26 +41,26 @@ public class MyAddressPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy addNewAddressDetails(int index) {
+    public AddressDetailsPage addNewAddressDetails(int index) {
 
         webDriver.findElement(By.className("main-page-indent"))
                 .findElement(By.xpath("//a[title='Add an address']"))
                 .click();
 
-        return new AddressSharedPageMy(webDriver);
+        return new AddressDetailsPage(webDriver);
     }
 
     public String getAlertMessage() {
         return webDriver.findElement(ALERT).getText();
     }
 
-    public AddressSharedPageMy addNewAddressDetailsAlert() {
+    public AddressDetailsPage addNewAddressDetailsAlert() {
 
         webDriver.findElement(ALERT)
                 .findElement(By.linkText("Add a new address"))
                 .click();
 
-        return new AddressSharedPageMy(webDriver);
+        return new AddressDetailsPage(webDriver);
     }
 
     public boolean hasAddresses() {

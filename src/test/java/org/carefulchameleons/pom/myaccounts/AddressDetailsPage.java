@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddressSharedPageMy extends MyAccountSharedPage {
+public class AddressDetailsPage extends MyAccountSharedPage {
 
     private final By FIRST_NAME = new By.ById("firstname");
     private final By LAST_NAME = new By.ById("lastname");
@@ -27,11 +27,11 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
 
     private final By SAVE_BUTTON = new By.ById("submitAddress");
 
-    public AddressSharedPageMy(WebDriver webDriver) {
+    public AddressDetailsPage(WebDriver webDriver) {
         super(webDriver, null);
     }
 
-    public AddressSharedPageMy inputFirstName(String firstName) {
+    public AddressDetailsPage inputFirstName(String firstName) {
 
         WebElement element = webDriver.findElement(FIRST_NAME);
 
@@ -41,7 +41,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputLastName(String lastName) {
+    public AddressDetailsPage inputLastName(String lastName) {
 
         WebElement element = webDriver.findElement(LAST_NAME);
 
@@ -51,7 +51,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputCompany(String company) {
+    public AddressDetailsPage inputCompany(String company) {
 
         WebElement element = webDriver.findElement(COMPANY);
 
@@ -61,7 +61,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
     
-    public AddressSharedPageMy inputAddressOne(String addressOne) {
+    public AddressDetailsPage inputAddressOne(String addressOne) {
 
         WebElement element = webDriver.findElement(ADDRESS_ONE);
 
@@ -71,7 +71,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputAddressTwo(String addressTwo) {
+    public AddressDetailsPage inputAddressTwo(String addressTwo) {
 
         WebElement element = webDriver.findElement(ADDRESS_TWO);
 
@@ -81,7 +81,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputCity(String city) {
+    public AddressDetailsPage inputCity(String city) {
 
         WebElement element = webDriver.findElement(CITY);
 
@@ -91,19 +91,19 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy chooseStateByName(String stateName) {
+    public AddressDetailsPage chooseStateByName(String stateName) {
         Select dropState = new Select(webDriver.findElement(STATE));
         dropState.selectByVisibleText(stateName);
         return this;
     }
 
-    public AddressSharedPageMy chooseStateByIndex(int index) {
+    public AddressDetailsPage chooseStateByIndex(int index) {
         Select dropState = new Select(webDriver.findElement(STATE));
         dropState.selectByIndex(index);
         return this;
     }
 
-    public AddressSharedPageMy inputZipCode(String zipCode) {
+    public AddressDetailsPage inputZipCode(String zipCode) {
 
         WebElement element = webDriver.findElement(ZIP_CODE);
 
@@ -113,19 +113,19 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy chooseCountryByName(String countryName) {
+    public AddressDetailsPage chooseCountryByName(String countryName) {
         Select dropState = new Select(webDriver.findElement(COUNTRY));
         dropState.selectByVisibleText(countryName);
         return this;
     }
 
-    public AddressSharedPageMy chooseCountryByIndex(int index) {
+    public AddressDetailsPage chooseCountryByIndex(int index) {
         Select dropState = new Select(webDriver.findElement(COUNTRY));
         dropState.selectByIndex(index);
         return this;
     }
 
-    public AddressSharedPageMy inputHomePhone(String homePhone) {
+    public AddressDetailsPage inputHomePhone(String homePhone) {
 
         WebElement element = webDriver.findElement(HOME_PHONE);
 
@@ -135,7 +135,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputMobilePhone(String mobilePhone) {
+    public AddressDetailsPage inputMobilePhone(String mobilePhone) {
 
         WebElement element = webDriver.findElement(MOBILE_PHONE);
 
@@ -145,7 +145,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputAdditionalInformation(String additionalInfo) {
+    public AddressDetailsPage inputAdditionalInformation(String additionalInfo) {
 
         WebElement element = webDriver.findElement(ADDITIONAL_INFO);
 
@@ -155,7 +155,7 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public AddressSharedPageMy inputAddressAlias(String addressAlias) {
+    public AddressDetailsPage inputAddressAlias(String addressAlias) {
 
         WebElement element = webDriver.findElement(ADDRESS_ALIAS);
 
@@ -209,13 +209,13 @@ public class AddressSharedPageMy extends MyAccountSharedPage {
         return webDriver.findElement(ADDRESS_ALIAS).getAttribute("value");
     }
 
-    public AddressSharedPageMy clickSaveButton() {
+    public AddressDetailsPage clickSaveButton() {
         webDriver.findElement(SAVE_BUTTON).click();
         return this;
     }
 
-    public MyAddressPageMy goToMyAddressPage() {
-        return new MyAddressPageMy(webDriver);
+    public MyAddressPage goToMyAddressPage() {
+        return new MyAddressPage(webDriver);
     }
 
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MyPersonalInfoPageMy extends MyAccountSharedPage {
+public class MyPersonalInfoPage extends MyAccountSharedPage {
 
     private final By SOCIAL_TITLE_MR = new By.ById("id_gender1");
     private final By SOCIAL_TITLE_MRS = new By.ById("id_gender2");
@@ -24,36 +24,36 @@ public class MyPersonalInfoPageMy extends MyAccountSharedPage {
     private final By SPECIAL_OFFERS_TICK_BOX = new By.ById("optin");
     private final By SAVE_BUTTON = new By.ByName("submitIdentity");
 
-    public MyPersonalInfoPageMy(WebDriver webDriver) {
+    public MyPersonalInfoPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=identity");
     }
 
-    public MyPersonalInfoPageMy chooseSocialTitleAsMr(){
+    public MyPersonalInfoPage chooseSocialTitleAsMr(){
         webDriver.findElement(SOCIAL_TITLE_MR).click();
-        return new MyPersonalInfoPageMy(webDriver);
+        return new MyPersonalInfoPage(webDriver);
     }
 
-    public MyPersonalInfoPageMy chooseSocialTitleAsMrs(){
+    public MyPersonalInfoPage chooseSocialTitleAsMrs(){
         webDriver.findElement(SOCIAL_TITLE_MRS).click();
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInFirstNameTextBox(String text){
+    public MyPersonalInfoPage enterTextInFirstNameTextBox(String text){
         webDriver.findElement(FIRST_NAME_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInLastNameTextBox(String text){
+    public MyPersonalInfoPage enterTextInLastNameTextBox(String text){
         webDriver.findElement(LAST_NAME_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInEmailTextBox(String text){
+    public MyPersonalInfoPage enterTextInEmailTextBox(String text){
         webDriver.findElement(EMAIL_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy selectDayForDateOfBirth(int day){
+    public MyPersonalInfoPage selectDayForDateOfBirth(int day){
         webDriver.findElement(DAY_FOR_DATE_OF_BIRTH).click();
         List<WebElement> dayOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
 
@@ -65,7 +65,7 @@ public class MyPersonalInfoPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public MyPersonalInfoPageMy selectMonthForDateOfBirth(int month){
+    public MyPersonalInfoPage selectMonthForDateOfBirth(int month){
         webDriver.findElement(MONTH_FOR_DATE_OF_BIRTH).click();
         List<WebElement> monthOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
 
@@ -77,7 +77,7 @@ public class MyPersonalInfoPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public MyPersonalInfoPageMy selectYearForDateOfBirth(int year){
+    public MyPersonalInfoPage selectYearForDateOfBirth(int year){
         webDriver.findElement(YEAR_FOR_DATE_OF_BIRTH).click();
         List<WebElement> monthOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
 
@@ -89,32 +89,32 @@ public class MyPersonalInfoPageMy extends MyAccountSharedPage {
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInCurrentPasswordTextBox(String text){
+    public MyPersonalInfoPage enterTextInCurrentPasswordTextBox(String text){
         webDriver.findElement(CURRENT_PASSWORD_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInNewPasswordTextBox(String text){
+    public MyPersonalInfoPage enterTextInNewPasswordTextBox(String text){
         webDriver.findElement(NEW_PASSWORD_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy enterTextInConfirmPasswordTextBox(String text){
+    public MyPersonalInfoPage enterTextInConfirmPasswordTextBox(String text){
         webDriver.findElement(CONFIRM_PASSWORD_TEXT_BOX).sendKeys(text);
         return this;
     }
 
-    public MyPersonalInfoPageMy clickTickBoxForNewsLetter(){
+    public MyPersonalInfoPage clickTickBoxForNewsLetter(){
         webDriver.findElement(NEWSLETTER_TICK_BOX).click();
         return this;
     }
 
-    public MyPersonalInfoPageMy clickTickBoxForSpecialOffers(){
+    public MyPersonalInfoPage clickTickBoxForSpecialOffers(){
         webDriver.findElement(SPECIAL_OFFERS_TICK_BOX).click();
         return this;
     }
 
-    public MyPersonalInfoPageMy clickSaveButton(){
+    public MyPersonalInfoPage clickSaveButton(){
         webDriver.findElement(SAVE_BUTTON).click();
         return this;
     }
