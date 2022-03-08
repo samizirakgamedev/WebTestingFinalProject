@@ -1,6 +1,5 @@
 package org.carefulchameleons.pom;
 
-import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.carefulchameleons.pom.information.ContactUs;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.openqa.selenium.By;
