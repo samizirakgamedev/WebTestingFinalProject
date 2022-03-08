@@ -25,7 +25,7 @@ public class MyPersonalInfoPage extends AccountDetailsPage {
     private final By SAVE_BUTTON = new By.ByName("submitIdentity");
 
     public MyPersonalInfoPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, "http://automationpractice.com/index.php?controller=identity");
     }
 
     public MyPersonalInfoPage chooseSocialTitleAsMr(){
