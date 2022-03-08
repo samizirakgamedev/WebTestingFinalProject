@@ -3,22 +3,26 @@ package org.carefulchameleons.pom.cart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class BankWirePaymentPage extends CartPage {
-    public BankWirePaymentPage(WebDriver webDriver) {
+/**
+ * POM class responsible for handling the bank wire payment page in the cart.
+ */
+public class CartBankWirePaymentPage extends CartPage {
+
+    public CartBankWirePaymentPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?fc=module&module=bankwire&controller=payment");
     }
 
-    public PaymentPage otherPaymentMethods(){
+    public CartPaymentPage otherPaymentMethods() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
-        return new PaymentPage(getWebDriver());
+        return new CartPaymentPage(getWebDriver());
     }
 
-    public PaymentConfirmationPage confirmOrder(){
+    public CartPaymentConfirmationPage confirmOrder() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button"))
                 .click();
-        return new PaymentConfirmationPage(getWebDriver());
+        return new CartPaymentConfirmationPage(getWebDriver());
     }
 }

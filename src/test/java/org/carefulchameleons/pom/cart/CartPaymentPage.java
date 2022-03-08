@@ -4,15 +4,17 @@ import org.carefulchameleons.pom.category.CategoryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
-public class PaymentPage extends CartPage {
-    public PaymentPage(WebDriver webDriver) {
+/**
+ * POM class responsible for handling the payment page in the cart.
+ */
+public class CartPaymentPage extends CartPage {
+    public CartPaymentPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=order&multi-shipping=");
     }
 
-    public WebElement getProduct(int index){
+    public WebElement getProduct(int index) {
         List<WebElement> cartItems = getWebDriver().
                 findElements(By.className("cart_item"));
         return cartItems.get(index);
@@ -21,8 +23,7 @@ public class PaymentPage extends CartPage {
     public int getProductQuantity(int index) {
         String stringQuantity = getProduct(index).
                 findElement(By.className("cart_quantity")).getText();
-        int quantity = Integer.parseInt(stringQuantity);
-        return quantity;
+        return Integer.parseInt(stringQuantity);
     }
 
     public String getProductName(int index) {
@@ -39,8 +40,7 @@ public class PaymentPage extends CartPage {
                 .findElement(By.className("cart_unit")).
                 findElement(By.className("price")).getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
     // only works when there is a discount
@@ -49,8 +49,7 @@ public class PaymentPage extends CartPage {
                 .findElement(By.className("cart_unit")).
                 findElement(By.className("old-price")).getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
     // only works when there is a discount
@@ -59,8 +58,7 @@ public class PaymentPage extends CartPage {
                 .findElement(By.className("cart_unit")).
                 findElement(By.className("special-price")).getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
     // only works when there is a discount
@@ -69,23 +67,21 @@ public class PaymentPage extends CartPage {
                 .findElement(By.className("cart_unit")).
                 findElement(By.className("price-percent-reduction")).getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
-    public String getStockStatus(int index){
+    public String getStockStatus(int index) {
         return getProduct(index)
                 .findElement(By.className("cart_avail"))
                 .findElement(By.className("label")).getText();
     }
 
-    public double getTotalProductPrice(int index){
+    public double getTotalProductPrice(int index) {
         String priceString = getProduct(index)
                 .findElement(By.className("cart_total")).
                 findElement(By.className("price")).getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
     public int getCartSize() {
@@ -103,71 +99,65 @@ public class PaymentPage extends CartPage {
         return -1;
     }
 
-    public double getTotalProducts(){
+    public double getTotalProducts() {
         String priceString = getWebDriver()
                 .findElement(By.id("total_product"))
                 .getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
-    public double getTotalShipping(){
+    public double getTotalShipping() {
         String priceString = getWebDriver()
                 .findElement(By.id("total_shipping"))
                 .getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
-    public double getTotalPriceWithTax(){
+    public double getTotalPriceWithTax() {
         String priceString = getWebDriver()
                 .findElement(By.id("total_price"))
                 .getText();
         priceString = priceString.replaceAll("[$]", "");
-        double price = Double.parseDouble(priceString);
-        return price;
+        return Double.parseDouble(priceString);
     }
 
-    public CategoryPage clickProductImage(int index){
+    public CategoryPage clickProductImage(int index) {
         getProduct(index).findElement(By.tagName("img")).click();
         String idSubstring = getProduct(index)
                 .findElement(By.className("cart_ref")).toString();
         idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
-        int id = Integer.parseInt(idSubstring);
-        return new CategoryPage(getWebDriver(), 0);
+        return new CategoryPage(getWebDriver(), Integer.parseInt(idSubstring));
     }
 
-    public CategoryPage clickProductName(int index){
+    public CategoryPage clickProductName(int index) {
         getProduct(index).findElement(By.className("product_name")).click();
         String idSubstring = getProduct(index)
                 .findElement(By.className("cart_ref")).toString();
         idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
-        int id = Integer.parseInt(idSubstring);
-        return new CategoryPage(getWebDriver(), 0);
+        return new CategoryPage(getWebDriver(), Integer.parseInt(idSubstring));
     }
 
-    public CategoryPage clickProductDescription(int index){
+    public CategoryPage clickProductDescription(int index) {
         getProduct(index).findElement(By.partialLinkText("color")).click();
         String idSubstring = getProduct(index)
                 .findElement(By.className("cart_ref")).toString();
         idSubstring = idSubstring.substring(idSubstring.lastIndexOf('_') + 1);
-        int id = Integer.parseInt(idSubstring);
-        return new CategoryPage(getWebDriver(), 0);
+        return new CategoryPage(getWebDriver(), Integer.parseInt(idSubstring));
     }
 
-    public BankWirePaymentPage payByBankWire(){
+    public CartBankWirePaymentPage payByBankWire() {
         getWebDriver().findElement(By.className("bankwire")).click();
-        return new BankWirePaymentPage(getWebDriver());
+        return new CartBankWirePaymentPage(getWebDriver());
     }
 
-    public CheckPaymentPage payByCheck(){
+    public CartCheckPaymentPage payByCheck() {
         getWebDriver().findElement(By.className("cheque")).click();
-        return new CheckPaymentPage(getWebDriver());
+        return new CartCheckPaymentPage(getWebDriver());
     }
 
-    public CartShippingPage continueShopping(){
+    public CartShippingPage continueShopping() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
