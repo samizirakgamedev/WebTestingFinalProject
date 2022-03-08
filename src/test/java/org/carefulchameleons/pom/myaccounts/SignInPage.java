@@ -17,8 +17,8 @@ public class SignInPage extends Page {
 
     private final By TOP_HOME_BUTTON = new By.ByClassName("home");
 
-    public SignInPage(WebDriver webDriver) {
-        super(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+    public SignInPage(WebDriver webDriver, String expectedUrl) {
+        super(webDriver, expectedUrl);
     }
 
     public SignInPage enterLoginEmail(String emailString) {
