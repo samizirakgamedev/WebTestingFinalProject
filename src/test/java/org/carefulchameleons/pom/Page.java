@@ -29,6 +29,10 @@ public abstract class Page {
         return pageFooter;
     }
 
+    public PageFooter getPageFooter() {
+        return pageFooter;
+    }
+
     public String getCurrentURL() {
         return webDriver.getCurrentUrl();
     }
