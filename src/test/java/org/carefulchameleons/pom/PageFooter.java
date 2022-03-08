@@ -1,12 +1,11 @@
 package org.carefulchameleons.pom;
 
-import io.cucumber.java.ro.Si;
 import org.carefulchameleons.pom.category.CategoryPage;
 import org.carefulchameleons.pom.information.*;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.MyAddressPage;
+import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
 import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
-import org.carefulchameleons.pom.myaccounts.OrderHistory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -92,25 +91,25 @@ public class PageFooter {
 
     public MyAccountPage goToMyAccount(){
         webDriver.findElement(MY_ACCOUNT_LINK).click();
-        return new MyAccountPage();
+        return new MyAccountPage(webDriver);
         // TODO - Need to update arguments when my account page is done
     }
 
-    public OrderHistory goToMyOrders(){
+    public MyOrderHistoryPage goToMyOrders(){
         webDriver.findElement(MY_ORDERS_LINK).click();
-        return new OrderHistory();
+        return new MyOrderHistoryPage(webDriver);
         // TODO - Need to update arguments when order history page is done
     }
 
     public MyAddressPage goToMyAddresses(){
         webDriver.findElement(MY_ADDRESSES_LINK).click();
-        return new MyAddressPage();
+        return new MyAddressPage(webDriver);
         // TODO - Need to update arguments when my address page is done
     }
 
     public MyPersonalInfoPage goToMyPersonalInfo(){
         webDriver.findElement(MY_PERSONAL_INFO).click();
-        return new MyPersonalInfoPage();
+        return new MyPersonalInfoPage(webDriver);
         // TODO - Need to update arguments when my personal info page is done
     }
 
