@@ -1,7 +1,7 @@
 Feature: Able to navigate to Twitter page from the website
 
   Background: Checking Twitter page
-    Given I am on the Home page
+    Given I am on the Home Page
 
   Scenario: Getting to the Twitter page from the Home page
     When I click on TWITTER icon
