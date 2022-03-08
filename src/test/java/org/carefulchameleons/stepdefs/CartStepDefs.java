@@ -1,20 +1,31 @@
 package org.carefulchameleons.stepdefs;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pom.cart.CartPage;
+import org.openqa.selenium.WebDriver;
 
 public class CartStepDefs {
-    @Given("I am in the Cart Page")
+    private static WebDriver webDriver;
+    private static CartPage cartPage;
+
+    @Before
+    public void setup() {
+
+    }
+
+
+    @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
+        webDriver.get("http://automationpractice.com/index.php?controller=order");
     }
     
     @And("No items have been added")
     public void noItemsHaveBeenAdded() {
-        
-        
-        
+
     }
 
     @Then("Cart should be empty")
