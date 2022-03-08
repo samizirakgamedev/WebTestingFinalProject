@@ -48,7 +48,7 @@ public class MyOrderHistoryPage extends AccountDetailsPage {
     }
 
     public boolean hasOrderHistory() {
-        List<WebElement> order = webDriver.findElements(By.id("order-list"));
+        List<WebElement> order = webDriver.findElements(ORDER_LIST);
         return order.size() != 0;
     }
 
