@@ -8,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 public class MyAccountPage extends Page {
 
     private final By MY_ACCOUNT_LIST = new By.ByClassName("myaccount-link-list");
-    private final By HOME_BUTTON = new By.ByXPath("//a[@title='Home']");
+    private final By BOTTOM_HOME_BUTTON = new By.ByXPath("//a[@title='Home']");
+    private final By TOP_HOME_BUTTON = new By.ByClassName("home");
 
     public MyAccountPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=my-account");
@@ -29,8 +30,13 @@ public class MyAccountPage extends Page {
         return new MyPersonalInfoPageMy(webDriver);
     }
 
-    public IndexPage goToBackToHome() {
-        webDriver.findElement(HOME_BUTTON).click();
+    public IndexPage clickHomeButtonTop() {
+        webDriver.findElement(TOP_HOME_BUTTON).click();
+        return new IndexPage(webDriver);
+    }
+
+    public IndexPage clickHomeButtonBottom() {
+        webDriver.findElement(BOTTOM_HOME_BUTTON).click();
         return new IndexPage(webDriver);
     }
 

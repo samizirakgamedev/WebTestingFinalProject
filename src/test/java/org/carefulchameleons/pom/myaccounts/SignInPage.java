@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.myaccounts;
 
+import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,8 @@ public class SignInPage extends Page {
 
     private final By CREATE_EMAIL = new By.ById("email_create");
     private final By CREATE_BUTTON = new By.ById("SubmitCreate");
+
+    private final By TOP_HOME_BUTTON = new By.ByClassName("home");
 
     public SignInPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
@@ -42,8 +45,14 @@ public class SignInPage extends Page {
         return this;
     }
 
-    public void clickCreateButton() {
+    public SignInPage clickCreateButton() {
         webDriver.findElement(CREATE_BUTTON).click();
+        return this;
+    }
+
+    public IndexPage clickHomeButtonTop() {
+        webDriver.findElement(TOP_HOME_BUTTON).click();
+        return new IndexPage(webDriver);
     }
 
 }
