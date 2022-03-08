@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MyOrderHistoryPage extends AccountDetailsPage {
+public class MyOrderHistoryPageMy extends MyAccountSharedPage {
 
     private final By ORDER_LIST = new By.ById("order-list");
     private final By ALERT = new By.ByClassName("alert-warning");
 
-    public MyOrderHistoryPage(WebDriver webDriver) {
+    public MyOrderHistoryPageMy(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=history");
     }
 
@@ -56,7 +56,7 @@ public class MyOrderHistoryPage extends AccountDetailsPage {
         return webDriver.findElement(ALERT).getText();
     }
 
-    public MyOrderHistoryPage clickDetailsButton() {
+    public MyOrderHistoryPageMy clickDetailsButton() {
         webDriver.findElement(By.className("history_detail"))
                 .findElement(By.className("btn")).click();
         return this;

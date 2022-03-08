@@ -3,9 +3,9 @@ package org.carefulchameleons.pom;
 import org.carefulchameleons.pom.category.CategoryPage;
 import org.carefulchameleons.pom.information.*;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
-import org.carefulchameleons.pom.myaccounts.MyAddressPage;
-import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
-import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
+import org.carefulchameleons.pom.myaccounts.MyAddressPageMy;
+import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPageMy;
+import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPageMy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -95,21 +95,21 @@ public class PageFooter {
         // TODO - Need to update arguments when my account page is done
     }
 
-    public MyOrderHistoryPage goToMyOrders(){
+    public MyOrderHistoryPageMy goToMyOrders(){
         webDriver.findElement(MY_ORDERS_LINK).click();
-        return new MyOrderHistoryPage(webDriver);
+        return new MyOrderHistoryPageMy(webDriver);
         // TODO - Need to update arguments when order history page is done
     }
 
-    public MyAddressPage goToMyAddresses(){
+    public MyAddressPageMy goToMyAddresses(){
         webDriver.findElement(MY_ADDRESSES_LINK).click();
-        return new MyAddressPage(webDriver);
+        return new MyAddressPageMy(webDriver);
         // TODO - Need to update arguments when my address page is done
     }
 
-    public MyPersonalInfoPage goToMyPersonalInfo(){
+    public MyPersonalInfoPageMy goToMyPersonalInfo(){
         webDriver.findElement(MY_PERSONAL_INFO).click();
-        return new MyPersonalInfoPage(webDriver);
+        return new MyPersonalInfoPageMy(webDriver);
         // TODO - Need to update arguments when my personal info page is done
     }
 

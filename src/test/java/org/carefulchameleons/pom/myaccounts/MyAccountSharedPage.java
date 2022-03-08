@@ -5,12 +5,12 @@ import org.carefulchameleons.pom.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AccountDetailsPage extends Page {
+public class MyAccountSharedPage extends Page {
 
     private final By TOP_NAVIGATION = new By.ByClassName("breadcrumb");
     private final By FOOTER_LINKS = new By.ByClassName("footer_links");
 
-    public AccountDetailsPage(WebDriver webDriver, String expectedUrl) {
+    public MyAccountSharedPage(WebDriver webDriver, String expectedUrl) {
         super(webDriver, expectedUrl);
     }
 

@@ -14,19 +14,19 @@ public class MyAccountPage extends Page {
         super(webDriver, "http://automationpractice.com/index.php?controller=my-account");
     }
 
-    public MyOrderHistoryPage goToMyOrderHistoryPage() {
+    public MyOrderHistoryPageMy goToMyOrderHistoryPage() {
         webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Orders']")).click();
-        return new MyOrderHistoryPage(webDriver);
+        return new MyOrderHistoryPageMy(webDriver);
     }
 
-    public MyAddressPage goToMyAddressesPage() {
+    public MyAddressPageMy goToMyAddressesPage() {
         webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Addresses']")).click();
-        return new MyAddressPage(webDriver);
+        return new MyAddressPageMy(webDriver);
     }
 
-    public MyPersonalInfoPage goToMyPersonalInfoPage() {
+    public MyPersonalInfoPageMy goToMyPersonalInfoPage() {
         webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Information']")).click();
-        return new MyPersonalInfoPage(webDriver);
+        return new MyPersonalInfoPageMy(webDriver);
     }
 
     public IndexPage goToBackToHome() {
