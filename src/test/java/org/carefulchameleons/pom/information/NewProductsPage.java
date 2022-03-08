@@ -129,6 +129,17 @@ public class NewProductsPage extends Page {
         return new CategoryMenu(webDriver).clickTShirt();
     }
 
+    public SearchPage clickOnTopSellers(){
+        return new LeftColumn(webDriver).topSellersBlock().clickTopSellers();
+    }
+
+    public OurStores clickOurStoresButton(){
+        return new LeftColumn(webDriver).ourStoresBlock().clickOurStores();
+    }
+
+    public OurStores clickDiscoverOurStoresButton(){
+        return new LeftColumn(webDriver).ourStoresBlock().clickDiscoverOurStores();
+    }
 
 }
 

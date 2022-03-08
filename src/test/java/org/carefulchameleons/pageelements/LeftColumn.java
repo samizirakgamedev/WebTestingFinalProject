@@ -63,9 +63,9 @@ public class LeftColumn {
             this.webDriver = webDriver;
         }
 
-        public BestSellersPage clickToSellers(){
+        public SearchPage clickTopSellers(){
             this.webDriver.findElement(root).findElement(topSellers).click();
-            return new BestSellersPage(webDriver);
+            return new SearchPage(webDriver);
         }
 
         public BestSellersPage clickAllBestSellers(){
