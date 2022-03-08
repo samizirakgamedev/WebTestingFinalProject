@@ -32,19 +32,29 @@ public class ProductSelection {
         return webDriver.findElements(PRODUCT_CONTAINER);
     }
 
-    public boolean addToCart(String productName) {
-        List<WebElement> products = getProducts(webDriver);
+    /**
+     * Adds the given product to the cart.
+     * @param productName The name of the product to be added to the cart
+     * @return this, for fluidity
+     */
+    public ProductSelection addToCart(String productName) {
+        List<WebElement> products = getProducts();
         for(WebElement product : products) {
             if(getProductName(product).equals(productName)) {
                 addProduct(product);
-                return true;
+                break;
             }
         }
-        return false;
+        return this;
     }
 
+    /**
+     * Retrieves the price of the given product
+     * @param productName The name of the product to get the price of
+     * @return the price of the product, or $-1 if the product was not found on the page
+     */
     public double getPrice(String productName) {
-        List<WebElement> products = getProducts(webDriver);
+        List<WebElement> products = getProducts();
         double price = -1;
         for(WebElement product : products) {
             if(getProductName(product).equals(productName)) {
@@ -54,6 +64,11 @@ public class ProductSelection {
         return price;
     }
 
+    /**
+     * Navigates to the page associated with the given product
+     * @param productName The name of the product to go to the page for
+     * @return The page associated with the product
+     */
     public ProductPage goToProductPage(String productName) {
         WebElement link = webDriver.findElement(By.linkText(productName));
         String href = link.getAttribute("href");
@@ -61,25 +76,46 @@ public class ProductSelection {
         return new ProductPage(webDriver, href);
     }
 
+    /**
+     * Returns to the general page this product selection was on
+     * @return the general page this product selection was on
+     */
     public Page returnToSource() {
         return sourcePage;
     }
 
-    public Page continueShopping() {
+    /**
+     * Clicks the "Continue shopping" button
+     * @return this, for fluidity
+     */
+    public ProductSelection continueShopping() {
         webDriver.findElement(CONTINUE_SHOPPING).click();
-        return sourcePage;
+        return this;
     }
 
+    /**
+     * Clicks the "Proceed to checkout" button, navigating to the cart summary page
+     * @return the cart summary page
+     */
     public CartSummaryPage proceedToCheckout() {
         webDriver.findElement(PROCEED_TO_CHECKOUT).click();
         return new CartSummaryPage(webDriver);
     }
 
+    /**
+     * Adds the given product to the cart
+     * @param product the product to add to the cart
+     */
     private void addProduct(WebElement product) {
         Actions actions = new Actions(webDriver);
         actions.moveToElement(product).moveToElement(product.findElement(ADD_TO_CART_BUTTON)).click();
     }
 
+    /**
+     * Retrieves the name of the given product
+     * @param product the product-container WebElement representing the product
+     * @return the product's name
+     */
     private String getProductName(WebElement product) {
         return product.findElement(PRODUCT_NAME).getText();
     }
