@@ -46,5 +46,11 @@ public class CartMenu {
         return new CartContent(webDriver);
     }
 
-
+    public Object hoverOnShoppingCartNoItems(Object page){
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(webDriver.findElement(shoppingCart).findElement(By.tagName("a")), 1, 1);
+        actions.perform();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        return page;
+    }
 }
