@@ -13,7 +13,7 @@ public class MyOrderHistoryPage extends AccountDetailsPage {
     private final By ALERT = new By.ByClassName("alert-warning");
 
     public MyOrderHistoryPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, "http://automationpractice.com/index.php?controller=history");
     }
 
     public WebElement getOrder(int index) {

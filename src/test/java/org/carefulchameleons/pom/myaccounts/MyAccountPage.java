@@ -19,11 +19,6 @@ public class MyAccountPage extends Page {
         return new MyOrderHistoryPage(webDriver);
     }
 
-    public MyCreditSlipsPage goToMyCreditSlipsPage() {
-        webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Credit slips']")).click();
-        return new MyCreditSlipsPage(webDriver);
-    }
-
     public MyAddressPage goToMyAddressesPage() {
         webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Addresses']")).click();
         return new MyAddressPage(webDriver);
@@ -32,11 +27,6 @@ public class MyAccountPage extends Page {
     public MyPersonalInfoPage goToMyPersonalInfoPage() {
         webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Information']")).click();
         return new MyPersonalInfoPage(webDriver);
-    }
-
-    public MyWishListPage goToMyWishListPage() {
-        webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='My wishlists']")).click();
-        return new MyWishListPage(webDriver);
     }
 
     public IndexPage goToBackToHome() {

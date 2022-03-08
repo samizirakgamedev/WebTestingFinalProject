@@ -27,12 +27,14 @@ public class SignInPage extends Page {
         return this;
     }
 
-    public void clickLoginButton() {
+    public SignInPage clickLoginButton() {
         webDriver.findElement(LOGIN_BUTTON).click();
+        return this;
     }
 
-    public void login(String emailString, String passwordString) {
+    public SignInPage login(String emailString, String passwordString) {
         enterLoginEmail(emailString).enterLoginPassword(passwordString).clickLoginButton();
+        return this;
     }
 
     public SignInPage enterCreateEmail(String emailString) {

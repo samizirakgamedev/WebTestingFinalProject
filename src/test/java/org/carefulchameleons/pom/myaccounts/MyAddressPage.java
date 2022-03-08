@@ -12,7 +12,7 @@ public class MyAddressPage extends AccountDetailsPage {
     private final By ALERT = new By.ByClassName("alert-warning");
 
     public MyAddressPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, "http://automationpractice.com/index.php?controller=addresses");
     }
 
     public WebElement getAddress(int index) {
