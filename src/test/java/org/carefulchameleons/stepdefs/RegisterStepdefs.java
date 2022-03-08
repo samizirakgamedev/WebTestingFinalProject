@@ -5,8 +5,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
-    public class RegisterStepdefs {
-        private static WebDriver webDriver;
+public class RegisterStepdefs {
+    private static WebDriver webDriver;
 
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
@@ -35,11 +35,11 @@ import org.openqa.selenium.WebDriver;
     public void iTypeAnInvalidEmailAddress() {
     }
 
-    @Then("The error <message> should be displayed")
+    @Then("The error An account using this email address has already been registered. should be displayed on the screen")
     public void theErrorMessageShouldBeDisplayed() {
     }
 
-    @When("I type a valid <email> address")
+    @When("I type a valid test@test.com email address")
     public void iTypeAValidEmailAddress() {
     }
 
@@ -47,32 +47,64 @@ import org.openqa.selenium.WebDriver;
     public void theCreateAnAccountPageIsOpen() {
     }
 
+    @When("I type my test first name")
+    public void iTypeMyFirstNameTest() {
+    }
+
     @When("I type my first name")
-    public void iTypeMyFirstName() {
+    public void iTypeMyFirstNameEmpty() {
+    }
+
+    @And("I type my test last name")
+    public void iTypeMyLastNameTest() {
     }
 
     @And("I type my last name")
-    public void iTypeMyLastName() {
+    public void iTypeMyLastNameEmpty() {
+    }
+
+    @And("I type my test address")
+    public void iTypeMyAddressTest() {
     }
 
     @And("I type my address")
-    public void iTypeMyAddress() {
+    public void iTypeMyAddressEmptyt() {
+    }
+
+    @And("I type my test city")
+    public void iTypeMyCityTest() {
     }
 
     @And("I type my city")
-    public void iTypeMyCity() {
+    public void iTypeMyCityEmptyt() {
     }
 
-    @And("I select my state")
+    @And("I select my state from the list")
     public void iSelectMyState() {
     }
 
-    @And("I type my zip code")
+    @And("I choose my Florida state")
+    public void iSelectMyStateFlorida() {
+    }
+
+    @And("I choose my state")
+    public void iSelectMyStateEmpty() {
+    }
+
+    @And("I type my 12345 zipcode")
     public void iTypeMyZipCode() {
     }
 
-    @And("I type my mobile phone")
+    @And("I type my zipcode")
+    public void iTypeMyZipCodeEmpty() {
+    }
+
+    @And("I type my 12345678 mobile phone")
     public void iTypeMyMobilePhone() {
+    }
+
+    @And("I type my mobile phone")
+    public void iTypeMyMobilePhoneEmpty() {
     }
 
     @And("I click the Register button")
@@ -91,45 +123,54 @@ import org.openqa.selenium.WebDriver;
     public void iTypeAValidEmail() {
     }
 
-    @When("I type an invalid <email> address")
+    @When("I type an invalid test email")
     public void iTypeAnInvalidEmail() {
     }
 
-    @Then("The error <message> should be displayed")
-    public void theErrorMessageShouldIsDisplayed() {
+    @When("I type an invalid email")
+    public void iTypeAnInvalidEmptyEmail() {
     }
 
-    @When("I type my <firstname>")
-    public void iTypeFirstname() {
+    @When("I type an invalid test@test email")
+    public void iTypeAnInvalidTestAtTestEmail() {
     }
 
-    @And("I type my <lastname>")
-    public void iTypeLastname() {
+    @When("I type an invalid test.com email")
+    public void iTypeAnInvalidTestDotComEmail() {
     }
 
-    @And("I type my <address>")
-    public void iTypeAddress() {
+    @Then("The error Invalid email address. should be displayed")
+    public boolean theErrorMessageShouldIsDisplayed() {
+        boolean isCorrectError = false;
+        //error message: Invalid email address.
+        return isCorrectError;
     }
 
-    @And("I type my <city>")
-    public void iTypeCity() {
+    @Then("The This country requires you to choose a State. message should be displayed")
+    public void theErrorMessageCountryShouldBeShown() {
     }
 
-    @And("I select my <state>")
-    public void iSelectState() {
+    @Then("The firstname is required. message should be displayed")
+    public void theErrorMessageFirstNameShouldBeShown() {
     }
 
-    @And("I type my <zipcode>")
-    public void iTypeMyZipcode() {
-            
+    @Then("The lastname is required. message should be displayed")
+    public void theErrorMessageLastNameShouldBeShown() {
     }
 
-    @And("I type my <mobilephone>")
-    public void iTypeMyMobilephone() {
-            
+    @Then("The address1 is required. message should be displayed")
+    public void theErrorMessageAddressShouldBeShown() {
     }
 
-    @Then("The <error> message should be displayed")
-    public void theErrorMessageShouldBeShown() {
+    @Then("The city is required. message should be displayed")
+    public void theErrorMessageCityShouldBeShown() {
     }
+
+    @Then("The The Zip/Postal code you've entered is invalid. It must follow this format: 00000 message should be displayed")
+    public void theErrorMessageZipCodeShouldBeShown() {
     }
+
+    @Then("The You must register at least one phone number. message should be displayed")
+    public void theErrorMessagePhoneNumberShouldBeShown() {
+    }
+}
