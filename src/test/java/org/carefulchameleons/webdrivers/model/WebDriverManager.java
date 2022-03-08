@@ -30,8 +30,8 @@ public abstract class WebDriverManager {
      */
     public void quitDriver() {
         if (null != driver) {
-            stopService();
             driver.quit();
+            stopService();
             driver = null;
         }
     }
