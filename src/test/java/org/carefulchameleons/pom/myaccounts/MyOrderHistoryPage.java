@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.myaccounts;
 
+import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,13 +9,16 @@ import java.util.List;
 
 public class MyOrderHistoryPage extends AccountDetailsPage {
 
+    private final By ORDER_LIST = new By.ById("order-list");
+    private final By ALERT = new By.ByClassName("alert-warning");
+
     public MyOrderHistoryPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public WebElement getOrder(int index) {
 
-        List<WebElement> orders = webDriver.findElement(By.id("order-list"))
+        List<WebElement> orders = webDriver.findElement(ORDER_LIST)
                 .findElement(By.tagName("tbody"))
                 .findElements(By.tagName("tr"));
 
@@ -49,7 +53,19 @@ public class MyOrderHistoryPage extends AccountDetailsPage {
     }
 
     public String getAlertMessage() {
-        return webDriver.findElement(By.className("alert-warning")).getText();
+        return webDriver.findElement(ALERT).getText();
+    }
+
+    public MyOrderHistoryPage clickDetailsButton() {
+        webDriver.findElement(By.className("history_detail"))
+                .findElement(By.className("btn")).click();
+        return this;
+    }
+
+    public CartSummaryPage clickReorderButton() {
+        webDriver.findElement(By.className("history_detail"))
+                .findElement(By.className("link-button")).click();
+        return new CartSummaryPage();
     }
 
 }
