@@ -1,6 +1,6 @@
 package org.carefulchameleons.pom.category;
 
-import org.carefulchameleons.pom.ColourSelection;
+import org.carefulchameleons.pom.enums.ColourSelection;
 import org.carefulchameleons.pom.Page;
 import org.carefulchameleons.pom.ProductSelection;
 import org.openqa.selenium.By;
@@ -130,5 +130,25 @@ public class CategoryPage extends Page {
         colour.clickCheckbox(webDriver);
         return this;
     }
+    public CategoryPage selectComposition(ColourSelection composition) {
+        composition.clickCheckbox(webDriver);
+        return this;
+    }
+
+    public CategoryPage selectCategory(ColourSelection category) {
+        category.clickCheckbox(webDriver);
+        return this;
+    }
+
+    public CategoryPage selectStyles(ColourSelection style) {
+        style.clickCheckbox(webDriver);
+        return this;
+    }
+
+    public CategoryPage selectSize(ColourSelection size) {
+        size.clickCheckbox(webDriver);
+        return this;
+    }
+
 
 }

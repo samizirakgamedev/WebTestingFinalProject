@@ -1,4 +1,4 @@
-package org.carefulchameleons.pom;
+package org.carefulchameleons.pom.enums;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
