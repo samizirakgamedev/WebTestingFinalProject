@@ -1,6 +1,5 @@
 package org.carefulchameleons.pageelements;
 
-import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -46,5 +45,11 @@ public class CartMenu {
         return new CartContent(webDriver);
     }
 
-
+    public Object hoverOnShoppingCartNoItems(Object page){
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(webDriver.findElement(shoppingCart).findElement(By.tagName("a")), 1, 1);
+        actions.perform();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        return page;
+    }
 }
