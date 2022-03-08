@@ -1,4 +1,4 @@
-Feature: Access and manipulate Cart page
+Feature: As a customer I want to be able to access and manipulate Cart page
 
   Scenario: Empty cart page
     Given I am in the Cart Page
