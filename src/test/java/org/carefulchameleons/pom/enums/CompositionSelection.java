@@ -16,8 +16,7 @@ public enum CompositionSelection {
     }
 
     public void clickCheckbox(WebDriver webDriver){
-        webDriver.findElement(new By.ById(COTTON.ID)).click();
-        webDriver.findElement(new By.ById(POLYESTER.ID)).click();
-        webDriver.findElement(new By.ById(VISCOSE.ID)).click();
+        webDriver.findElement(new By.ById(ID)).click();
+
     }
 }

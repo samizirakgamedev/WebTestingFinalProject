@@ -32,13 +32,7 @@ public enum ColourSelection {
     }
 
     public void clickCheckbox(WebDriver webDriver){
-        webDriver.findElement(new By.ById(GREEN.ID)).click();
-        webDriver.findElement(new By.ById(YELLOW.ID)).click();
-        webDriver.findElement(new By.ById(BLUE.ID)).click();
-        webDriver.findElement(new By.ById(ORANGE.ID)).click();
-        webDriver.findElement(new By.ById(BEIGE.ID)).click();
-        webDriver.findElement(new By.ById(WHITE.ID)).click();
-        webDriver.findElement(new By.ById(PINK.ID)).click();
-        webDriver.findElement(new By.ById(BLACK.ID)).click();
+        webDriver.findElement(new By.ById(ID)).click();
+
     }
 }

@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 public enum PropertiesSelection {
 
-    COLORFUL_DRESS(""),
-    MIDI_DRESS(""),
-    SHORT_SLEEVE(""),
-    MAXI_DRESS(""),
-    SHORT_DRESS("");
+    COLORFUL_DRESS("layered_id_feature_18"),
+    MIDI_DRESS("layered_id_feature_20"),
+    SHORT_SLEEVE("layered_id_feature_17"),
+    MAXI_DRESS("layered_id_feature_21"),
+    SHORT_DRESS("layered_id_feature_19");
 
     public String ID;
 
@@ -18,10 +18,7 @@ public enum PropertiesSelection {
     }
 
     public void clickCheckbox(WebDriver webDriver) {
-        webDriver.findElement(new By.ById(COLORFUL_DRESS.ID)).click();
-        webDriver.findElement(new By.ById(MIDI_DRESS.ID)).click();
-        webDriver.findElement(new By.ById(SHORT_SLEEVE.ID)).click();
-        webDriver.findElement(new By.ById(MAXI_DRESS.ID)).click();
-        webDriver.findElement(new By.ById(SHORT_DRESS.ID)).click();
+        webDriver.findElement(new By.ById(ID)).click();
+
     }
 }

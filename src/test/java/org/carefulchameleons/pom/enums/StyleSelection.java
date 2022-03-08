@@ -16,9 +16,6 @@ public enum StyleSelection {
     }
 
     public void clickCheckbox(WebDriver webDriver){
-        webDriver.findElement(new By.ById(CASUAL.ID)).click();
-        webDriver.findElement(new By.ById(DRESSY.ID)).click();
-        webDriver.findElement(new By.ById(GIRLY.ID)).click();
-
+        webDriver.findElement(new By.ById(ID)).click();
     }
 }
