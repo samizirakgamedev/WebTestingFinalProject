@@ -2,9 +2,9 @@ package org.carefulchameleons.pom.myaccounts;
 
 import org.openqa.selenium.WebDriver;
 
-public class MyWishListPage extends AccountDetailsPage {
+public class MyCreditSlipsPage extends AccountDetailsPage {
 
-    public MyWishListPage(WebDriver webDriver) {
+    public MyCreditSlipsPage(WebDriver webDriver) {
         super(webDriver);
     }
 
