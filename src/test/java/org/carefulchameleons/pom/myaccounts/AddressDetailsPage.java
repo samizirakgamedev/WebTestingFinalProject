@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class AddressDetailsPage extends AccountDetailsPage {
+public class AddressDetailsPage extends MyAccountSharedPage {
 
     private final By FIRST_NAME = new By.ById("firstname");
     private final By LAST_NAME = new By.ById("lastname");
@@ -28,7 +28,7 @@ public class AddressDetailsPage extends AccountDetailsPage {
     private final By SAVE_BUTTON = new By.ById("submitAddress");
 
     public AddressDetailsPage(WebDriver webDriver) {
-        super(webDriver);
+        super(webDriver, null);
     }
 
     public AddressDetailsPage inputFirstName(String firstName) {
@@ -209,8 +209,9 @@ public class AddressDetailsPage extends AccountDetailsPage {
         return webDriver.findElement(ADDRESS_ALIAS).getAttribute("value");
     }
 
-    public void clickSaveButton() {
+    public AddressDetailsPage clickSaveButton() {
         webDriver.findElement(SAVE_BUTTON).click();
+        return this;
     }
 
     public MyAddressPage goToMyAddressPage() {

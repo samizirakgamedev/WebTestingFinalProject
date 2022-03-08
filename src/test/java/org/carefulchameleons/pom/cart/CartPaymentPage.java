@@ -1,20 +1,17 @@
 package org.carefulchameleons.pom.cart;
 
-import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.category.CategoryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
 /**
- * POM class responsible for handling the summary page in the cart.
+ * POM class responsible for handling the payment page in the cart.
  */
-public class CartSummaryPage extends CartPage {
-
-    public CartSummaryPage(WebDriver webDriver) {
-        super(webDriver, "http://automationpractice.com/index.php?controller=order");
+public class CartPaymentPage extends CartPage {
+    public CartPaymentPage(WebDriver webDriver) {
+        super(webDriver, "http://automationpractice.com/index.php?controller=order&multi-shipping=");
     }
 
     public WebElement getProduct(int index) {
@@ -25,8 +22,7 @@ public class CartSummaryPage extends CartPage {
 
     public int getProductQuantity(int index) {
         String stringQuantity = getProduct(index).
-                findElement(By.className("cart_quantity_input")).
-                getAttribute("value");
+                findElement(By.className("cart_quantity")).getText();
         return Integer.parseInt(stringQuantity);
     }
 
@@ -88,13 +84,6 @@ public class CartSummaryPage extends CartPage {
         return Double.parseDouble(priceString);
     }
 
-    public CartSummaryPage removeProductFromCart(int index) {
-        getProduct(index).findElement(By.className("cart_delete"))
-                .findElement(By.className("cart_quantity_delete"))
-                .click();
-        return this;
-    }
-
     public int getCartSize() {
         List<WebElement> cartItems = getWebDriver().
                 findElements(By.className("cart_item"));
@@ -108,20 +97,6 @@ public class CartSummaryPage extends CartPage {
             }
         }
         return -1;
-    }
-
-    public CartSummaryPage incrementQuantity(int index) {
-        getProduct(index).findElement(By.className("cart_quantity"))
-                .findElement(By.className("cart_quantity_up"))
-                .click();
-        return this;
-    }
-
-    public CartSummaryPage decrementQuantity(int index) {
-        getProduct(index).findElement(By.className("cart_quantity"))
-                .findElement(By.className("cart_quantity_down"))
-                .click();
-        return this;
     }
 
     public double getTotalProducts() {
@@ -140,40 +115,12 @@ public class CartSummaryPage extends CartPage {
         return Double.parseDouble(priceString);
     }
 
-    public double getTotalPriceWithoutTax() {
-        String priceString = getWebDriver()
-                .findElement(By.id("total_price_without_tax"))
-                .getText();
-        priceString = priceString.replaceAll("[$]", "");
-        return Double.parseDouble(priceString);
-    }
-
-    public double getTotalTax() {
-        String priceString = getWebDriver()
-                .findElement(By.id("total_tax"))
-                .getText();
-        priceString = priceString.replaceAll("[$]", "");
-        return Double.parseDouble(priceString);
-    }
-
     public double getTotalPriceWithTax() {
         String priceString = getWebDriver()
                 .findElement(By.id("total_price"))
                 .getText();
         priceString = priceString.replaceAll("[$]", "");
         return Double.parseDouble(priceString);
-    }
-
-    public String getCartTitle() {
-        return getWebDriver().
-                findElement(By.id("cart_title"))
-                .getText();
-    }
-
-    public String getCartContains() {
-        return getWebDriver().
-                findElement(By.id("summary_products_quantity"))
-                .getText();
     }
 
     public CategoryPage clickProductImage(int index) {
@@ -200,24 +147,20 @@ public class CartSummaryPage extends CartPage {
         return new CategoryPage(getWebDriver(), Integer.parseInt(idSubstring));
     }
 
-    public IndexPage continueShopping() {
+    public CartBankWirePaymentPage payByBankWire() {
+        getWebDriver().findElement(By.className("bankwire")).click();
+        return new CartBankWirePaymentPage(getWebDriver());
+    }
+
+    public CartCheckPaymentPage payByCheck() {
+        getWebDriver().findElement(By.className("cheque")).click();
+        return new CartCheckPaymentPage(getWebDriver());
+    }
+
+    public CartShippingPage continueShopping() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
-        return new IndexPage(getWebDriver());
-    }
-
-    public CartAddressPage proceedToCheckoutLoggedIn() {
-        getWebDriver().findElement(By.className("cart_navigation"))
-                .findElement(By.className("button"))
-                .click();
-        return new CartAddressPage(getWebDriver());
-    }
-
-    public CartSignInPage proceedToCheckoutNotLoggedIn() {
-        getWebDriver().findElement(By.className("cart_navigation"))
-                .findElement(By.className("button"))
-                .click();
-        return new CartSignInPage(getWebDriver());
+        return new CartShippingPage(getWebDriver());
     }
 }
