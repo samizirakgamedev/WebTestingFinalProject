@@ -5,16 +5,16 @@ import org.openqa.selenium.WebDriver;
 public abstract class Page {
 
     protected WebDriver webDriver;
-    private final PageHeader pageHeader;
-    private final PageFooter pageFooter;
+    private final PageHeader PAGE_HEADER;
+    private final PageFooter PAGE_FOOTER;
 
     private final String EXPECTED_URL;
 
     public Page(WebDriver webDriver, String expected_url) {
         this.webDriver = webDriver;
         EXPECTED_URL = expected_url;
-        pageHeader = new PageHeader(webDriver);
-        pageFooter = new PageFooter(webDriver);
+        PAGE_HEADER = new PageHeader(webDriver);
+        PAGE_FOOTER = new PageFooter(webDriver);
     }
 
     public WebDriver getWebDriver() {
@@ -22,15 +22,11 @@ public abstract class Page {
     }
 
     public PageHeader getPageHeader(){
-        return pageHeader;
-    }
-
-    public PageFooter pageFooter(){
-        return pageFooter;
+        return PAGE_HEADER;
     }
 
     public PageFooter getPageFooter() {
-        return pageFooter;
+        return PAGE_FOOTER;
     }
 
     public String getCurrentURL() {
