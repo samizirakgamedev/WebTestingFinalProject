@@ -42,7 +42,7 @@ public class PageHeader {
 
     public MyAccountPage clickSignInButton() {
         webDriver.findElement(SIGN_IN).click();
-        return new MyAccountPage();
+        return new MyAccountPage(webDriver);
         // TODO - Need to update arguments when my account page is done
     }
 
@@ -56,7 +56,7 @@ public class PageHeader {
 
     public SearchPage clickSearchButton() {
         webDriver.findElement(SEARCH_BUTTON).click();
-        return new SearchPage();
+        return new SearchPage(webDriver);
         // TODO - Need to update arguments when search page is done
     }
 
@@ -67,7 +67,7 @@ public class PageHeader {
 
     public CartSummaryPage clickCartButton() {
         webDriver.findElement(CART_BUTTON).click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(webDriver);
         // TODO - Need to update arguments when cart summary page is done
     }
 
@@ -110,7 +110,7 @@ public class PageHeader {
     public CartSummaryPage clickCartCheckOutButton() {
         hoverCartButton();
         webDriver.findElement(CART_CHECKOUT_BUTTON).click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(webDriver);
         // TODO - Need to update arguments when cart summary page is done
     }
 }
