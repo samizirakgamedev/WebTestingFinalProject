@@ -1,14 +1,23 @@
 package org.carefulchameleons.stepdefs;
+import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.AddressDetailsPage;
+import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
+import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 
 public class MyAccountStepdefs {
     private static WebDriver webDriver;
     private MyAccountPage myAccountPage = new MyAccountPage(webDriver);
+    private AddressDetailsPage addressDetailsPage = new AddressDetailsPage(webDriver);
+    private MyOrderHistoryPage myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
+    private MyPersonalInfoPage myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
+    private MyAddressPage myAddressPage = new MyAddressPage(webDriver);
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
@@ -62,7 +71,8 @@ public class MyAccountStepdefs {
 
     @When("I click on the Credit Slips button")
     public void iClickOnTheCreditSlipsButton() {
-        myAccountPage.goToMyCreditSlipsPage();
+        //myAccountPage.goToMyCreditSlipsPage();
+        webDriver.findElement(By.linkText("My credit slips")).click();
     }
 
     @Then("The Credit Slips page should open")
@@ -98,7 +108,7 @@ public class MyAccountStepdefs {
 
     @When("I click on the My Wishlist button")
     public void iClickOnTheMyWishlistButton() {
-        myAccountPage.goToMyWishListPage();
+        //myAccountPage.goToMyWishListPage();
     }
 
     @Then("The My Wishlist page should open")
@@ -132,47 +142,74 @@ public class MyAccountStepdefs {
 
     @When("I click the Add a new address button")
     public void iClickTheAddANewAddressButton() {
-
+        //addressDetailsPage.clickNewAddress();
     }
 
     @Then("The page to add new address should open")
-    public void thePageToAddNewAddressShouldOpen() {
+    public boolean thePageToAddNewAddressShouldOpen() {
+        boolean pageToAddNewAddress = false;
+        if (webDriver.getPageSource().contains("To add a new address, please fill out the form below.")) pageToAddNewAddress = true;
+        return pageToAddNewAddress;
     }
 
     @When("I click the Delete button")
     public void iClickTheDeleteButton() {
+        //addressDetailsPage.clickDeleteButton();
     }
 
     @And("I confirm the deletion")
     public void iConfirmTheDeletion() {
+        //not a clue
     }
 
     @Then("The address should be deleted")
     public void theAddressShouldBeDeleted() {
+        //again not a clue
     }
 
     @When("I click the Update button")
     public void iClickTheUpdateButton() {
+        //myAddressPage.updateAddressDetails(???);
     }
 
     @Then("The page to update the address should open")
-    public void thePageToUpdateTheAddressShouldOpen() {
+    public boolean thePageToUpdateTheAddressShouldOpen() {
+        boolean updateAdressOpen = false;
+        if (webDriver.getPageSource().contains("Modify address \"My address\"")) updateAdressOpen = true;
+        return updateAdressOpen;
     }
 
     @Given("I am on the update address page")
-    public void iAmOnTheUpdateAddressPage() {
+    public boolean iAmOnTheUpdateAddressPage() {
+        boolean updateAdressOpen = false;
+        if (webDriver.getPageSource().contains("Modify address \"My address\"")) updateAdressOpen = true;
+        return updateAdressOpen;
     }
 
     @When("I edit the fields")
     public void iEditTheFields() {
+        addressDetailsPage.inputFirstName("test");
+        addressDetailsPage.inputLastName("test");
+        addressDetailsPage.inputAddressOne("1, test street");
+        addressDetailsPage.inputCity("testCity");
+        addressDetailsPage.chooseStateByName("Florida");
+        addressDetailsPage.inputZipCode("12345");
+        addressDetailsPage.chooseCountryByName("United States");
+        addressDetailsPage.inputMobilePhone("12345678");
+        addressDetailsPage.inputAddressAlias("my test address");
     }
 
     @And("click the button Save")
     public void clickTheButtonSave() {
+        addressDetailsPage.clickSaveButton();
     }
 
     @Then("the address should be updated")
-    public void theAddressShouldBeUpdated() {
+    public boolean theAddressShouldBeUpdated() {
+        boolean addressIsUpdated = false;
+        if (addressDetailsPage.getFIRST_NAME().equals("test") && addressDetailsPage.getLAST_NAME().equals("test") && addressDetailsPage.getAddressOne().equals("1, test street") &&
+        addressDetailsPage.getCITY().equals("testCity") && addressDetailsPage.getZIP_CODE().equals("12345") && addressDetailsPage.getMOBILE_PHONE().equals("12345678")) addressIsUpdated = true;
+        return addressIsUpdated;
     }
 
     @Given("I am on My Personal Information page")
@@ -182,63 +219,83 @@ public class MyAccountStepdefs {
 
     @When("I edit the first name field")
     public void iEditTheFirstNameField() {
+        myPersonalInfoPage.enterTextInFirstNameTextBox("test");
     }
 
     @And("I click the button Save")
     public void iClickTheButtonSave() {
+        myPersonalInfoPage.clickSaveButton();
     }
 
     @Then("the first name should be updated")
-    public void theFirstNameShouldBeUpdated() {
+    public boolean theFirstNameShouldBeUpdated() {
+        boolean firstNameUpdated = false;
+        //if (myPersonalInfoPage.getFIRST_NAME().equals("test")) firstNameUpdated = true;
+        return firstNameUpdated;
     }
 
     @When("I edit the last name field")
     public void iEditTheLastNameField() {
+        myPersonalInfoPage.enterTextInLastNameTextBox("test");
     }
 
     @Then("the last name should be updated")
-    public void theLastNameShouldBeUpdated() {
+    public boolean theLastNameShouldBeUpdated() {
+        boolean lastNameUpdated = false;
+        //if (myPersonalInfoPage.getLAST_NAME().equals("test")) lastNameUpdated = true;
+        return lastNameUpdated;
     }
 
     @When("I edit the email address field")
     public void iEditTheEmailAddressField() {
+        myPersonalInfoPage.enterTextInEmailTextBox("test@test.com");
     }
 
     @Then("the email address should be updated")
-    public void theEmailAddressShouldBeUpdated() {
+    public boolean theEmailAddressShouldBeUpdated() {
+        boolean emailAddressUpdated = false;
+        //if (myPersonalInfoPage.getEmail().equals("test@test.com")) emailAddressUpdated = true;
+        return emailAddressUpdated;
     }
 
     @When("I edit the email address field with an invalid value")
     public void iEditTheEmailAddressFieldWithAnInvalidValue() {
+        myPersonalInfoPage.enterTextInEmailTextBox("test@test");
     }
 
     @Then("an error message should be displayed")
     public void anErrorMessageShouldBeDisplayed() {
+        //locator for error message
     }
 
     @When("I fill the new password field")
     public void iFillTheNewPasswordField() {
+        myPersonalInfoPage.enterTextInNewPasswordTextBox("1234test");
     }
 
     @And("the confirmation password field with the same password")
     public void theConfirmationPasswordFieldWithTheSamePassword() {
+        myPersonalInfoPage.enterTextInConfirmPasswordTextBox("1234test");
     }
 
     @Then("the password should be updated")
     public void thePasswordShouldBeUpdated() {
+        //not a clue
     }
 
     @And("the confirmation password field with different password")
     public void theConfirmationPasswordFieldWithDifferentPassword() {
+        myPersonalInfoPage.enterTextInConfirmPasswordTextBox("12test34");
     }
 
     @Then("the error The password and confirmation do not match. should be displayed")
     public void theErrorThePasswordAndConfirmationDoNotMatchShouldBeDisplayed() {
+        //locator for error message
     }
 
     @Given("I am on My Wishlist page")
     public void iAmOnMyWishlistPage() {
-        myAccountPage.goToMyWishListPage();
+        //myAccountPage.goToMyWishListPage();
     }
 
     @When("I fill the name field for my wishlist")
@@ -284,21 +341,30 @@ public class MyAccountStepdefs {
 
     @When("I click on Order Reference link")
     public void iClickOnOrderReferenceLink() {
+        myOrderHistoryPage.clickDetailsButton();
     }
 
     @Then("the order details should load")
-    public void theOrderDetailsShouldLoad() {
+    public boolean theOrderDetailsShouldLoad() {
+        boolean orderDetailsLoaded = false;
+        if (webDriver.findElement(By.id("order-list")) == null); //not a clue if it works
+        return orderDetailsLoaded;
     }
 
     @And("the order details are loaded")
-    public void theOrderDetailsAreLoaded() {
+    public boolean theOrderDetailsAreLoaded() {
+        boolean orderDetailsLoaded = false;
+        if (webDriver.findElement(By.id("order-list")) == null); //not a clue if it works
+        return orderDetailsLoaded;
     }
 
     @When("I click on the Invoice link")
     public void iClickOnTheInvoiceLink() {
+        webDriver.findElement(By.linkText("PDF")).click();
     }
 
     @Then("the invoice pdf should open")
     public void theInvoicePdfShouldOpen() {
+        //it's actually downloading for me
     }
 }
