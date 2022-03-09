@@ -56,7 +56,7 @@ public class PageHeader {
 
     public SearchPage clickSearchButton() {
         webDriver.findElement(SEARCH_BUTTON).click();
-        return new SearchPage(webDriver);
+        return new SearchPage(webDriver, "");
         // TODO - Need to update arguments when search page is done
     }
 

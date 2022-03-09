@@ -46,4 +46,9 @@ public class MyAccountPage extends Page {
         return new IndexPage(webDriver);
     }
 
+    public void goToMyCreditSlipsPage() {
+    }
+
+    public void goToMyWishListPage() {
+    }
 }

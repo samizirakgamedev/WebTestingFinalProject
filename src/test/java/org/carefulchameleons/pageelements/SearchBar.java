@@ -21,7 +21,7 @@ public class SearchBar {
     public SearchPage doSearch(String entry){
         webDriver.findElement(searchBar).sendKeys(entry);
         webDriver.findElement(searchButton).click();
-        return new SearchPage(webDriver);
+        return new SearchPage(webDriver, "");
     }
 
     public SearchBar assignSearchBarInput(By inputBox){

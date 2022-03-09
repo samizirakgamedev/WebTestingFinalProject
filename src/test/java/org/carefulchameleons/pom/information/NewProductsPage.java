@@ -14,18 +14,6 @@ import java.time.Duration;
 
 public class NewProductsPage extends Page {
 
-//    public static void main(String[] args) {
-//        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-//
-//        WebDriver webDriver = new ChromeDriver();
-//        webDriver.get("http://automationpractice.com/index.php?controller=new-products");
-//        //new NewProductsPage(webDriver).;
-//        new LeftColumn(webDriver).ourStoresBlock().clickOurStores();
-//        //webDriver.close();
-//        //webDriver.quit();
-//    }
-
-
     private WebDriver webDriver;
     private By searchBar;
     private By searchButton;
@@ -35,9 +23,7 @@ public class NewProductsPage extends Page {
     public NewProductsPage(WebDriver webDriver){
         super(webDriver, "http://automationpractice.com/index.php?controller=new-products");
         this.webDriver = webDriver;
-
         homeNavIcon = By.className("home");
-
         womenNav = By.linkText("WOMEN");
         topsNav = By.linkText("TOPS");
     }
@@ -51,94 +37,16 @@ public class NewProductsPage extends Page {
         return new IndexPage(webDriver);
     }
 
-    public SearchPage doSearch(String entry){
-
-        return new SearchBar(webDriver).doSearch(entry);
-    }
-
-    public DressesPage clickDresses(){
-        return new CategoryMenu(webDriver).clickDresses();
+    public SearchBar searchBar(){
+        return new SearchBar(webDriver);
     }
 
     public CategoryMenu categoryMenu(){
         return new CategoryMenu(webDriver);
     }
 
-    //In dress
-
-
-    public EveningDressPage clickEveningDressNav(){
-        return new CategoryMenu(webDriver).hoverOverDress().clickOnEveningDress();
-    }
-
-    public SummerDressPage clickSummerDressNav(){
-        return new CategoryMenu(webDriver).hoverOverDress().clickOnSummerDress();
-    }
-
-    public CasualDressPage clickCasualDresses(){
-        return new CategoryMenu(webDriver).hoverOverDress().clickOnCasualDress();
-    }
-
-
-    public WomenPage clickWomen(){
-        return new CategoryMenu(webDriver).clickWomen();
-    }
-
-    private WebElement getElementInWomen(By byElement){
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(webDriver.findElement(womenNav), 10, 10);
-        actions.perform();
-        FluentWait fluentWait = new FluentWait<WebDriver>(webDriver)
-                .withTimeout(Duration.ofSeconds(5))
-                .pollingEvery(Duration.ofMillis(250))
-                .ignoring(NoSuchElementException.class);
-        WebElement element = (WebElement) fluentWait.until(ExpectedConditions.presenceOfElementLocated(byElement));
-        return element;
-    }
-
-    public TopsPage clickOnTopsInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnTops();
-
-    }
-
-    public TShirtsPage clickOnTShirtsInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnTShirts();
-    }
-
-//    public BlousesPage clickOnBlousesInWomen(){
-//        return new CategoryMenu(webDriver).hoverOverWomen().clickOnBlouses();
-//    }
-//
-    public DressesPage clickOnDressesInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnDresses();
-    }
-
-    public CasualDressPage clickOnCasualDressesInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnCasualDresses();
-    }
-
-    public EveningDressPage clickOnEveningDressesInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnEveningDresses();
-    }
-
-    public  SummerDressPage clickOnSummerDressesInWomen(){
-        return new CategoryMenu(webDriver).hoverOverWomen().clickOnSummerDresses();
-    }
-
-    public TShirtsPage clickOnTShirtsNav(){
-        return new CategoryMenu(webDriver).clickTShirt();
-    }
-
-    public SearchPage clickOnTopSellers(){
-        return new LeftColumn(webDriver).topSellersBlock().clickTopSellers();
-    }
-
-    public OurStores clickOurStoresButton(){
-        return new LeftColumn(webDriver).ourStoresBlock().clickOurStores();
-    }
-
-    public OurStores clickDiscoverOurStoresButton(){
-        return new LeftColumn(webDriver).ourStoresBlock().clickDiscoverOurStores();
+    public LeftColumn leftColumn(){
+        return new LeftColumn(webDriver);
     }
 
 }
