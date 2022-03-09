@@ -1,5 +1,9 @@
 package org.carefulchameleons.webdrivers.model;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariDriverService;
 
@@ -40,8 +44,14 @@ public class SafariWebDriver extends WebDriverManager{
         System.out.println("!! Safari does not support running in headless mode!!");
         System.out.println("!! A standard Safari web driver has been created !!");
     }
+
     @Override
     protected void createDriverWithIPhoneElevenResolution() {
-        // Behaviour to be added.
+            createDriver();
+            Dimension iPhoneEleven = new Dimension(414,896);
+            WebElement html = driver.findElement(By.tagName("html"));
+            driver.manage().window().setSize(iPhoneEleven);
+            html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
+
     }
 }

@@ -65,22 +65,22 @@ public class WebDriverTest {
     public static void safariTest(){
         WebDriverManager driverManager;
         WebDriver driver;
-        String desiredPage = "https://www.google.com/";
+        String desiredPage = "https://www.automationpractice.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.SAFARI);
-        driver = driverManager.getDriver();
+        driver = driverManager.getIPhoneElevenDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))
             System.out.println(">>> Safari Driver Functioning <<<");
-        driverManager.quitDriver();
+        //driverManager.quitDriver();
     }
 
     public static void main(String[] args) {
 //        operaTest();
 //        chromeTest();
 //        firefoxTest();
-        ieTest();
-//        safariTest();
+        //ieTest();
+        safariTest();
     }
 }
