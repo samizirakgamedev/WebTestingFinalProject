@@ -16,11 +16,31 @@ public class MyAddressPage extends MyAccountSharedPage {
         super(webDriver, "http://automationpractice.com/index.php?controller=addresses");
     }
 
+    /**
+     * <p> Gets a given address WebElement </p>
+     *
+     * <p> Requires: {@link #hasAddresses()} to be true </p>
+     *
+     * @param index position in the list of WebElements from the addresses ('addresses' classname).
+     *              index must be < {@link #getAddressSize()}
+     *
+     * @return {@link AddressDetailsPage}, as it goes to a new details' page to edit
+     */
     public WebElement getAddress(int index) {
         List<WebElement> addresses = webDriver.findElements(ADDRESSES);
         return addresses.get(index);
     }
 
+    /**
+     * <p> Clicks the update button for an address. </p>
+     *
+     * <p> Requires: {@link #hasAddresses()} to be true. </p>
+     *
+     * @param index position in the list of WebElements from the addresses ('addresses' classname).
+     *              index must be < {@link #getAddressSize()}
+     *
+     * @return {@link AddressDetailsPage}, as it goes to a new details' page to edit
+     */
     public AddressDetailsPage updateAddressDetails(int index) {
 
         getAddress(index)
@@ -31,6 +51,16 @@ public class MyAddressPage extends MyAccountSharedPage {
         return new AddressDetailsPage(webDriver);
     }
 
+    /**
+     * <p> Clicks the delete button for an address. </p>
+     *
+     * <p> Requires: {@link #hasAddresses()} to be true. </p>
+     *
+     * @param index position in the list of WebElements from the addresses ('addresses' classname).
+     *              index must be < {@link #getAddressSize()}
+     *
+     * @return {@link MyAddressPage}, as it doesn't change page to allow chaining
+     */
     public MyAddressPage deleteAddress(int index) {
 
         getAddress(index)
@@ -41,6 +71,16 @@ public class MyAddressPage extends MyAccountSharedPage {
         return this;
     }
 
+    /**
+     * <p> Adds a new address. </p>
+     *
+     * <p> Requires: {@link #hasAddresses()} to be true. </p>
+     *
+     * @param index position in the list of WebElements from the addresses ('addresses' classname).
+     *              index must be < {@link #getAddressSize()}
+     *
+     * @return {@link AddressDetailsPage}, as it goes to a new details' page to create an address
+     */
     public AddressDetailsPage addNewAddressDetails(int index) {
 
         webDriver.findElement(By.className("main-page-indent"))
@@ -50,10 +90,22 @@ public class MyAddressPage extends MyAccountSharedPage {
         return new AddressDetailsPage(webDriver);
     }
 
+    /**
+     * Requires: {@link #hasAddresses()} to be false
+     *
+     * @return the alert message if the user has no addresses
+     */
     public String getAlertMessage() {
         return webDriver.findElement(ALERT).getText();
     }
 
+    /**
+     * <p> Adds a new address from alert message. </p>
+     *
+     * <p> Requires: {@link #hasAddresses()} to be false. </p>
+     *
+     * @return {@link AddressDetailsPage}, as it goes to a new details' page to create an address
+     */
     public AddressDetailsPage addNewAddressDetailsAlert() {
 
         webDriver.findElement(ALERT)
@@ -63,9 +115,19 @@ public class MyAddressPage extends MyAccountSharedPage {
         return new AddressDetailsPage(webDriver);
     }
 
+    /**
+     * @return true is the user has any address, else false
+     */
     public boolean hasAddresses() {
         List<WebElement> addresses = webDriver.findElements(ADDRESSES);
         return addresses.size() != 0;
+    }
+
+    /**
+     * @return amount of addresses user has
+     */
+    public int getAddressSize() {
+        return webDriver.findElements(ADDRESSES).size();
     }
 
 }

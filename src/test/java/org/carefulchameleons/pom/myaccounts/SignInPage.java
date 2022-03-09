@@ -36,6 +36,15 @@ public class SignInPage extends Page {
         return this;
     }
 
+    /**
+     * Attempts to log a user in
+     *
+     * @param emailString email input
+     * @param passwordString password input
+     *
+     * @return {@link SignInPage} if login is intended to work call {@link #goToMyAccountPage()},
+     * else stay on the page
+     */
     public SignInPage login(String emailString, String passwordString) {
         enterLoginEmail(emailString).enterLoginPassword(passwordString).clickLoginButton();
         return this;
@@ -54,6 +63,10 @@ public class SignInPage extends Page {
     public IndexPage clickHomeButtonTop() {
         webDriver.findElement(TOP_HOME_BUTTON).click();
         return new IndexPage(webDriver);
+    }
+
+    public MyAccountPage goToMyAccountPage() {
+        return new MyAccountPage(webDriver);
     }
 
 }
