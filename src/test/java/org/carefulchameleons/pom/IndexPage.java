@@ -21,16 +21,6 @@ import java.time.Duration;
 
 public class IndexPage extends Page {
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-
-        WebDriver webDriver = new ChromeDriver();
-        webDriver.get("http://automationpractice.com/index.php");
-        //new NewProductsPage(webDriver).;
-        new IndexPage(webDriver).featuredItems().clickOnEye(1);
-        //webDriver.close();
-        //webDriver.quit();
-    }
 
     public class ProductAddedToCartPopUp{
         private WebDriver webDriver;
@@ -65,7 +55,7 @@ public class IndexPage extends Page {
         }
     }
 
-    private class ItemFancyBox{
+    public class ItemFancyBox{
 
         public ItemFancyBox(WebDriver webDriver) {
             webDriver.switchTo().frame(webDriver.findElement(By.className("fancybox-iframe")));
@@ -138,7 +128,7 @@ public class IndexPage extends Page {
         }
     }
 
-    private class ItemDisplay{
+    public class ItemDisplay{
         private WebDriver webDriver;
         private WebElement root;
         public ItemDisplay(WebDriver webDriver, WebElement root){
