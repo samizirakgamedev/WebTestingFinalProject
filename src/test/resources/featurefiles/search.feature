@@ -27,13 +27,13 @@ Feature: As a user I would like to see results of searching word so that I can u
 
     Examples:
       | search input  | expected result  | sort by                  | sorted                   |
-      | Dress         | 7                | Price: Lowest first      | Price: Lowest first      |
-      | Dress         | 7                | Price: Highest first     | Price: Highest first     |
-      | Dress         | 7                | Product Name: A to Z     | Product Name: A to Z     |
-      | Dress         | 7                | Product Name: Z to A     | Product Name: Z to A     |
-      | Dress         | 7                | In stock                 | In stock                 |
-      | Dress         | 7                | Reference: Lowest first  | Reference: Lowest first  |
-      | Dress         | 7                | Reference: Highest first | Reference: Highest first |
+      | Printed Dress | 5                | Price: Lowest first      | Price: Lowest first      |
+      | Printed Dress | 5                | Price: Highest first     | Price: Highest first     |
+      | Printed Dress | 5                | Product Name: A to Z     | Product Name: A to Z     |
+      | Printed Dress | 5                | Product Name: Z to A     | Product Name: Z to A     |
+      | Printed Dress | 5                | In stock                 | In stock                 |
+      | Printed Dress | 5                | Reference: Lowest first  | Reference: Lowest first  |
+      | Printed Dress | 5                | Reference: Highest first | Reference: Highest first |
 
   Scenario: As a user I want to use the search box and be able to discover the stores
     When I enter any word in the search bar
