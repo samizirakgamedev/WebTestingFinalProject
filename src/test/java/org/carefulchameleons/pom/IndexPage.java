@@ -19,16 +19,16 @@ import java.time.Duration;
 
 public class IndexPage extends Page {
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-
-        WebDriver webDriver = new ChromeDriver();
-        webDriver.get("http://automationpractice.com/index.php");
-        //new NewProductsPage(webDriver).;
-        new IndexPage(webDriver).featuredItems().clickOnEye(1);
-        //webDriver.close();
-        //webDriver.quit();
-    }
+//    public static void main(String[] args) {
+//        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+//
+//        WebDriver webDriver = new ChromeDriver();
+//        webDriver.get("http://automationpractice.com/index.php");
+//        //new NewProductsPage(webDriver).;
+//        new IndexPage(webDriver).featuredItems().clickOnEye(1).clickExit();
+//        //webDriver.close();
+//        //webDriver.quit();
+//    }
 
     public class ProductAddedToCartPopUp{
         private WebDriver webDriver;
@@ -56,7 +56,7 @@ public class IndexPage extends Page {
         }
 
         public IndexPage clickExit(){
-            webDriver.switchTo().frame(0);
+            webDriver.switchTo().defaultContent();
             webDriver.findElement(By.className("fancybox-close")).click();
             return new IndexPage(webDriver);
         }
@@ -67,6 +67,7 @@ public class IndexPage extends Page {
         private WebElement root;
         public ItemDisplay(WebDriver webDriver, WebElement root){
             this.webDriver = webDriver;
+            this.root = root;
 
         }
         public void clickOnImage(int index){
@@ -75,7 +76,7 @@ public class IndexPage extends Page {
 
         public ItemFancyBox clickOnEye(int index){
             root.findElements(By.className("quick-view-mobile")).get(index).click();
-            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
             return new ItemFancyBox(webDriver);
         }
 

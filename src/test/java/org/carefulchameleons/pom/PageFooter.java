@@ -49,7 +49,7 @@ public class PageFooter {
 
     public SpecialsPage goToSpecials() {
         webDriver.findElement(SPECIALS_LINK).click();
-        return new SpecialsPage();
+        return new SpecialsPage(webDriver, "");
         // TODO - Need to update arguments when specials page is done
     }
 
@@ -59,27 +59,27 @@ public class PageFooter {
         // TODO - Need to update arguments when new products page is done
     }
 
-    public BestSellers goToBestSellers() {
+    public BestSellersPage goToBestSellers() {
         webDriver.findElement(BEST_SELLERS_LINK).click();
-        return new BestSellers();
+        return new BestSellersPage(webDriver);
         // TODO - Need to update arguments when best sellers page is done
     }
 
     public OurStores goToOurStores() {
         webDriver.findElement(OUR_STORES_LINK).click();
-        return new OurStores();
+        return new OurStores(webDriver);
         // TODO - Need to update arguments when our stores page is done
     }
 
     public TermsAndConditionsPage goToTermsAndConditions(){
         webDriver.findElement(TERMS_AND_CONDITIONS_LINK).click();
-        return new TermsAndConditionsPage();
+        return new TermsAndConditionsPage(webDriver);
         // TODO - Need to update arguments when terms and conditions page is done
     }
 
     public AboutUsPage goToAboutUs() {
         webDriver.findElement(ABOUT_US_LINK).click();
-        return new AboutUsPage();
+        return new AboutUsPage(webDriver);
         // TODO - Need to update arguments when about us page is done
     }
 

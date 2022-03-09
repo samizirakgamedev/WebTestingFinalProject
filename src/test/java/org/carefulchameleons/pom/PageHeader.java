@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom;
 
+import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.carefulchameleons.pom.information.ContactUs;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.openqa.selenium.By;
@@ -55,7 +56,7 @@ public class PageHeader {
 
     public SearchPage clickSearchButton() {
         webDriver.findElement(SEARCH_BUTTON).click();
-        return new SearchPage(webDriver);
+        return new SearchPage(webDriver, "");
         // TODO - Need to update arguments when search page is done
     }
 
