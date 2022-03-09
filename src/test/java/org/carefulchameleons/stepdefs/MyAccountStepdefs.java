@@ -346,7 +346,7 @@ public class MyAccountStepdefs {
 
     @When("I click on Order Reference link")
     public void iClickOnOrderReferenceLink() {
-        myOrderHistoryPage.clickDetailsButton();
+        myOrderHistoryPage.clickDetailsButton(1);
     }
 
     @Then("the order details should load")
