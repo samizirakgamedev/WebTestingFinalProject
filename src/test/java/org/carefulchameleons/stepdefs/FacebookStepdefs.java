@@ -5,11 +5,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.PageFooter;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-
 import java.util.ArrayList;
 
 public class FacebookStepdefs {
@@ -18,6 +18,7 @@ public class FacebookStepdefs {
     private IndexPage indexPage;
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
+    private PageFooter pageFooter;
     //private static WebDriverManager manager;
 
     @Given("I am on the Home page")
@@ -31,8 +32,8 @@ public class FacebookStepdefs {
     @When("I click on FACEBOOK icon")
     public void iClickOnFACEBOOKIcon() {
         indexPage = new IndexPage(webDriver);
-        //indexPage.clickFacebookButton();
-
+        pageFooter = new PageFooter(webDriver);
+        pageFooter.clickFacebookIcon();
     }
 
     @Then("I will go to the FACEBOOK page")

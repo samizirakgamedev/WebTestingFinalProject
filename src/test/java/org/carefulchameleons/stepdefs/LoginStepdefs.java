@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class LoginStepdefs {
 
     private static WebDriver webDriver;
@@ -22,26 +24,30 @@ public class LoginStepdefs {
     //private static WebDriverManager manager;
 
     //@Before will only be staying in one StepDef
-    @Before
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        System.out.println("setup");
-    }
+
+//    @Before
+//    public void setup() {
+//        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+//        System.out.println("setup");
+//    }
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
         //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
         //webDriver = manager.getDriver();
+        webDriver = new ChromeDriver();
         webDriver.get("http://automationpractice.com/index.php");
 
         indexPage = new IndexPage(webDriver);
-        //indexPage.clickSignInButton();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        indexPage.getPageHeader().clickSignInButton();
     }
 
     @When("I enter my registered email")
     public void iEnterMyRegisteredEmail() {
         //??expectedUrl??
         signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         signinPage.enterLoginEmail("finalproject@test.com");
     }
 
@@ -58,6 +64,7 @@ public class LoginStepdefs {
     @Then("I will go to the My Account page")
     public void iWillGoToTheMyAccountPage() {
         myAccountPage = new MyAccountPage(webDriver);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getCurrentURL());
     }
 
@@ -69,6 +76,7 @@ public class LoginStepdefs {
     @When("I insert an unregistered email")
     public void iInsertAnUnregisteredEmail() {
         signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         signinPage.enterLoginEmail("finalproject1@test.com");
     }
 
@@ -79,12 +87,14 @@ public class LoginStepdefs {
 
     @Then("I will stay in the Login Page")
     public void iWillStayInTheLoginPage() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", signinPage.getCurrentURL());
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication", signinPage.getCurrentURL());
     }
 
     @When("I insert a registered email")
     public void iInsertARegisteredEmail() {
         signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         signinPage.enterLoginEmail("finalproject@test.com");
     }
 
@@ -96,7 +106,7 @@ public class LoginStepdefs {
     @After
     public static void tearDown() {
         if(webDriver != null) {
-            //    manager.quitDriver();
+                webDriver.quit();
             System.out.println("tearDown login");
         }
     }

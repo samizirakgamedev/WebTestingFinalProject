@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.PageFooter;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,7 @@ public class GooglePlusStepdefs {
     private IndexPage indexPage;
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
+    private PageFooter pageFooter;
     //private static WebDriverManager manager;
 
     @Given("I am on the HomePage")
@@ -31,7 +33,8 @@ public class GooglePlusStepdefs {
     @When("I click on Google plus icon")
     public void iClickOnGooglePlusIcon() {
         indexPage = new IndexPage(webDriver);
-        //indexPage.clickGooglePlusButton();
+        pageFooter = new PageFooter(webDriver);
+        pageFooter.clickGoogleIcon();
     }
 
     @Then("I will go to the Google plus page")
