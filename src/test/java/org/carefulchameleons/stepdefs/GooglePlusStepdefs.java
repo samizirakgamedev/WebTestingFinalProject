@@ -10,7 +10,9 @@ import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class GooglePlusStepdefs {
@@ -26,6 +28,7 @@ public class GooglePlusStepdefs {
     public void iAmOnTheHomePage() {
         //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
         //webDriver = manager.getDriver();
+        webDriver = new ChromeDriver();
         webDriver.get("http://automationpractice.com/index.php");
 
     }
@@ -33,19 +36,20 @@ public class GooglePlusStepdefs {
     @When("I click on Google plus icon")
     public void iClickOnGooglePlusIcon() {
         indexPage = new IndexPage(webDriver);
-        pageFooter = new PageFooter(webDriver);
-        pageFooter.clickGoogleIcon();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        indexPage.getPageFooter().clickGoogleIcon();
     }
 
     @Then("I will go to the Google plus page")
     public void iWillGoToTheGooglePlusPage() {
-        Assertions.assertEquals("https://plus.google.com/111979135243110831526/posts", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assertions.assertEquals("https://accounts.google.com/signin/v2/identifier?passive=1209600&osid=1&continue=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&followup=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&flowName=GlifWebSignIn&flowEntry=ServiceLogin", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
 
     }
     @After
     public static void tearDown() {
         if(webDriver != null) {
-            //    manager.quitDriver();
+                webDriver.quit();
             System.out.println("tearDown googlePlus");
         }
     }
