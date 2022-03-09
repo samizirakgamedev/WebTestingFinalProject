@@ -40,7 +40,7 @@ public class WebDriverTest {
         String desiredPage = "https://www.google.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.IE);
-        driver = driverManager.getDriver();
+        driver = driverManager.getHeadlessDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))

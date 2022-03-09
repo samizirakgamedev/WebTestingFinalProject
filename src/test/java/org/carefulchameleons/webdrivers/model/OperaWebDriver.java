@@ -35,6 +35,10 @@ public class OperaWebDriver extends WebDriverManager{
     }
     @Override
     protected void createDriver() {
+        driver = new OperaDriver(operaDriverService);
+    }
+    @Override
+    protected void createHeadlessDriver() {
         OperaOptions options = new OperaOptions();
         options.addArguments("headless");
         driver = new OperaDriver(operaDriverService,options);

@@ -36,8 +36,13 @@ public class IEWebDriver extends WebDriverManager {
     }
     @Override
     protected void createDriver() {
-        InternetExplorerOptions options = new InternetExplorerOptions();
-        options.addCommandSwitches("headless");
-        driver = new InternetExplorerDriver(internetExplorerDriverService,options);
+        driver = new InternetExplorerDriver(internetExplorerDriverService);
+    }
+
+    @Override
+    protected void createHeadlessDriver() {
+        createDriver();
+        System.out.println("!! IE does not support running in headless mode!!");
+        System.out.println("!!- A standard IE web driver has been created -!!");
     }
 }

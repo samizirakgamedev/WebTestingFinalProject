@@ -24,6 +24,8 @@ public abstract class WebDriverManager {
      * Creates the driver of choice for the user.
      */
     protected abstract void createDriver();
+
+    protected abstract void createHeadlessDriver();
     /**
      * Manager method that can be called to terminate the active driver by stopping the service and quitting it.
      * Sets the driver to null after termination.
@@ -48,6 +50,18 @@ public abstract class WebDriverManager {
         return driver;
     }
     /**
+     * Manager method that can be called to create a WebDriver of choice in "headless mode" and return it.
+     * Starts the drivers the service for the driver in advance of creating it.
+     * Note: Default filepath for driver is: src/test/resources/drivers/[Driver name]
+     */
+    public WebDriver getHeadlessDriver() {
+        if (null == driver) {
+            startService();
+            createHeadlessDriver();
+        }
+        return driver;
+    }
+    /**
      * Manager method that can be called to create a WebDriver of choice and return it.
      * Can be called with a custom file path to the driver needed to run the WebDriver.
      */
@@ -55,6 +69,17 @@ public abstract class WebDriverManager {
         if (null == driver) {
             startService(filePath);
             createDriver();
+        }
+        return driver;
+    }
+    /**
+     * Manager method that can be called to create a WebDriver of choice in "headless mode" and return it.
+     * Can be called with a custom file path to the driver needed to run the WebDriver.
+     */
+    public WebDriver getHeadlessDriverWithCustomPath(String filePath) {
+        if (null == driver) {
+            startService(filePath);
+            createHeadlessDriver();
         }
         return driver;
     }

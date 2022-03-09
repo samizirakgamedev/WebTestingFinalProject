@@ -33,4 +33,11 @@ public class SafariWebDriver extends WebDriverManager{
     protected void createDriver() {
         driver = new SafariDriver();
     }
+
+    @Override
+    protected void createHeadlessDriver() {
+        createDriver();
+        System.out.println("!! Safari does not support running in headless mode!!");
+        System.out.println("!! A standard Safari web driver has been created !!");
+    }
 }

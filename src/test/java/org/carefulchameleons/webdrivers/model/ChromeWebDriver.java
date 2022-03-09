@@ -35,6 +35,10 @@ public class ChromeWebDriver extends WebDriverManager{
     }
     @Override
     protected void createDriver() {
+        driver = new ChromeDriver(chromeDriverService);
+    }
+    @Override
+    protected void createHeadlessDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         driver = new ChromeDriver(chromeDriverService, options);
