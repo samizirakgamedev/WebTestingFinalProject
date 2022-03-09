@@ -35,6 +35,38 @@ public class RegistrationPage extends Page {
         super(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=identity#account-creation");
     }
 
+    public boolean isPhoneNumberErrorPresent(){
+        return webDriver.getPageSource().contains("You must register at least one phone number.");
+    }
+
+    public boolean isLastNameErrorPresent(){
+        return webDriver.getPageSource().contains("lastname is required.");
+    }
+
+    public boolean isFirstNameErrorPresent(){
+        return webDriver.getPageSource().contains("firstname is required.");
+    }
+
+    public boolean isPasswordErrorPresent(){
+        return webDriver.getPageSource().contains("passwd is required.");
+    }
+
+    public boolean isAddressOneErrorPresent(){
+        return webDriver.getPageSource().contains("address1 is required.");
+    }
+
+    public boolean isCityErrorPresent(){
+        return webDriver.getPageSource().contains("city is required.");
+    }
+
+    public boolean isZipPostCodeErrorPresent(){
+        return webDriver.getPageSource().contains("The Zip/Postal code you've entered is invalid. It must follow this format: 00000");
+    }
+
+    public boolean isCountryErrorPresent(){
+        return webDriver.getPageSource().contains("This country requires you to choose a State.");
+    }
+
     public RegistrationPage chooseSocialTitleAsMr(){
         webDriver.findElement(SOCIAL_TITLE_MR).click();
         return this;
