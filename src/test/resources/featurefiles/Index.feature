@@ -75,14 +75,21 @@ Feature: As a customer, I want to be able to sign up for the newsletter using my
   Background: Setting up the Browser
     Given I am on the home page
 
-  #todo
 
-Feature: As a customer, I want to add products displayed on the home page that I find attractive to the cart and then checkout.
+  @newsletter
+  Scenario: I want to sign up for the newsletter
+    When I enter my email address
+    And I click on the newsletter button
+    Then I will register myself for the email newsletter
 
-  Background: Setting up the Browser
-    Given I am on the home page
+#Feature: As a customer, I want to add products displayed on the home page that I find attractive to the cart and then checkout.
 
-  #todo
+  # Background: Setting up the Browser
+  #  Given I am on the home page
+  # When I hover over the first product displayed
+  #  And I click on the Add to cart blue button
+  # Then
+  ##todo
 
 Feature: As a customer, I want to be able to contact help if I have any struggles regarding the website.
 
@@ -94,7 +101,7 @@ Feature: As a customer, I want to be able to contact help if I have any struggle
     When I click on the contact us button
     Then I am taken to the contact us page
 
-  @contact
-  Scenario: I want to contact customer service regarding an inquiry
+  #  @contact
+  #  Scenario: I want to contact customer service regarding an inquiry
 
-        #Todo
+  ##Todo

@@ -110,7 +110,6 @@ public class IndexStepDefs {
     public void iClickOnThePanel(String name) {
 
 
-
     }
 
     @Then("I am taken to the {string} page")
@@ -139,13 +138,13 @@ public class IndexStepDefs {
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=new-products", indexPage.getCurrentURL());
             case ("Best sellers"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=best-sales", indexPage.getCurrentURL());
-            case("Our stores"):
+            case ("Our stores"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=stores", indexPage.getCurrentURL());
-            case("Terms and conditions of use"):
+            case ("Terms and conditions of use"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=3&controller=cms", indexPage.getCurrentURL());
-            case("About us"):
+            case ("About us"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=4&controller=cms", indexPage.getCurrentURL());
-            case("Sitemap"):
+            case ("Sitemap"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", indexPage.getCurrentURL());
         }
     }
@@ -153,7 +152,7 @@ public class IndexStepDefs {
     @When("I click on the button within the Call Us section")
     public void iClickOnTheButtonWithinTheCallUsSection() {
 
-        // todo
+      //  indexPage.
 
     }
 
@@ -173,13 +172,13 @@ public class IndexStepDefs {
                 indexPage.pageFooter().goToNewProducts();
             case ("Best sellers"):
                 indexPage.pageFooter().goToBestSellers();
-            case("Our stores"):
+            case ("Our stores"):
                 indexPage.pageFooter().goToOurStores();
-            case("Terms and conditions of use"):
+            case ("Terms and conditions of use"):
                 indexPage.pageFooter().goToTermsAndConditions();
-            case("About us"):
+            case ("About us"):
                 indexPage.pageFooter().goToAboutUs();
-            case("Sitemap"):
+            case ("Sitemap"):
                 indexPage.pageFooter().goToSitemap();
 
             case ("My orders"):
