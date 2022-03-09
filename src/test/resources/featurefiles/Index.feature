@@ -50,18 +50,25 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     When I click on the "<Name>" link
     Then I am taken to the "<Account Detail>" page
     Examples:
-      | Name | Account Detail |
-      |      |                |
+      | Name             | Account Detail   |
+      | My orders        | My orders        |
+      | My credit slips  | My credit slips  |
+      | My addresses     | My addresses     |
+      | My personal info | My personal info |
 
   @navigation
   Scenario Outline: I want to access the information available from the footer of the website
     When I click on the "<Name>" link
     Then I am taken to the "<Information Page>" section.
     Examples:
-      | Name | Information Page |
-      |      |                  |
-
-
+      | Name                        | Information Page            |
+      | Specials                    | Specials                    |
+      | New products                | New products                |
+      | Best sellers                | Best sellers                |
+      | Our stores                  | Our stores                  |
+      | Terms and conditions of use | Terms and conditions of use |
+      | About us                    | About us                    |
+      | Sitemap                     | Sitemap                     |
 
 Feature: As a customer, I want to be able to sign up for the newsletter using my e-mail address to stay updated.
 
