@@ -14,13 +14,13 @@ public class FacebookStepdefs {
     //private MyAccountPage myAccountPage;
     //private static WebDriverManager manager;
 
-    @Given("I am on the Home page")
-    public void iAmOnTheHomePage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
-        webDriver.get("http://automationpractice.com/index.php");
-
-    }
+//    @Given("I am on the Home page")
+//    public void iAmOnTheHomePage() {
+//        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
+//        //webDriver = manager.getDriver();
+//        webDriver.get("http://automationpractice.com/index.php");
+//
+//    }
 
     @When("I click on FACEBOOK icon")
     public void iClickOnFACEBOOKIcon() {
