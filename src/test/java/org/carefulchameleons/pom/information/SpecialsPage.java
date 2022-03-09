@@ -5,6 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class SpecialsPage extends Page {
     public SpecialsPage(WebDriver webDriver, String expected_url) {
-        super(webDriver, expected_url);
+        super(webDriver, "");
     }
 }

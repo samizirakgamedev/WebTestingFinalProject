@@ -55,37 +55,28 @@ public class MyPersonalInfoPage extends MyAccountSharedPage {
 
     public MyPersonalInfoPage selectDayForDateOfBirth(int day){
         webDriver.findElement(DAY_FOR_DATE_OF_BIRTH).click();
-        List<WebElement> dayOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
-
-        for (WebElement element : dayOptions) {
-            if (Integer.parseInt(element.getAttribute("value")) == day){
-                element.click();
-            }
-        }
+        webDriver.findElement(DAY_FOR_DATE_OF_BIRTH)
+                .findElements(DATE_OF_BIRTH_OPTIONS)
+                .get(day - 1)
+                .click();
         return this;
     }
 
     public MyPersonalInfoPage selectMonthForDateOfBirth(int month){
         webDriver.findElement(MONTH_FOR_DATE_OF_BIRTH).click();
-        List<WebElement> monthOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
-
-        for (WebElement element : monthOptions) {
-            if (Integer.parseInt(element.getAttribute("value")) == month){
-                element.click();
-            }
-        }
+        webDriver.findElement(MONTH_FOR_DATE_OF_BIRTH)
+                .findElements(DATE_OF_BIRTH_OPTIONS)
+                .get(month - 1)
+                .click();
         return this;
     }
 
     public MyPersonalInfoPage selectYearForDateOfBirth(int year){
         webDriver.findElement(YEAR_FOR_DATE_OF_BIRTH).click();
-        List<WebElement> monthOptions = webDriver.findElements(DATE_OF_BIRTH_OPTIONS);
-
-        for (WebElement element : monthOptions) {
-            if (Integer.parseInt(element.getAttribute("value")) == year){
-                element.click();
-            }
-        }
+        webDriver.findElement(YEAR_FOR_DATE_OF_BIRTH)
+                .findElements(DATE_OF_BIRTH_OPTIONS)
+                .get(year - 1)
+                .click();
         return this;
     }
 
