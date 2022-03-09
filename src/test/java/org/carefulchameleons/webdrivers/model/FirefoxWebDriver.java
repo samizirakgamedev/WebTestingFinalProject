@@ -51,10 +51,10 @@ public class FirefoxWebDriver extends WebDriverManager{
         driver = new FirefoxDriver(firefoxDriverService,options);
     }
     @Override
-    protected void createDriverWithIPhoneElevenResolution() {
+    protected void createPhoneDriver(MobilePhoneType type) {
         createDriver();
 
-        Dimension iPhone = new Dimension(414,896);
+        Dimension iPhone = new Dimension(type.width,type.height);
         WebElement html = driver.findElement(By.tagName("html"));
         driver.manage().window().setSize(iPhone);
         html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));

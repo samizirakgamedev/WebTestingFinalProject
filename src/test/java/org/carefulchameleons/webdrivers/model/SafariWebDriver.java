@@ -37,21 +37,18 @@ public class SafariWebDriver extends WebDriverManager{
     protected void createDriver() {
         driver = new SafariDriver();
     }
-
     @Override
     protected void createHeadlessDriver() {
         createDriver();
         System.out.println("!! Safari does not support running in headless mode!!");
         System.out.println("!! A standard Safari web driver has been created !!");
     }
-
     @Override
-    protected void createDriverWithIPhoneElevenResolution() {
-            createDriver();
-            Dimension iPhoneEleven = new Dimension(414,896);
-            WebElement html = driver.findElement(By.tagName("html"));
-            driver.manage().window().setSize(iPhoneEleven);
-            html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
-
+    protected void createPhoneDriver(MobilePhoneType type) {
+        createDriver();
+        Dimension iPhoneEleven = new Dimension(type.width,type.height);
+        WebElement html = driver.findElement(By.tagName("html"));
+        driver.manage().window().setSize(iPhoneEleven);
+        html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
     }
 }

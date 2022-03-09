@@ -48,10 +48,10 @@ public class ChromeWebDriver extends WebDriverManager{
         driver = new ChromeDriver(chromeDriverService, options);
     }
     @Override
-    protected void createDriverWithIPhoneElevenResolution() {
+    protected void createPhoneDriver(MobilePhoneType type) {
         createDriver();
 
-        Dimension iPhoneEleven = new Dimension(414,896);
+        Dimension iPhoneEleven = new Dimension(type.width,type.height);
         WebElement html = driver.findElement(By.tagName("html"));
         driver.manage().window().setSize(iPhoneEleven);
         html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));

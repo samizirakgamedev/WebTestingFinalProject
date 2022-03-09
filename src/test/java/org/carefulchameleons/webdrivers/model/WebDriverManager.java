@@ -29,12 +29,14 @@ public abstract class WebDriverManager {
      */
     protected abstract void createHeadlessDriver();
     /**
-     * Creates the driver of choice for the user with a screen (browser) size and resolution of an iPhone 11.
+     * Creates the driver of choice for the user with a screen (browser) size and resolution of the MobilePhoneType of choice.
+     * @param type MobilePhoneType that defines the height and width of the mobile phone.
      */
-    protected abstract void createDriverWithIPhoneElevenResolution();
+    protected abstract void createPhoneDriver(MobilePhoneType type);
+
     /**
      * Manager method that can be called to terminate the active driver by stopping the service and quitting it.
-     * Sets the driver to null after termination.
+     * NOTE: Sets the driver to null after termination.
      */
     public void quitDriver() {
         if (null != driver) {
@@ -47,6 +49,7 @@ public abstract class WebDriverManager {
      * Manager method that can be called to create a WebDriver of choice and return it.
      * Starts the drivers the service for the driver in advance of creating it.
      * Note: Default filepath for driver is: src/test/resources/drivers/[Driver name]
+     * @return Returns the created WebDriver
      */
     public WebDriver getDriver() {
         if (null == driver) {
@@ -59,7 +62,7 @@ public abstract class WebDriverManager {
      * Manager method that can be called to create a WebDriver of choice in "headless mode" and return it.
      * Starts the drivers the service for the driver in advance of creating it.
      * Note: Default filepath for driver is: src/test/resources/drivers/[Driver name]
-     * Note: Will return a browser that isn't headless if the browser doesn't support headless mode.
+     * @return Returns the created WebDriver. Note: Will return a browser that isn't headless if the browser doesn't support headless mode.
      */
     public WebDriver getHeadlessDriver() {
         if (null == driver) {
@@ -69,8 +72,22 @@ public abstract class WebDriverManager {
         return driver;
     }
     /**
+     * Manager method that can be called to create a WebDriver of choice with a screen (browser) size and resolution of the MobilePhoneType of choice and then return it.
+     * Note: Default filepath for driver is: src/test/resources/drivers/[Driver name].
+     * @param type MobilePhoneType that defines the height and width of the mobile phone.
+     * @return Returns the created WebDriver
+     */
+    public WebDriver getMobilePhoneDriver(MobilePhoneType type) {
+        if (null == driver) {
+            startService();
+            createPhoneDriver(type);
+        }
+        return driver;
+    }
+    /**
      * Manager method that can be called to create a WebDriver of choice and return it.
-     * Can be called with a custom file path to the driver needed to run the WebDriver.
+     * @param filePath Custom file path to the driver needed to run the WebDriver.
+     * @return Returns the created WebDriver
      */
     public WebDriver getDriverWithCustomPath(String filePath) {
         if (null == driver) {
@@ -81,8 +98,8 @@ public abstract class WebDriverManager {
     }
     /**
      * Manager method that can be called to create a WebDriver of choice in "headless mode" and return it.
-     * Can be called with a custom file path to the driver needed to run the WebDriver.
-     * Note: Will return a browser that isn't headless if the browser doesn't support headless mode.
+     * @param filePath Custom file path to the driver needed to run the WebDriver.
+     * @return Returns the created WebDriver. Note: Will return a browser that isn't headless if the browser doesn't support headless mode.
      */
     public WebDriver getHeadlessDriverWithCustomPath(String filePath) {
         if (null == driver) {
@@ -92,13 +109,15 @@ public abstract class WebDriverManager {
         return driver;
     }
     /**
-     * Manager method that can be called to create a WebDriver of choice with a screen (browser) size and resolution of an iPhone 11 and then return it.
-     * Note: Default filepath for driver is: src/test/resources/drivers/[Driver name].
+     * Manager method that can be called to create a WebDriver of choice with a screen (browser) size and resolution of the MobilePhoneType of choice and then return it.
+     * @param filePath Custom file path to the driver needed to run the WebDriver.
+     * @param type MobilePhoneType that defines the height and width of the mobile phone.
+     * @return Returns the created WebDriver.
      */
-    public WebDriver getIPhoneElevenDriver() {
+    public WebDriver getMobilePhoneDriverWithCustomPath(String filePath, MobilePhoneType type) {
         if (null == driver) {
-            startService();
-            createDriverWithIPhoneElevenResolution();
+            startService(filePath);
+            createPhoneDriver(type);
         }
         return driver;
     }
