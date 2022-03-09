@@ -1,5 +1,6 @@
 package org.carefulchameleons.stepdefs;
 import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.cucumber.java.en.And;
@@ -12,7 +13,9 @@ import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
 import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 
 public class MyAccountStepdefs {
+
     private static WebDriver webDriver;
+
     private MyAccountPage myAccountPage = new MyAccountPage(webDriver);
     private AddressDetailsPage addressDetailsPage = new AddressDetailsPage(webDriver);
     private MyOrderHistoryPage myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
@@ -29,7 +32,7 @@ public class MyAccountStepdefs {
 
     @When("I click the Sign out link")
     public void iClickTheSignOutLink() {
-        //myAccountPage.clickSignoutLink();
+        myAccountPage.getPageHeader().clickSignOutButton();
     }
 
     @And("The registration page opens")
@@ -71,8 +74,7 @@ public class MyAccountStepdefs {
 
     @When("I click on the Credit Slips button")
     public void iClickOnTheCreditSlipsButton() {
-        //myAccountPage.goToMyCreditSlipsPage();
-        webDriver.findElement(By.linkText("My credit slips")).click();
+        myAccountPage.goToMyCreditSlipsPage();
     }
 
     @Then("The Credit Slips page should open")
@@ -125,7 +127,7 @@ public class MyAccountStepdefs {
 
     @When("I click the Back to your account. button")
     public void iClickTheBackToYourAccountButton() {
-        //clickity click Back to your account.
+        myOrderHistoryPage.clickTopNavigationMyAccount();
     }
 
     @Then("I should be on My Account page")
@@ -142,7 +144,7 @@ public class MyAccountStepdefs {
 
     @When("I click the Add a new address button")
     public void iClickTheAddANewAddressButton() {
-        //addressDetailsPage.clickNewAddress();
+        myAddressPage.addNewAddressDetails();
     }
 
     @Then("The page to add new address should open")
@@ -154,22 +156,25 @@ public class MyAccountStepdefs {
 
     @When("I click the Delete button")
     public void iClickTheDeleteButton() {
-        //addressDetailsPage.clickDeleteButton();
+        // index is the address you want to delete out of all the addresses
+        myAddressPage.deleteAddress(0);
     }
 
     @And("I confirm the deletion")
     public void iConfirmTheDeletion() {
-        //not a clue
+        // index is the address you want to delete out of all the addresses
+        myAddressPage.confirmDeleteAddress(0);
     }
 
     @Then("The address should be deleted")
     public void theAddressShouldBeDeleted() {
-        //again not a clue
+        // use the expect amount of addresses you want to see
+        Assertions.assertEquals(0, myAddressPage.getAddressSize());
     }
 
     @When("I click the Update button")
     public void iClickTheUpdateButton() {
-        //myAddressPage.updateAddressDetails(???);
+        myAddressPage.updateAddressDetails(0);
     }
 
     @Then("The page to update the address should open")
@@ -367,4 +372,5 @@ public class MyAccountStepdefs {
     public void theInvoicePdfShouldOpen() {
         //it's actually downloading for me
     }
+
 }
