@@ -4,9 +4,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.carefulchameleons.pom.myaccounts.RegistrationPage;
+import org.carefulchameleons.pom.PageHeader;
 
 public class RegisterStepdefs {
     private static WebDriver webDriver;
+    private RegistrationPage registrationPage = new RegistrationPage(webDriver);
+    private PageHeader pageHeader = new PageHeader(webDriver);
 
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
@@ -15,6 +19,7 @@ public class RegisterStepdefs {
 
     @When("I click on Sign in button")
     public void iClickOnSignInButton() {
+        pageHeader.clickSignInButton();
     }
 
     @Given("The registration page is open")
@@ -26,6 +31,7 @@ public class RegisterStepdefs {
 
     @And("I click the Create an account button")
     public void iClickTheCreateAnAccountButton() {
+        registrationPage.clickRegisterButton();
     }
 
     @Then("The Create an account page should open")
@@ -35,16 +41,16 @@ public class RegisterStepdefs {
         return createAccountPageOpen;
     }
 
-    @When("I type an invalid <email> address")
-    public void iTypeAnInvalidEmailAddress() {
-    }
-
     @Then("The error An account using this email address has already been registered. should be displayed on the screen")
-    public void theErrorMessageShouldBeDisplayed() {
+    public boolean theErrorMessageShouldBeDisplayed() {
+        boolean isEmailError = false;
+        if (webDriver.getPageSource().contains("An account using this email address has already been registered.")) isEmailError = true;
+        return isEmailError;
     }
 
     @When("I type a valid test@test.com email address")
     public void iTypeAValidEmailAddress() {
+        registrationPage.enterTextInEmailTextBox("test@test.com");
     }
 
     @Given("The Create an account page is open")
@@ -56,66 +62,82 @@ public class RegisterStepdefs {
 
     @When("I type my test first name")
     public void iTypeMyFirstNameTest() {
+        registrationPage.enterTextInFirstNameTextBox("test");
     }
 
     @When("I type my first name")
     public void iTypeMyFirstNameEmpty() {
+        registrationPage.enterTextInFirstNameTextBox("");
     }
 
     @And("I type my test last name")
     public void iTypeMyLastNameTest() {
+        registrationPage.enterTextInLastNameTextBox("test");
     }
 
     @And("I type my last name")
     public void iTypeMyLastNameEmpty() {
+        registrationPage.enterTextInLastNameTextBox("");
     }
 
     @And("I type my test address")
     public void iTypeMyAddressTest() {
+        registrationPage.enterTextInAddressOneTextBox("test");
     }
 
     @And("I type my address")
     public void iTypeMyAddressEmptyt() {
+        registrationPage.enterTextInAddressOneTextBox("");
     }
 
     @And("I type my test city")
     public void iTypeMyCityTest() {
+        registrationPage.enterTextInCityTextBox("test");
     }
 
     @And("I type my city")
     public void iTypeMyCityEmptyt() {
+        registrationPage.enterTextInCityTextBox("");
     }
 
     @And("I select my state from the list")
     public void iSelectMyState() {
+        registrationPage.selectStateAtIndex(0);
     }
 
     @And("I choose my Florida state")
     public void iSelectMyStateFlorida() {
+        registrationPage.selectStateAtIndex(9);
     }
 
     @And("I choose my state")
     public void iSelectMyStateEmpty() {
+        registrationPage.selectStateAtIndex(0);
     }
 
     @And("I type my 12345 zipcode")
     public void iTypeMyZipCode() {
+        registrationPage.enterTextInPostCodeTextBox("12345");
     }
 
     @And("I type my zipcode")
     public void iTypeMyZipCodeEmpty() {
+        registrationPage.enterTextInPostCodeTextBox("");
     }
 
     @And("I type my 12345678 mobile phone")
     public void iTypeMyMobilePhone() {
+        registrationPage.enterTextInMobilePhoneTextBox("12345678");
     }
 
     @And("I type my mobile phone")
     public void iTypeMyMobilePhoneEmpty() {
+        registrationPage.enterTextInMobilePhoneTextBox("");
     }
 
     @And("I click the Register button")
     public void iClickTheRegisterButton() {
+        registrationPage.clickRegisterButton();
     }
 
     @Then("The My Account page should open")
@@ -125,62 +147,70 @@ public class RegisterStepdefs {
         return myAccountPageOpen;
     }
 
-    @When("I type my <firstname>")
-    public void iTypeMyFirstname() {
-    }
-
     @When("I type a valid email address")
     public void iTypeAValidEmail() {
+        registrationPage.enterTextInEmailTextBox("test@test.com");
     }
 
     @When("I type an invalid test email")
     public void iTypeAnInvalidEmail() {
+        registrationPage.enterTextInEmailTextBox("test");
     }
 
     @When("I type an invalid email")
     public void iTypeAnInvalidEmptyEmail() {
+        registrationPage.enterTextInEmailTextBox("");
     }
 
     @When("I type an invalid test@test email")
     public void iTypeAnInvalidTestAtTestEmail() {
+        registrationPage.enterTextInEmailTextBox("test@test");
     }
 
     @When("I type an invalid test.com email")
     public void iTypeAnInvalidTestDotComEmail() {
+        registrationPage.enterTextInEmailTextBox("test.com");
     }
 
     @Then("The error Invalid email address. should be displayed")
     public boolean theErrorMessageShouldIsDisplayed() {
-        boolean isCorrectError = false;
-        //error message: Invalid email address.
-        return isCorrectError;
+        boolean isEmailError = false;
+        if (webDriver.getPageSource().contains("Invalid email address.")) isEmailError = true;
+        return isEmailError;
     }
 
     @Then("The This country requires you to choose a State. message should be displayed")
-    public void theErrorMessageCountryShouldBeShown() {
+    public boolean theErrorMessageCountryShouldBeShown() {
+        return registrationPage.isCountryErrorPresent();
     }
 
     @Then("The firstname is required. message should be displayed")
-    public void theErrorMessageFirstNameShouldBeShown() {
+    public boolean theErrorMessageFirstNameShouldBeShown() {
+        return registrationPage.isFirstNameErrorPresent();
     }
 
     @Then("The lastname is required. message should be displayed")
-    public void theErrorMessageLastNameShouldBeShown() {
+    public boolean theErrorMessageLastNameShouldBeShown() {
+        return registrationPage.isLastNameErrorPresent();
     }
 
     @Then("The address1 is required. message should be displayed")
-    public void theErrorMessageAddressShouldBeShown() {
+    public boolean theErrorMessageAddressShouldBeShown() {
+        return registrationPage.isAddressOneErrorPresent();
     }
 
     @Then("The city is required. message should be displayed")
-    public void theErrorMessageCityShouldBeShown() {
+    public boolean theErrorMessageCityShouldBeShown() {
+        return registrationPage.isCityErrorPresent();
     }
 
     @Then("The The Zip/Postal code you've entered is invalid. It must follow this format: 00000 message should be displayed")
-    public void theErrorMessageZipCodeShouldBeShown() {
+    public boolean theErrorMessageZipCodeShouldBeShown() {
+        return registrationPage.isZipPostCodeErrorPresent();
     }
 
     @Then("The You must register at least one phone number. message should be displayed")
-    public void theErrorMessagePhoneNumberShouldBeShown() {
+    public boolean theErrorMessagePhoneNumberShouldBeShown() {
+        return registrationPage.isPhoneNumberErrorPresent();
     }
 }

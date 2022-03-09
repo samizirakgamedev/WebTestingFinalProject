@@ -57,7 +57,7 @@ public class MyPersonalInfoPage extends MyAccountSharedPage {
         webDriver.findElement(DAY_FOR_DATE_OF_BIRTH).click();
         webDriver.findElement(DAY_FOR_DATE_OF_BIRTH)
                 .findElements(DATE_OF_BIRTH_OPTIONS)
-                .get(day - 1)
+                .get(day)
                 .click();
         return this;
     }
@@ -66,7 +66,7 @@ public class MyPersonalInfoPage extends MyAccountSharedPage {
         webDriver.findElement(MONTH_FOR_DATE_OF_BIRTH).click();
         webDriver.findElement(MONTH_FOR_DATE_OF_BIRTH)
                 .findElements(DATE_OF_BIRTH_OPTIONS)
-                .get(month - 1)
+                .get(month)
                 .click();
         return this;
     }
@@ -75,7 +75,7 @@ public class MyPersonalInfoPage extends MyAccountSharedPage {
         webDriver.findElement(YEAR_FOR_DATE_OF_BIRTH).click();
         webDriver.findElement(YEAR_FOR_DATE_OF_BIRTH)
                 .findElements(DATE_OF_BIRTH_OPTIONS)
-                .get(year - 1)
+                .get(year)
                 .click();
         return this;
     }

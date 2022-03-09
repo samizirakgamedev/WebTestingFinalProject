@@ -48,54 +48,11 @@ Feature: As a customer I would like to navigate through my account pages and edi
     And I confirm the deletion
     Then The address should be deleted
 
-  Scenario: As a customer I want to have the option to update an address
-    Given I am on My Addresses page
-    When I click the Update button
-    Then The page to update the address should open
-
-  Scenario: As a customer I want to be able to update an address
-    Given I am on the update address page
-    When I edit the fields
-    And click the button Save
-    Then the address should be updated
-
-  Scenario: As a customer I want to be able to update my first name
-    Given I am on My Personal Information page
-    When I edit the first name field
-    And I click the button Save
-    Then the first name should be updated
-
-  Scenario: As a customer I want to be able to update my last name
-    Given I am on My Personal Information page
-    When I edit the last name field
-    And I click the button Save
-    Then the last name should be updated
-
-  Scenario: As a customer I want to be able to update my email address
-    Given I am on My Personal Information page
-    When I edit the email address field
-    And I click the button Save
-    Then the email address should be updated
-
   Scenario: As a customer I want to not be able to update my email address with an invalid value
     Given I am on My Personal Information page
     When I edit the email address field with an invalid value
     And I click the button Save
     Then an error message should be displayed
-
-  Scenario: As a customer I want to be able to update my password if both fields match
-    Given I am on My Personal Information page
-    When I fill the new password field
-    And the confirmation password field with the same password
-    And I click the button Save
-    Then the password should be updated
-
-  Scenario: As a customer I want to not be able to update my password if both fields don't match
-    Given I am on My Personal Information page
-    When I fill the new password field
-    And the confirmation password field with different password
-    And I click the button Save
-    Then the error The password and confirmation do not match. should be displayed
 
   Scenario: As a customer I want to be able to create a wishlist
     Given I am on My Wishlist page

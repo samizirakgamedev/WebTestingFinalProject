@@ -25,9 +25,20 @@ public class PageHeader {
     private final By CART_SHIPPING_COST = new By.ByClassName("ajax_cart_shipping_cost");
     private final By CART_TOTAL_COST = new By.ByClassName("ajax_block_cart_total");
     private final By CART_CHECKOUT_BUTTON = new By.ById("button_order_cart");
+    private final By SIGN_OUT_BUTTON = new By.ByClassName("logout");
+    private final By MY_ACCOUNT_BUTTON = new By.ByClassName("account");
 
     public PageHeader(WebDriver webDriver) {
         this.webDriver = webDriver;
+    }
+
+    public void clickSignOutButton(){
+        webDriver.findElement(SIGN_OUT_BUTTON).click();
+    }
+
+    public MyAccountPage clickMyAccountButton(){
+        webDriver.findElement(MY_ACCOUNT_BUTTON).click();
+        return new MyAccountPage(webDriver);
     }
 
     public void clickHeaderImage() {
