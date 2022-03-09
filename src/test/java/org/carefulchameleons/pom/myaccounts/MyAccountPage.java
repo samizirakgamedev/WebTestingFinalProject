@@ -31,6 +31,11 @@ public class MyAccountPage extends Page {
         return new MyPersonalInfoPage(webDriver);
     }
 
+    public MyWishListsPage goToMyWishListsPage() {
+        webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='My wishlists']")).click();
+        return new MyWishListsPage(webDriver);
+    }
+
     public IndexPage clickHomeButtonTop() {
         webDriver.findElement(TOP_HOME_BUTTON).click();
         return new IndexPage(webDriver);
