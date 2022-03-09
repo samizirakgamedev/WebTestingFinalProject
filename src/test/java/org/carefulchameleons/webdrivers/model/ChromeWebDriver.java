@@ -1,5 +1,9 @@
 package org.carefulchameleons.webdrivers.model;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -42,5 +46,14 @@ public class ChromeWebDriver extends WebDriverManager{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         driver = new ChromeDriver(chromeDriverService, options);
+    }
+    @Override
+    protected void createDriverWithIPhoneElevenResolution() {
+        createDriver();
+
+        Dimension iPhoneEleven = new Dimension(414,896);
+        WebElement html = driver.findElement(By.tagName("html"));
+        driver.manage().window().setSize(iPhoneEleven);
+        html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
     }
 }

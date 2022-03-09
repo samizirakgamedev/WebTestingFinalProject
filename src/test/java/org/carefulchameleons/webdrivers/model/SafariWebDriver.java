@@ -40,4 +40,8 @@ public class SafariWebDriver extends WebDriverManager{
         System.out.println("!! Safari does not support running in headless mode!!");
         System.out.println("!! A standard Safari web driver has been created !!");
     }
+    @Override
+    protected void createDriverWithIPhoneElevenResolution() {
+        // Behaviour to be added.
+    }
 }

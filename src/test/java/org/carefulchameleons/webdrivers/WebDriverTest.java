@@ -12,7 +12,7 @@ public class WebDriverTest {
         String desiredPage = "https://www.google.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        driver = driverManager.getDriver();
+        driver = driverManager.getIPhoneElevenDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))
@@ -26,7 +26,7 @@ public class WebDriverTest {
         String desiredPage = "https://www.google.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.FIREFOX);
-        driver = driverManager.getDriver();
+        driver = driverManager.getIPhoneElevenDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))
@@ -40,12 +40,12 @@ public class WebDriverTest {
         String desiredPage = "https://www.google.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.IE);
-        driver = driverManager.getHeadlessDriver();
+        driver = driverManager.getIPhoneElevenDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))
             System.out.println(">>> IE Driver Functioning <<<");
-        driverManager.quitDriver();
+        //driverManager.quitDriver();
     }
 
     public static void operaTest(){
@@ -54,12 +54,12 @@ public class WebDriverTest {
         String desiredPage = "https://www.google.com/";
 
         driverManager = WebDriverFactory.getManager(WebDriverType.OPERA);
-        driver = driverManager.getDriver();
+        driver = driverManager.getIPhoneElevenDriver();
         driver.get(desiredPage);
 
         if (driver.getCurrentUrl().equals(desiredPage))
             System.out.println(">>> Opera Driver Functioning <<<");
-        driverManager.quitDriver();
+        //driverManager.quitDriver();
     }
 
     public static void safariTest(){
@@ -80,7 +80,7 @@ public class WebDriverTest {
 //        operaTest();
 //        chromeTest();
 //        firefoxTest();
-//        ieTest();
+        ieTest();
 //        safariTest();
     }
 }

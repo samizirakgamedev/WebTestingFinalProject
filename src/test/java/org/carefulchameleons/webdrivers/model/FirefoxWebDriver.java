@@ -1,5 +1,9 @@
 package org.carefulchameleons.webdrivers.model;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
@@ -45,5 +49,14 @@ public class FirefoxWebDriver extends WebDriverManager{
         options.setBinary("C:/Program Files/Mozilla Firefox/firefox.exe");
         options.setHeadless(true);
         driver = new FirefoxDriver(firefoxDriverService,options);
+    }
+    @Override
+    protected void createDriverWithIPhoneElevenResolution() {
+        createDriver();
+
+        Dimension iPhone = new Dimension(414,896);
+        WebElement html = driver.findElement(By.tagName("html"));
+        driver.manage().window().setSize(iPhone);
+        html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
     }
 }

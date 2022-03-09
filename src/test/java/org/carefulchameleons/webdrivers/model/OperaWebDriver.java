@@ -1,5 +1,9 @@
 package org.carefulchameleons.webdrivers.model;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaOptions;
@@ -42,5 +46,14 @@ public class OperaWebDriver extends WebDriverManager{
         OperaOptions options = new OperaOptions();
         options.addArguments("headless");
         driver = new OperaDriver(operaDriverService,options);
+    }
+    @Override
+    protected void createDriverWithIPhoneElevenResolution() {
+        createDriver();
+
+        Dimension iPhoneEleven = new Dimension(414,896);
+        WebElement html = driver.findElement(By.tagName("html"));
+        driver.manage().window().setSize(iPhoneEleven);
+        html.sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT));
     }
 }
