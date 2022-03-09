@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.ItemPage;
 import org.carefulchameleons.pom.ProductPage;
+import org.carefulchameleons.pom.ProductSelection;
 import org.carefulchameleons.pom.cart.CartPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,7 @@ public class CartStepDefs {
     private static WebDriver webDriver;
     private static CartSummaryPage cartSummaryPage;
     private static IndexPage indexPage;
+    private static ProductSelection productSelection;
 
     @Before
     public void setUp() {
@@ -46,18 +48,28 @@ public class CartStepDefs {
 
     @And("An item has been added")
     public void anItemHasBeenAdded() {
-        webDriver.navigate().to("http://automationpractice.com/index.php");
+    }
+
+    @Given("I have added an item to the cart")
+    public void iHaveAddedAnItemToTheCart() {
+        webDriver.get("http://automationpractice.com/index.php");
         indexPage = new IndexPage(webDriver);
-        
+        productSelection =  indexPage.featuredItems();
+        productSelection.addItemToCart(0);
+    }
+
+    @When("I go to the Cart Page")
+    public void iGoToTheCartPage() {
+        cartSummaryPage = productSelection.proceedToCheckout();
     }
 
     @Then("Item should be shown in the page")
     public void itemShouldBeShownInThePage() {
-        String product = cartSummaryPage.getProductName(1);
-        Assertions.assertEquals("dd", product);
+        int products = cartSummaryPage.getCartSize();
+        Assertions.assertEquals(1, products);
     }
 
-    @When("I click on the remove item button next to the item")
+    @And("I click on the remove item button next to the item")
     public void iClickOnTheRemoveItemButtonNextToTheItem() {
         cartSummaryPage.removeProductFromCart(1);
     }
