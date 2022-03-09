@@ -27,10 +27,10 @@ public class PageFooter {
     private final By MY_ORDERS_LINK = new By.ByLinkText("MY orders");
     private final By MY_ADDRESSES_LINK = new By.ByLinkText("My addresses");
     private final By MY_PERSONAL_INFO = new By.ByLinkText("My Personal info");
-    private final By FACEBOOK_ICON = new By.ByLinkText("Facebook");
-    private final By TWITTER_ICON = new By.ByLinkText("Twitter");
-    private final By YOUTUBE_ICON = new By.ByLinkText("Youtube");
-    private final By GOOGLE_ICON = new By.ByLinkText("Google Plus");
+    private final By FACEBOOK_ICON = new By.ByClassName("facebook");
+    private final By TWITTER_ICON = new By.ByClassName("twitter");
+    private final By YOUTUBE_ICON = new By.ByClassName("youtube");
+    private final By GOOGLE_ICON = new By.ByClassName("google-plus");
 
     public PageFooter(WebDriver webDriver) {
         this.webDriver = webDriver;
