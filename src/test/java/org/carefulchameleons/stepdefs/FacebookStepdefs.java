@@ -4,14 +4,20 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
+
+import java.util.ArrayList;
 
 public class FacebookStepdefs {
 
     private static WebDriver webDriver;
-    //private Homepage homePage;
-    //private LoginPage loginPage;
-    //private MyAccountPage myAccountPage;
+    private IndexPage indexPage;
+    private SignInPage signInPage;
+    private MyAccountPage myAccountPage;
     //private static WebDriverManager manager;
 
 //    @Given("I am on the Home page")
@@ -24,14 +30,14 @@ public class FacebookStepdefs {
 
     @When("I click on FACEBOOK icon")
     public void iClickOnFACEBOOKIcon() {
-        //homePage = new homePage(webDriver);
-        //homePage.clickFacebookButton();
+        indexPage = new IndexPage(webDriver);
+        //indexPage.clickFacebookButton();
 
     }
 
     @Then("I will go to the FACEBOOK page")
     public void iWillGoToTheFACEBOOKPage() {
-        //Assertions.assertEquals("https://www.facebook.com/groups/525066904174158/", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
+        Assertions.assertEquals("https://www.facebook.com/groups/525066904174158/", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
     @After

@@ -1,6 +1,7 @@
 package org.carefulchameleons.pom;
 
 import io.cucumber.java.bs.I;
+import org.carefulchameleons.pageelements.CartMenu;
 import org.carefulchameleons.pageelements.CategoryMenu;
 import org.carefulchameleons.pageelements.LogoButton;
 import org.carefulchameleons.pageelements.SearchBar;
@@ -14,98 +15,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
 public class IndexPage extends Page {
-
-//    public static void main(String[] args) {
-//        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-//
-//        WebDriver webDriver = new ChromeDriver();
-//        webDriver.get("http://automationpractice.com/index.php");
-//        //new NewProductsPage(webDriver).;
-//        new IndexPage(webDriver).featuredItems().clickOnEye(1).clickExit();
-//        //webDriver.close();
-//        //webDriver.quit();
-//    }
-
-    public class ProductAddedToCartPopUp{
-        private WebDriver webDriver;
-        private WebElement root;
-        public ProductAddedToCartPopUp(WebDriver webDriver, WebElement root){
-            this.webDriver = webDriver;
-            this.root = root;
-        }
-        public IndexPage clickContinueShopping(){
-            root.findElements(By.className("continue"));
-            return new IndexPage(webDriver);
-        }
-
-        public CartSummaryPage clickProceesToCheckout(){
-            root.findElement(By.partialLinkText("Proceed to checkout")).click();
-            return new CartSummaryPage(webDriver);
-        }
-
-    }
-
-    private class ItemFancyBox{
-
-        public ItemFancyBox(WebDriver webDriver) {
-            webDriver.switchTo().frame(webDriver.findElement(By.className("fancybox-iframe")));
-        }
-
-        public IndexPage clickExit(){
-            webDriver.switchTo().defaultContent();
-            webDriver.findElement(By.className("fancybox-close")).click();
-            return new IndexPage(webDriver);
-        }
-    }
-
-    private class ItemDisplay{
-        private WebDriver webDriver;
-        private WebElement root;
-        public ItemDisplay(WebDriver webDriver, WebElement root){
-            this.webDriver = webDriver;
-            this.root = root;
-
-        }
-        public void clickOnImage(int index){
-            root.findElements(By.tagName("img")).get(index).click();
-        }
-
-        public ItemFancyBox clickOnEye(int index){
-            root.findElements(By.className("quick-view-mobile")).get(index).click();
-            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-            return new ItemFancyBox(webDriver);
-        }
-
-        public void clickOnTitle(int index){
-            root.findElements(By.className("product-name")).get(index).click();
-            return;
-        }
-
-
-        public IndexPage getPrice(int index, String price){
-            price = root.findElements(By.className("product-price")).get(index).getText();
-            return new IndexPage(webDriver);
-        }
-
-        public ProductAddedToCartPopUp addItemToCart(int index){
-            root.findElements(By.partialLinkText("Add to cart")).get(index).click();
-            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-            return new ProductAddedToCartPopUp(webDriver, webDriver.findElement(By.id("layer_cart")));
-        }
-
-
-
-        public void clickOnMore(int index){
-            root.findElements(By.partialLinkText("More")).get(index).click();
-
-        }
-
-
-    }
 
     public IndexPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php");
@@ -133,9 +47,10 @@ public class IndexPage extends Page {
         return this;
     }
 
-    public ItemDisplay featuredItems(){
-        return new ItemDisplay(webDriver, webDriver.findElement(By.id("homefeatured")));
+    public ProductSelection featuredItems(){
+        return new ProductSelection(webDriver, this);
     }
+
 
     public PageFooter pageFooter(){
         return new PageFooter(webDriver);

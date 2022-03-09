@@ -5,101 +5,113 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.cart.*;
+import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.openqa.selenium.WebDriver;
 
 public class OrderStepdefs {
 
     private static WebDriver webDriver;
-    //private Homepage homePage;
-    //private LoginPage loginPage;
-    //private MyAccountPage myAccountPage;
+    private IndexPage indexPage;
+    private SignInPage signInPage;
+    private MyAccountPage myAccountPage;
+    private CartSummaryPage summaryPage;
+    private CartAddressPage addressPage;
+    private CartShippingPage shippingPage;
+    private CartPaymentPage paymentPage;
+    private CartPaymentConfirmationPage cartPaymentConfirmationPage;
+    private CartBankWirePaymentPage cartBankWirePaymentPage;
     //private static WebDriverManager manager;
-    //private CheckoutFinal check;
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
         //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
         //webDriver = manager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
-
     }
 
     @When("I click on the black Sign in button")
     public void iClickOnTheBlackSignInButton() {
-        //homePage = new homePage(webDriver);
-        //homePage.clickSignInButton();
+        indexPage = new IndexPage(webDriver);
+        //indexPage.clickSignInButton();
     }
 
     @And("I enter the Email Address {string} and  the Password {string}")
     public void iEnterTheEmailAddressAndThePassword(String email, String password) {
-        //loginPage = new LoginPage(webDriver);
-        //loginPage.enterUsername(username);
-        //loginPage.enterPassword(password);
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        signInPage.enterLoginEmail(email);
+        signInPage.enterLoginPassword(password);
     }
 
     @And("I click Sign in green button")
     public void iClickSignInGreenButton() {
-        //loginPage.clickLogInButton();
+        signInPage.clickLoginButton();
     }
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
-        //add the method call
+        myAccountPage = new MyAccountPage(webDriver);
+        //myAccountPage.METHOD?? hovering to women tab
     }
 
     @And("I click on the sub menu T-shirts")
     public void iClickOnTheSubMenuTShirts() {
-        //WomensPage womensPage = new WomensPage(webdriver);
-        //womensPage.clickTShirts();
+        //myAccountPage.clickTShirts();   //url for T-shirts page: http://automationpractice.com/index.php?id_category=5&controller=category
     }
 
     @And("I hover over the first product displayed")
     public void iHoverOverTheFirstProductDisplayed() {
-        //add the method call
+        //initialise tshirts page?
+        //hovering over Faded short sleeve Tshirt  //TshirtPage.METHOD??
     }
 
     @And("I click on the More button")
     public void iClickOnTheMoreButton() {
-        ////womensPage.clickMore();
+        //on the dynamic thing
+        //TshirtPage.clickMore();
     }
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-        //ItemPage itemPage = new ItemPage(webdriver);
-        //itemPage.clickPlus();
+          //initialise this page?                                                      //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
+
+        //thisPage.clickPlus();
     }
 
     @And("I select size M")
     public void iSelectSizeM() {
-        //itemPage.clickSizeDropdown();
-        //itemPage.clickM();
+        //thisPage.clickSizeDropdown();
+        //thisPage.clickM();
     }
 
     @And("I click on the Add to cart blue button")
     public void iClickOnTheAddToCartBlueButton() {
-        //itemPage.clickAddToCart();
+        //thisPage.clickAddToCart();
     }
 
     @And("I click on the green Proceed to checkout button")
     public void iClickOnTheGreenProceedToCheckoutButton() {
-        //itemPage.clickProceedToCheckout();
+        //from the popped up thing
+        //thisPage.clickProceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
-        //SummaryPage summaryPage = new SummaryPage(webdriver);
+        summaryPage = new CartSummaryPage(webDriver);
         //summaryPage.clickProceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
-        //AddressPage addressPage = new AddressPage(webdriver);
+         addressPage = new CartAddressPage(webDriver);
         //addressPage.clickProceedToCheckout();
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        //ShippingPage shippingPage = new ShippingPage(webdriver);
+        shippingPage = new CartShippingPage(webDriver);
         //shippingPage.clickTermsAndConditions();
     }
 
@@ -110,19 +122,25 @@ public class OrderStepdefs {
 
     @And("I click on the Pay by bank wire button")
     public void iClickOnThePayByBankWireButton() {
+    paymentPage = new CartPaymentPage(webDriver);
+
+    //cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
 
         //paymentPage.clickPayByBankWire();
     }
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        //PaymentPage paymentPage = new PaymentPage(webdriver);
-        //paymentPage.clickConfirmMyOrder();
+        cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
+        cartBankWirePaymentPage.confirmOrder();
     }
 
     @Then("Your order on My Store is complete. should be displayed")
     public void yourOrderOnMyStoreIsCompleteShouldBeDisplayed() {
-        //CheckoutFinal checkoutFinal = new CheckoutFinal(webdriver);
+        //url is different in CartPageConfirmationPage
+        //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
+
+        //CartPageConfirmationPage checkoutFinal = new CartPageConfirmationPage(webdriver);
         //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle());
     }
 
