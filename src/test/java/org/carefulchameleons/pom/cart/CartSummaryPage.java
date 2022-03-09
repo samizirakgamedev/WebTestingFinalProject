@@ -101,6 +101,17 @@ public class CartSummaryPage extends CartPage {
         return cartItems.size();
     }
 
+    public boolean isCartEmpty(){
+        if (getCartSize() != 0)
+            return false;
+        else
+            return true;
+    }
+
+    public String getEmptyAlert(){
+        return getWebDriver().findElement(By.className("alert-warning")).getText();
+    }
+
     public int getProductIndexFromName(String name) {
         for (int i = 0; i < getCartSize(); i++) {
             if (getProductName(i).equals(name)) {
