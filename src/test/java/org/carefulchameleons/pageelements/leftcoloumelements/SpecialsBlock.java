@@ -11,7 +11,6 @@ public class SpecialsBlock{
     public SpecialsBlock(WebDriver webDriver, WebElement root){
         this.webDriver = webDriver;
         this.root = root;
-
     }
 
     public SearchPage clickAllSpecials(){
@@ -19,11 +18,8 @@ public class SpecialsBlock{
         return new SearchPage(webDriver, "");
     }
 
-
-
     public SearchPage clickSpecials(){
         root.findElement(By.partialLinkText("SPECIALS")).click();
         return new SearchPage(webDriver, "");
     }
-
 }
