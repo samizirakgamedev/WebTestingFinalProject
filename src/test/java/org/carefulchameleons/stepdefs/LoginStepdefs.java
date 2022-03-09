@@ -6,15 +6,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginStepdefs {
 
     private static WebDriver webDriver;
-    //private Homepage homePage;
-    //private LoginPage loginPage;
-    //private MyAccountPage myAccountPage;
+    private IndexPage indexPage;
+    private SignInPage signinPage;
+    private MyAccountPage myAccountPage;
     //private static WebDriverManager manager;
 
     //@Before will only be staying in one StepDef
@@ -30,30 +34,30 @@ public class LoginStepdefs {
         //webDriver = manager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
 
-        //homePage = new homePage(webDriver);
-        //homePage.clickSignInButton();
+        indexPage = new IndexPage(webDriver);
+        //indexPage.clickSignInButton();
     }
 
     @When("I enter my registered email")
     public void iEnterMyRegisteredEmail() {
-        //loginPage = new LoginPage(webDriver);
-        //loginPage.enterUsername("finalproject@test.com");
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        signinPage.enterLoginEmail("finalproject@test.com");
     }
 
     @And("I enter my correct password")
     public void iEnterMyCorrectPassword() {
-        //loginPage.enterPassword("SpartaGlobal");
+        signinPage.enterLoginPassword("SpartaGlobal");
     }
 
     @And("I click on the login button")
     public void iClickOnTheLoginButton() {
-        //loginPage.clickLogInButton();
+        signinPage.clickLoginButton();
     }
 
     @Then("I will go to the My Account page")
     public void iWillGoToTheMyAccountPage() {
-        //myAccountPage = new MyAccountPage(webdriver);
-        //Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getCurrentURL());
+        myAccountPage = new MyAccountPage(webDriver);
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=my-account", myAccountPage.getCurrentURL());
     }
 
     @And("I should see my account information")
@@ -63,29 +67,29 @@ public class LoginStepdefs {
 
     @When("I insert an unregistered email")
     public void iInsertAnUnregisteredEmail() {
-        //loginPage = new LoginPage(webDriver);
-        //loginPage.enterUsername("finalproject1@test.com");
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        signinPage.enterLoginEmail("finalproject1@test.com");
     }
 
     @And("I insert a valid password")
     public void iInsertAValidPassword() {
-        //loginPage.enterPassword("SpartaGlobal");
+        signinPage.enterLoginPassword("SpartaGlobal");
     }
 
     @Then("I will stay in the Login Page")
     public void iWillStayInTheLoginPage() {
-        //Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", loginPage.getCurrentURL());
+        Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=my-account", signinPage.getCurrentURL());
     }
 
     @When("I insert a registered email")
     public void iInsertARegisteredEmail() {
-        //loginPage = new LoginPage(webDriver);
-        //loginPage.enterUsername("finalproject@test.com");
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        signinPage.enterLoginEmail("finalproject@test.com");
     }
 
     @And("I insert an invalid password")
     public void iInsertAnInvalidPassword() {
-        //loginPage.enterPassword("SpartaGlobal1");
+        signinPage.enterLoginPassword("SpartaGlobal1");
     }
 
     @After
