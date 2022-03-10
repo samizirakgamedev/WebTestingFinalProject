@@ -1,16 +1,29 @@
 package org.carefulchameleons.stepdefs;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 import org.carefulchameleons.pom.myaccounts.RegistrationPage;
 import org.carefulchameleons.pom.PageHeader;
 
 public class RegisterStepdefs {
+    private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
-    private RegistrationPage registrationPage = new RegistrationPage(webDriver);
-    private PageHeader pageHeader = new PageHeader(webDriver);
+    private RegistrationPage registrationPage;
+    private PageHeader pageHeader;
+
+    @Before
+    public void setup() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        registrationPage = new RegistrationPage(webDriver);
+        pageHeader = new PageHeader(webDriver);
+    }
 
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
