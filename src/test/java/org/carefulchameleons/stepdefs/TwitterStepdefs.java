@@ -45,7 +45,7 @@ public class TwitterStepdefs {
         Assertions.assertEquals("https://twitter.com/seleniumfrmwrk", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
-    @After
+    @After("@twitter")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

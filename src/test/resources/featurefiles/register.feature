@@ -1,15 +1,19 @@
 Feature: As a customer, I want to be able to register an acccount on automationpractice.com website
+
+  @register
   Scenario: As a customer, I want to be able to navigate to the sign up page
     Given I open the Home Page
     When I click on Sign in button
     Then The registration page is open
 
+  @register
   Scenario: As a customer I want to be able to create an account using a valid email address
     Given The registration page is open
     When I type a valid email address
     And I click the Create an account button
     Then The Create an account page should open
 
+  @register
   Scenario Outline: As a customer I can't create an account if the email is incorrect format
     Given The registration page is open
     When I type an invalid <email> email
@@ -21,6 +25,7 @@ Feature: As a customer, I want to be able to register an acccount on automationp
       | test@test   | Invalid email address.  |
       | test.com    | Invalid email address.  |
 
+  @register
   Scenario Outline: As a customer I can't create another account with the same email address
     Given The registration page is open
     When I type a valid <email> email address
@@ -30,6 +35,7 @@ Feature: As a customer, I want to be able to register an acccount on automationp
       | email         | message                                                           |
       | test@test.com | An account using this email address has already been registered.  |
 
+  @register
   Scenario: As a customer I want to be able to create an account by filling out only the required fields
     Given The Create an account page is open
     When I type my first name
