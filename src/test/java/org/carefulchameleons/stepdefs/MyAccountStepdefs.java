@@ -382,7 +382,7 @@ public class MyAccountStepdefs {
         //it's actually downloading for me
     }
 
-    @After
+    @After("@myaccount")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

@@ -151,7 +151,7 @@ public class OrderStepdefs {
         //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle()); Need this method
     }
 
-    @After
+    @After("@order")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

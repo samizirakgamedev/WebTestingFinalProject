@@ -108,7 +108,7 @@ public class SearchStepdefs {
         Assertions.assertEquals("http://automationpractice.com/index.php?id_supplier=1&controller=supplier", fashionSupplierPage.getCurrentURL());
     }
 
-    @After
+    @After("@search")
     public static void tearDown() {
         if (webDriver != null) {
             driverManager.quitDriver();

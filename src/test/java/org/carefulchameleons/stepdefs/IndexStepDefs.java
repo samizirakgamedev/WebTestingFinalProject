@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -14,24 +15,31 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
 import java.util.function.BooleanSupplier;
 
 public class IndexStepDefs {
     private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private IndexPage indexPage;
-    
-    @Before
+
+    @Before("@index")
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        System.out.println("setup");
+
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.navigate().to("http://automationpractice.com/");
+
+        indexPage = new IndexPage(webDriver);
+
+        SignInPage signInPage = indexPage.getPageHeader().clickSignInButton();
+        signInPage.login("rlovecetest@hotmail.co.uk", "password1");
+        signInPage.clickHomeButtonTop();
+
     }
 
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
-        webDriver.get("http://automationpractice.com/index.php");
         Assertions.assertEquals("http://automationpractice.com/index.php", indexPage.getCurrentURL());
     }
 
@@ -61,7 +69,7 @@ public class IndexStepDefs {
 
     @Then("I am sent to the women's department")
     public void iAmSentToTheWomenSDepartment() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=3&controller=category", indexPage.getCurrentURL());
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
 
     }
 
@@ -87,6 +95,7 @@ public class IndexStepDefs {
     public void iCanSeeTheBestSellingItems() {
 
         indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
 
     }
@@ -113,15 +122,18 @@ public class IndexStepDefs {
     @Then("I am taken to the {string} page")
     public void iAmTakenToThePage(String name) {
 
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         switch (name) {
             case ("My orders"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=history", indexPage.getCurrentURL());
-            case ("My credit slips"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=order-slip", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=history", indexPage.getCurrentURL());
+                break;
             case ("My addresses"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=addresses", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=addresses", indexPage.getCurrentURL());
+                break;
             case ("My personal info"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=identity", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=identity", indexPage.getCurrentURL());
+                break;
         }
 
     }
@@ -132,18 +144,25 @@ public class IndexStepDefs {
         switch (name) {
             case ("Specials"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=prices-drop", indexPage.getCurrentURL());
+                break;
             case ("New products"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=new-products", indexPage.getCurrentURL());
+                break;
             case ("Best sellers"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=best-sales", indexPage.getCurrentURL());
+                break;
             case ("Our stores"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=stores", indexPage.getCurrentURL());
+                break;
             case ("Terms and conditions of use"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=3&controller=cms", indexPage.getCurrentURL());
+                break;
             case ("About us"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=4&controller=cms", indexPage.getCurrentURL());
+                break;
             case ("Sitemap"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", indexPage.getCurrentURL());
+                break;
         }
     }
 
@@ -166,27 +185,34 @@ public class IndexStepDefs {
         switch (name) {
             case ("Specials"):
                 indexPage.pageFooter().goToSpecials();
+                break;
             case ("New products"):
                 indexPage.pageFooter().goToNewProducts();
+                break;
             case ("Best sellers"):
                 indexPage.pageFooter().goToBestSellers();
+                break;
             case ("Our stores"):
                 indexPage.pageFooter().goToOurStores();
+                break;
             case ("Terms and conditions of use"):
                 indexPage.pageFooter().goToTermsAndConditions();
+                break;
             case ("About us"):
                 indexPage.pageFooter().goToAboutUs();
+                break;
             case ("Sitemap"):
                 indexPage.pageFooter().goToSitemap();
-
+                break;
             case ("My orders"):
                 indexPage.pageFooter().goToMyOrders();
-            case ("My credit slips"):
-                indexPage.pageFooter().goToMyOrders();
+                break;
             case ("My addresses"):
                 indexPage.pageFooter().goToMyAddresses();
+                break;
             case ("My personal info"):
                 indexPage.pageFooter().goToMyPersonalInfo();
+                break;
         }
 
     }
@@ -203,7 +229,7 @@ public class IndexStepDefs {
 
     }
 
-    @After
+    @After("@index")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();
