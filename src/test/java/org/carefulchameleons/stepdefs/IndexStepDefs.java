@@ -7,8 +7,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
-import org.carefulchameleons.pom.PageHeader;
-import org.carefulchameleons.pom.myaccounts.RegistrationPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
@@ -27,6 +25,7 @@ public class IndexStepDefs {
 
     @Before("@index")
     public void setup() {
+
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.navigate().to("http://automationpractice.com/");
@@ -34,7 +33,7 @@ public class IndexStepDefs {
         indexPage = new IndexPage(webDriver);
 
         SignInPage signInPage = indexPage.getPageHeader().clickSignInButton();
-        signInPage.login("dpbtest@test.com", "password");
+        signInPage.login("rlovecetest@hotmail.co.uk", "password1");
         signInPage.clickHomeButtonTop();
 
     }
@@ -123,15 +122,18 @@ public class IndexStepDefs {
     @Then("I am taken to the {string} page")
     public void iAmTakenToThePage(String name) {
 
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
         switch (name) {
             case ("My orders"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=history", indexPage.getCurrentURL());
-            case ("My credit slips"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=order-slip", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=history", indexPage.getCurrentURL());
+                break;
             case ("My addresses"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=addresses", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=addresses", indexPage.getCurrentURL());
+                break;
             case ("My personal info"):
-                Assertions.assertEquals("http://automationpractice.com/index.php?controller=authentication&back=identity", indexPage.getCurrentURL());
+                Assertions.assertEquals("http://automationpractice.com/index.php?controller=identity", indexPage.getCurrentURL());
+                break;
         }
 
     }
@@ -142,18 +144,25 @@ public class IndexStepDefs {
         switch (name) {
             case ("Specials"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=prices-drop", indexPage.getCurrentURL());
+                break;
             case ("New products"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=new-products", indexPage.getCurrentURL());
+                break;
             case ("Best sellers"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=best-sales", indexPage.getCurrentURL());
+                break;
             case ("Our stores"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=stores", indexPage.getCurrentURL());
+                break;
             case ("Terms and conditions of use"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=3&controller=cms", indexPage.getCurrentURL());
+                break;
             case ("About us"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=4&controller=cms", indexPage.getCurrentURL());
+                break;
             case ("Sitemap"):
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", indexPage.getCurrentURL());
+                break;
         }
     }
 
@@ -196,7 +205,6 @@ public class IndexStepDefs {
                 indexPage.pageFooter().goToSitemap();
                 break;
             case ("My orders"):
-            case ("My credit slips"):
                 indexPage.pageFooter().goToMyOrders();
                 break;
             case ("My addresses"):

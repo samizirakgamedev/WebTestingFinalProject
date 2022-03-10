@@ -54,7 +54,6 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     Examples:
       | Name             | Account Detail   |
       | My orders        | My orders        |
-      | My credit slips  | My credit slips  |
       | My addresses     | My addresses     |
       | My personal info | My personal info |
 
