@@ -12,12 +12,13 @@ public class CategoryStepdefs {
 
     private static WebDriver webDriver;
     private  static WebDriverManager driverManager;
-    String url = webDriver.getCurrentUrl();
 
-    //this part might be added to CategoryPage.java
-    String subUrl = url.substring(url.indexOf("=") + 1);
-    String catID = subUrl.substring(0, subUrl.indexOf("&"));
-    int cat = Integer.parseInt(catID);
+//    String url = webDriver.getCurrentUrl();
+//
+//    //this part might be added to CategoryPage.java
+//    String subUrl = url.substring(url.indexOf("=") + 1);
+//    String catID = subUrl.substring(0, subUrl.indexOf("&"));
+//    int cat = Integer.parseInt(catID);
 
     //until here
     CategoryPage categoryPage;
@@ -26,8 +27,8 @@ public class CategoryStepdefs {
     public void iAmOnTheCategoryPage() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
-        categoryPage = new CategoryPage(webDriver, cat);
-        catID = "3";
+        categoryPage = new CategoryPage(webDriver, 3);
+        String catID = "3";
         webDriver.navigate().to("http://automationpractice.com/index.php?id_category=" + catID + "&controller=category");
     }
 
