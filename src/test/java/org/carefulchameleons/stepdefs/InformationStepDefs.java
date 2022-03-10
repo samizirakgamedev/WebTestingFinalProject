@@ -7,28 +7,30 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.PageFooter;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.sql.DriverManager;
+
 public class InformationStepDefs {
-    private static WebDriver webDriver;
+    private static WebDriver driver;
+    private static WebDriverManager driverManager;
     private static PageFooter pageFooter;
 
     @Before
     public void setUp() {
-        webDriver = new ChromeDriver();
-    }
-    @After
-    public void cleanUp() {
-        webDriver.close();
-        webDriver.quit();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        driver = driverManager.getDriver();
+        driver.get("http://automationpractice.com/index.php");
     }
 
     @Given("I am on the Home page")
     public void IAmOnTheHomePage(){
-        webDriver.get("http://automationpractice.com/index.php");
-        pageFooter = new PageFooter(webDriver);
+        pageFooter = new PageFooter(driver);
     }
 
     @When("I click on the Specials link")
@@ -38,7 +40,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the Specials page")
     public void iAmTakenToTheSpecialsPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=prices-drop", currentUrl);
     }
 
@@ -49,7 +51,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the New Products page")
     public void iAmTakenToTheNewProductsPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=new-products", currentUrl);
     }
 
@@ -60,7 +62,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the Best Sellers page")
     public void iAmTakenToTheBestSellersPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=best-sales", currentUrl);
     }
 
@@ -71,7 +73,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the Our Stores page")
     public void iAmTakenToTheOurStoresPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=stores", currentUrl);
     }
 
@@ -82,7 +84,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the Terms and conditions of use page")
     public void iAmTakenToTheTermsAndConditionsOfUsePage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=3&controller=cms", currentUrl);
     }
 
@@ -93,7 +95,7 @@ public class InformationStepDefs {
 
     @Then("I am taken to the About us page")
     public void iAmTakenToTheAboutUsPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?id_cms=4&controller=cms", currentUrl);
     }
 
@@ -104,7 +106,12 @@ public class InformationStepDefs {
 
     @Then("I am taken to the Sitemap page")
     public void iAmTakenToTheSitemapPage() {
-        String currentUrl = webDriver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", currentUrl);
+    }
+
+    @After
+    public void cleanUp() {
+        driverManager.quitDriver();
     }
 }

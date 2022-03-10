@@ -1,5 +1,6 @@
 package org.carefulchameleons.stepdefs;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -31,7 +32,7 @@ public class CartStepDefs {
         webDriver.get("http://automationpractice.com/index.php?controller=order");
         cartSummaryPage = new CartSummaryPage(webDriver);
     }
-    
+
     @And("No items have been added")
     public void noItemsHaveBeenAdded() {}
 
@@ -56,6 +57,11 @@ public class CartStepDefs {
         indexPage = new IndexPage(webDriver);
         productSelection =  indexPage.featuredItems();
         productSelection.addItemToCart(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I go to the Cart Page")
@@ -71,54 +77,48 @@ public class CartStepDefs {
 
     @And("I click on the remove item button next to the item")
     public void iClickOnTheRemoveItemButtonNextToTheItem() {
-        cartSummaryPage.removeProductFromCart(1);
+        cartSummaryPage.removeProductFromCart(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on the minus button next to the item")
     public void iClickOnTheMinusButtonNextToTheItem() {
-        cartSummaryPage.decrementQuantity(1);
+        cartSummaryPage.decrementQuantity(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on the plus button next to the item")
     public void iClickOnThePlusButtonNextToTheItem() {
-        cartSummaryPage.incrementQuantity(1);
+        cartSummaryPage.incrementQuantity(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("Item's quantity should increase from {int} to {int}")
     public void itemSQuantityShouldIncreaseFromTo(int arg0, int arg1) {
-        double totalProducts = cartSummaryPage.getTotalProducts();
+        double totalProducts = cartSummaryPage.getProductQuantity(0);
         Assertions.assertEquals(arg1, totalProducts);
-    }
-
-    @And("An item has been added and its quantity increased")
-    public void anItemHasBeenAddedAndItsQuantityIncreased() {
-        //add item to cart
-
-        cartSummaryPage.incrementQuantity(1);
     }
 
     @Then("Item's quantity should be {int}")
     public void itemSQuantityShouldBe(int arg0) {
-        double totalProducts = cartSummaryPage.getTotalProducts();
+        double totalProducts = cartSummaryPage.getProductQuantity(0);
         Assertions.assertEquals(arg0, totalProducts);
     }
 
-    @When("I edit quantity text box with number {int}")
-    public void iEditQuantityTextBoxWithNumber(int arg0) {
-        //Edit text box
-
-    }
-
-    @Then("Item's quantity should be {int} and total should be updated")
-    public void itemSQuantityShouldBeAndTotalShouldBeUpdated(int arg0) {
-
-        double totalProducts = cartSummaryPage.getTotalProducts();
-        Assertions.assertEquals(arg0, totalProducts);
-    }
-
-    @And("Total number of products should be {int}")
-    public void totalNumberOfProductsShouldBe(int arg0) {
-        double totalProducts = cartSummaryPage.getTotalProducts();
-        Assertions.assertEquals(arg0, totalProducts);
+    @After
+    public void cleanUp() {
+        webDriver.quit();
     }
 }
