@@ -8,10 +8,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.SearchPage;
-import org.carefulchameleons.pom.information.FashionSupplierPage;
-import org.carefulchameleons.pom.information.OurStores;
-import org.carefulchameleons.pom.myaccounts.MyAccountPage;
-import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -23,11 +19,7 @@ public class SearchStepdefs {
     private static WebDriver webDriver;
     private  static WebDriverManager driverManager;
     private IndexPage indexPage;
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
     private SearchPage searchPage;
-    private OurStores ourStores;
-    private FashionSupplierPage fashionSupplierPage;
 
     @Before("@search")
     public void setUp() {
@@ -36,17 +28,8 @@ public class SearchStepdefs {
         webDriver.get("http://automationpractice.com/index.php");
     }
 
-    @After("@search")
-    public static void tearDown() {
-        if (webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown searchPage");
-        }
-    }
-
     @Given("I am on the Index page")
     public void iAmOnTheIndexPage() {
-
     }
 
     @When("I enter the word {string}")
@@ -66,7 +49,6 @@ public class SearchStepdefs {
         Assertions.assertTrue(searchPage.getTextOfNumberOfSearchResults().contains(expectedResult)); //?
     }
 
-    //opt
     @And("I will see that total number of items displayed is equal to the {string}")
     public void iWillSeeThatTotalNumberOfItemsDisplayedIsEqualToThe(String expectedValue) {
         Assertions.assertEquals(Integer.parseInt(expectedValue), searchPage.getNumberOfItemsInSearchResults() - 1);
@@ -80,7 +62,7 @@ public class SearchStepdefs {
 
     @And("I click on the dropdown Sort by")
     public void iClickOnTheDropdownSortBy() {
-        //searchPage.sortByGivenChoice()
+        //it will click in the next condition
     }
 
     @And("I click on {string}")
@@ -93,22 +75,11 @@ public class SearchStepdefs {
         Assertions.assertEquals(sorted, searchPage.getSelectedSortByAsString());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @After("@search")
+    public static void tearDown() {
+        if (webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown searchPage");
+        }
+    }
 }

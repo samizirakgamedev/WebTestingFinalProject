@@ -27,14 +27,14 @@ Feature: As a user I would like to see results of searching word so that I can u
     Then I will see that results are correctly sorted by "<sorted>"
 
     Examples:
-      | search input  | expected result  | sort by                  | sorted                   |
+      | search input  | expected result  | sort by        | sorted                   |
       | Printed Dress | 5                | price:asc      | Price: Lowest first      |
-      | Printed Dress | 5                | Price: Highest first     | Price: Highest first     |
-      | Printed Dress | 5                | Product Name: A to Z     | Product Name: A to Z     |
-      | Printed Dress | 5                | Product Name: Z to A     | Product Name: Z to A     |
-      | Printed Dress | 5                | In stock                 | In stock                 |
-      | Printed Dress | 5                | Reference: Lowest first  | Reference: Lowest first  |
-      | Printed Dress | 5                | Reference: Highest first | Reference: Highest first |
+      | Printed Dress | 5                | price:desc     | Price: Highest first     |
+      | Printed Dress | 5                | name:asc       | Product Name: A to Z     |
+      | Printed Dress | 5                | name:desc      | Product Name: Z to A     |
+      | Printed Dress | 5                | quantity:desc  | In stock                 |
+      | Printed Dress | 5                | reference:asc  | Reference: Lowest first  |
+      | Printed Dress | 5                | reference:desc | Reference: Highest first |
 
 
 
