@@ -8,7 +8,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.ProductSelection;
+import org.carefulchameleons.pom.cart.CartAddressPage;
+import org.carefulchameleons.pom.cart.CartShippingPage;
+import org.carefulchameleons.pom.cart.CartSignInPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -25,6 +29,9 @@ public class CartStepDefs {
     private static CartSummaryPage cartSummaryPage;
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
+    private static SignInPage signInPage;
+    private static CartAddressPage cartAddressPage;
+    private static CartShippingPage cartShippingPage;
 
     @Before("@cart")
     public void setUp() {
@@ -129,4 +136,42 @@ public class CartStepDefs {
         }
     }
 
+    @When("I click on the continue shopping button on the summary page")
+    public void iClickOnTheContinueShoppingButtonOnTheSummaryPage() {
+        cartSummaryPage.continueShopping();
+    }
+
+    @Then("I should be taken to the index page")
+    public void iShouldBeTakenToTheIndexPage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php", driverManager.getDriver().getCurrentUrl());
+    }
+
+    @And("I go to the Cart address Page")
+    public void iGoToTheCartAddressPage() {
+        cartSummaryPage = new CartSummaryPage(driver);
+        cartSummaryPage.proceedToCheckoutLoggedIn();
+    }
+
+    @When("I click on the continue shopping button on the address page")
+    public void iClickOnTheContinueShoppingButtonOnTheAddressPage() {
+        cartAddressPage.continueShopping();
+    }
+
+    @And("I click on the Sign in button")
+    public void iClickOnTheSignInButton() {
+        indexPage = new IndexPage(driver);
+        indexPage.getPageHeader().clickSignInButton();
+    }
+
+    @And("I enter Email Address {string} and Password {string}")
+    public void iEnterEmailAddressAndPassword(String email, String password) {
+        signInPage = new SignInPage(driver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        signInPage.enterLoginEmail(email);
+        signInPage.enterLoginPassword(password);
+    }
+
+    @And("I click Sign in button")
+    public void iClickSignInButton() {
+        signInPage.clickLoginButton();
+    }
 }

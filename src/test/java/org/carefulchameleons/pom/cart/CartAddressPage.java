@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.cart;
 
+import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -61,11 +62,11 @@ public class CartAddressPage extends CartPage {
         return getWebDriver().findElement(By.tagName("textarea")).getText();
     }
 
-    public CartSummaryPage continueShopping() {
+    public IndexPage continueShopping() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
-        return new CartSummaryPage(getWebDriver());
+        return new IndexPage(getWebDriver());
     }
 
     public CartShippingPage proceedToCheckout() {
