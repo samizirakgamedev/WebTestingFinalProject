@@ -12,7 +12,6 @@ import org.carefulchameleons.pom.cart.CartAddressPage;
 import org.carefulchameleons.pom.cart.CartShippingPage;
 import org.carefulchameleons.pom.cart.CartSignInPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
-import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;

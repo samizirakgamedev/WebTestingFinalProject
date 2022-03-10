@@ -41,5 +41,4 @@ public class MyAccountSharedPage extends Page {
 
         return new IndexPage(webDriver);
     }
-
 }

@@ -22,9 +22,6 @@ public class FacebookStepdefs {
     private static WebDriver webDriver;
     private  static WebDriverManager driverManager;
     private IndexPage indexPage;
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
-    private PageFooter pageFooter;
 
     @Before("@facebook")
     public static void setUp() {
@@ -43,7 +40,6 @@ public class FacebookStepdefs {
 
     @Given("I am on the Home page")
     public void iAmOnTheHomePage() {
-
     }
 
     @When("I click on FACEBOOK icon")
@@ -58,5 +54,4 @@ public class FacebookStepdefs {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertEquals("https://www.facebook.com/groups/525066904174158/", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
-
 }

@@ -44,7 +44,6 @@ public class MyAccountStepdefs {
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
-
         myAccountPage = new MyAccountPage(webDriver);
         myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
         addressDetailsPage = new AddressDetailsPage(webDriver);
@@ -189,19 +188,16 @@ public class MyAccountStepdefs {
 
     @When("I click the Delete button")
     public void iClickTheDeleteButton() {
-        // index is the address you want to delete out of all the addresses
         myAddressPage.deleteAddress(0);
     }
 
     @And("I confirm the deletion")
     public void iConfirmTheDeletion() {
-        // index is the address you want to delete out of all the addresses
         myAddressPage.confirmDeleteAddress(0);
     }
 
     @Then("The address should be deleted")
     public void theAddressShouldBeDeleted() {
-        // use the expect amount of addresses you want to see
         Assertions.assertEquals(0, myAddressPage.getAddressSize());
     }
 
@@ -269,7 +265,6 @@ public class MyAccountStepdefs {
     @Then("the first name should be updated")
     public boolean theFirstNameShouldBeUpdated() {
         boolean firstNameUpdated = false;
-        //if (myPersonalInfoPage.getFIRST_NAME().equals("test")) firstNameUpdated = true;
         return firstNameUpdated;
     }
 
@@ -281,7 +276,6 @@ public class MyAccountStepdefs {
     @Then("the last name should be updated")
     public boolean theLastNameShouldBeUpdated() {
         boolean lastNameUpdated = false;
-        //if (myPersonalInfoPage.getLAST_NAME().equals("test")) lastNameUpdated = true;
         return lastNameUpdated;
     }
 
@@ -293,7 +287,6 @@ public class MyAccountStepdefs {
     @Then("the email address should be updated")
     public boolean theEmailAddressShouldBeUpdated() {
         boolean emailAddressUpdated = false;
-        //if (myPersonalInfoPage.getEmail().equals("test@test.com")) emailAddressUpdated = true;
         return emailAddressUpdated;
     }
 
@@ -304,7 +297,6 @@ public class MyAccountStepdefs {
 
     @Then("an error message should be displayed")
     public void anErrorMessageShouldBeDisplayed() {
-        //locator for error message
     }
 
     @When("I fill the new password field")
@@ -319,7 +311,6 @@ public class MyAccountStepdefs {
 
     @Then("the password should be updated")
     public void thePasswordShouldBeUpdated() {
-        //not a clue
     }
 
     @And("the confirmation password field with different password")
@@ -329,7 +320,6 @@ public class MyAccountStepdefs {
 
     @Then("the error The password and confirmation do not match. should be displayed")
     public void theErrorThePasswordAndConfirmationDoNotMatchShouldBeDisplayed() {
-        //locator for error message
     }
 
     @Given("I am on My Wishlist page")

@@ -3,7 +3,6 @@ package org.carefulchameleons.pom.information;
 import org.carefulchameleons.pageelements.CategoryMenu;
 import org.carefulchameleons.pom.Page;
 import org.carefulchameleons.pom.PageFooter;
-import org.carefulchameleons.pom.PageHeader;
 import org.openqa.selenium.WebDriver;
 
 public class AboutUsPage extends Page {

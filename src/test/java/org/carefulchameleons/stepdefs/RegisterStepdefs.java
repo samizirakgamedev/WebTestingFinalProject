@@ -1,4 +1,5 @@
 package org.carefulchameleons.stepdefs;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -39,13 +40,10 @@ public class RegisterStepdefs {
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
         registrationPage = new RegistrationPage(webDriver);
-//        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
     @When("I click on Sign in button")
     public void iClickOnSignInButton() {
-//        pageHeader.clickSignInButton();
-//        registrationPage.getPageHeader().clickSignInButton();
     }
 
     @Given("The registration page is open")
@@ -259,5 +257,4 @@ public class RegisterStepdefs {
     public boolean theErrorMessagePhoneNumberShouldBeShown() {
         return registrationPage.isPhoneNumberErrorPresent();
     }
-
 }

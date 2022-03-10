@@ -1,6 +1,5 @@
 package org.carefulchameleons.pageelements;
 
-
 import org.carefulchameleons.pom.category.CategoryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -59,7 +58,6 @@ public class WomenMenu{
     public WomenMenu assignRootElement(By rootElement) {
         this.rootElement = rootElement;
         return this;
-
     }
 
     public WomenMenu assignBlouses(By blouses) {
@@ -76,24 +74,20 @@ public class WomenMenu{
     public WomenMenu assignDresses(By dresses) {
         this.dresses = dresses;
         return this;
-
     }
 
     public WomenMenu assignCasualDresses(By casualDresses) {
         this.casualDresses = casualDresses;
         return this;
-
     }
 
     public WomenMenu assignEveningDresses(By eveningDresses) {
         this.eveningDresses = eveningDresses;
         return this;
-
     }
 
     public WomenMenu assignSummerDresses(By summerDresses) {
         this.summerDresses = summerDresses;
         return this;
-
     }
 }

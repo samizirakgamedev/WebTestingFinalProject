@@ -217,5 +217,4 @@ public class AddressDetailsPage extends MyAccountSharedPage {
     public MyAddressPage goToMyAddressPage() {
         return new MyAddressPage(webDriver);
     }
-
 }

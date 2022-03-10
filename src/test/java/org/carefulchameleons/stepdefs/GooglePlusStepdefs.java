@@ -22,9 +22,6 @@ public class GooglePlusStepdefs {
 
     private static WebDriver webDriver;
     private IndexPage indexPage;
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
-    private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
     @Before("@google")
@@ -44,7 +41,6 @@ public class GooglePlusStepdefs {
 
     @Given("I am on the HomePage")
     public void iAmOnTheHomePage() {
-
     }
 
     @When("I click on Google plus icon")
@@ -60,5 +56,4 @@ public class GooglePlusStepdefs {
         Assertions.assertEquals("https://accounts.google.com/signin/v2/identifier?passive=1209600&osid=1&continue=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&followup=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&flowName=GlifWebSignIn&flowEntry=ServiceLogin", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
 
     }
-
 }

@@ -413,9 +413,5 @@ public class MyWishListsPage extends MyAccountSharedPage {
                 .click();
 
         return this;
-
     }
-
-
-
 }

@@ -41,5 +41,4 @@ public abstract class Page {
     public boolean isUrlCorrect() {
         return getCurrentURL().equals(EXPECTED_URL);
     }
-
 }

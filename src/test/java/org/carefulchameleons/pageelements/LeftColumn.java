@@ -1,19 +1,11 @@
 package org.carefulchameleons.pageelements;
 
 import org.carefulchameleons.pageelements.leftcoloumelements.*;
-import org.carefulchameleons.pom.SearchPage;
-import org.carefulchameleons.pom.information.OurStores;
-import org.carefulchameleons.pom.information.TermsAndConditionsPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import java.time.Duration;
-import java.util.List;
 
 public class LeftColumn {
-
 
     private WebDriver webDriver;
     private By root = By.id("left_column");

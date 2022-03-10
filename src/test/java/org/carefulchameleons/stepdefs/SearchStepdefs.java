@@ -65,7 +65,6 @@ public class SearchStepdefs {
 
     @And("I click on the dropdown Sort by")
     public void iClickOnTheDropdownSortBy() {
-        //it will click in the next condition
     }
 
     @And("I click on {string}")

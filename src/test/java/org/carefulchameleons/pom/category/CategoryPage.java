@@ -154,5 +154,4 @@ public class CategoryPage extends Page {
     public CategoryMenu getCategoryMenu(){
         return new CategoryMenu(webDriver);
     }
-
 }

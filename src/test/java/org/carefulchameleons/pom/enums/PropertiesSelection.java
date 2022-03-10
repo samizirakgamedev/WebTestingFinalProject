@@ -19,6 +19,5 @@ public enum PropertiesSelection {
 
     public void clickCheckbox(WebDriver webDriver) {
         webDriver.findElement(new By.ById(ID)).click();
-
     }
 }

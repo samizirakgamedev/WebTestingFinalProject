@@ -10,6 +10,7 @@ import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 import org.carefulchameleons.pom.category.CategoryPage;
+
 public class CategoryStepdefs {
 
     private static WebDriver webDriver;
@@ -189,5 +190,4 @@ public class CategoryStepdefs {
         if (categoryPage.getCurrentURL().contains("condition-new")) isConditionNewSelected = true;
         return isConditionNewSelected;
     }
-
 }
