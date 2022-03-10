@@ -30,7 +30,7 @@ public class ChromeWebDriver extends WebDriverManager{
     }
     @Override
     protected void startService() {
-        startService("src/test/resources/drivers/chromedriver.exe");
+        startService("src/test/resources/drivers/chromedriver");
     }
     @Override
     protected void stopService() {
