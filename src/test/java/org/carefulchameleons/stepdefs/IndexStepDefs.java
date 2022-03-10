@@ -11,13 +11,16 @@ import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.function.BooleanSupplier;
 
 public class IndexStepDefs {
     private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private IndexPage indexPage;
-
+    
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
@@ -83,9 +86,8 @@ public class IndexStepDefs {
     @Then("I can see the best selling items")
     public void iCanSeeTheBestSellingItems() {
 
-
-        // Todo
-
+        indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
 
     }
 
@@ -207,5 +209,15 @@ public class IndexStepDefs {
             driverManager.quitDriver();
             System.out.println("tearDown index");
         }
+    }
+
+    @When("I enter my email address and submit it")
+    public void iEnterMyEmailAddress() {
+        indexPage.getPageFooter().enterNewsletterEmailAndClickSubmit("dpbtest@test.com");
+    }
+
+    @Then("I will register myself for the email newsletter")
+    public void iWillRegisterMyselfForTheEmailNewsletter() {
+        Assertions.assertTrue((BooleanSupplier) webDriver.findElement(By.className("alert_alert-success")));
     }
 }

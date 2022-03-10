@@ -32,13 +32,13 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     When I click on the search button
     Then I am taken to my search results
 
-  @navigation
-  Scenario Outline: I want to search the various categories that are advertised on the front of the home page.
-    When I click on the "<Name>" panel
-    Then I am taken to the "<Category>" page
-    Examples:
-      | Name | Category |
-      |      |          |
+ # @navigation
+ # Scenario Outline: I want to search the various categories that are advertised on the front of the home page.
+ #   When I click on the "<Name>" panel
+ #   Then I am taken to the "<Category>" page
+ #   Examples:
+ #     | Name | Category |
+ #     |  |  |
 
   @navigation
   Scenario: I want to be able to contact the organization of the website.
@@ -78,8 +78,7 @@ Feature: As a customer, I want to be able to sign up for the newsletter using my
 
   @newsletter
   Scenario: I want to sign up for the newsletter
-    When I enter my email address
-    And I click on the newsletter button
+    When I enter my email address and submit it
     Then I will register myself for the email newsletter
 
 #Feature: As a customer, I want to add products displayed on the home page that I find attractive to the cart and then checkout.
