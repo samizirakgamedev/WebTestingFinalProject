@@ -1,13 +1,22 @@
 package org.carefulchameleons.stepdefs;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.openqa.selenium.WebDriver;
 
 public class InformationStepDefs {
 
+    private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
 
     @When("I click on the Specials link")
     public void iClickOnTheSpecialsLink() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
     }
 
     @Then("I am taken to the Specials page")
@@ -72,4 +81,13 @@ public class InformationStepDefs {
     @Then("I am taken to the Sitemap page")
     public void iAmTakenToTheSitemapPage() {
     }
+
+    @After
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown information");
+        }
+    }
+
 }

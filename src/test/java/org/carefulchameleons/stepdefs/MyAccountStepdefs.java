@@ -1,5 +1,5 @@
 package org.carefulchameleons.stepdefs;
-import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import org.carefulchameleons.pom.myaccounts.*;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
@@ -22,8 +22,9 @@ public class MyAccountStepdefs {
     private MyPersonalInfoPage myPersonalInfoPage;
     private MyAddressPage myAddressPage;
 
-    @Before
-    public void setup() {
+
+    @Given("I am on my account page")
+    public boolean iAmOnMyAccountPage() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         myAccountPage = new MyAccountPage(webDriver);
@@ -31,10 +32,7 @@ public class MyAccountStepdefs {
         addressDetailsPage = new AddressDetailsPage(webDriver);
         myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
         myAddressPage = new MyAddressPage(webDriver);
-    }
 
-    @Given("I am on my account page")
-    public boolean iAmOnMyAccountPage() {
         boolean myAccountPageOpen = false;
         webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
         if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
@@ -382,6 +380,14 @@ public class MyAccountStepdefs {
     @Then("the invoice pdf should open")
     public void theInvoicePdfShouldOpen() {
         //it's actually downloading for me
+    }
+
+    @After
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown my account");
+        }
     }
 
 }

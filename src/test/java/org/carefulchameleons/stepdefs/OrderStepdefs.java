@@ -9,11 +9,15 @@ import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.cart.*;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 
 public class OrderStepdefs {
 
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
     private IndexPage indexPage;
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
@@ -23,12 +27,12 @@ public class OrderStepdefs {
     private CartPaymentPage paymentPage;
     private CartPaymentConfirmationPage cartPaymentConfirmationPage;
     private CartBankWirePaymentPage cartBankWirePaymentPage;
-    //private static WebDriverManager manager;
+
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
     }
 
@@ -150,8 +154,8 @@ public class OrderStepdefs {
     @After
     public static void tearDown() {
         if(webDriver != null) {
-            //    manager.quitDriver();
-            System.out.println("tearDown login");
+            driverManager.quitDriver();
+            System.out.println("tearDown order");
         }
     }
 }

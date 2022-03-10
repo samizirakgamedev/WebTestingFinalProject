@@ -1,25 +1,26 @@
 package org.carefulchameleons.stepdefs;
 
-import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.cart.CartPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 
 public class CartStepDefs {
+    private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private static CartPage cartPage;
-
-    @Before
-    public void setup() {
-
-    }
 
 
     @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php?controller=order");
     }
     
@@ -85,5 +86,13 @@ public class CartStepDefs {
 
     @And("Total number of products should be {int}")
     public void totalNumberOfProductsShouldBe(int arg0) {
+    }
+
+    @After
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
     }
 }
