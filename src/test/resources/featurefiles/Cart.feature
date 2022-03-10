@@ -5,7 +5,7 @@ Feature: As a customer I want to be able to access and manipulate Cart page
     And No items have been added
     Then Cart should be empty
     And Your shopping cart is empty. should appear
-#
+
   Scenario: Show item
     Given I have added an item to the cart
     When I go to the Cart Page

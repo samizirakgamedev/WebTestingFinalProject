@@ -13,7 +13,12 @@ import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CartStepDefs {
     private static WebDriver driver;
@@ -59,11 +64,8 @@ public class CartStepDefs {
         indexPage = new IndexPage(driver);
         productSelection =  indexPage.featuredItems();
         productSelection.addItemToCart(0);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]")));
     }
 
     @When("I go to the Cart Page")
