@@ -16,7 +16,4 @@ public class LogoButton {
         webDriver.findElement(logoButton).click();
         return new IndexPage(webDriver);
     }
-
-
-
 }

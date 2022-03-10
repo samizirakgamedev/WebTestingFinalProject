@@ -1,6 +1,7 @@
 package org.carefulchameleons.pom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +14,10 @@ public class SearchPage extends Page {
     private final By SORT_BY_OPTIONS = new By.ByTagName("option");
     private final By GRID_VIEW = new By.ByClassName("icon-th-large");
     private final By LIST_VIEW = new By.ByClassName("icon-th-list");
+    private final By SEARCH_RESULTS_TEXT = new By.ByClassName("heading-counter");
+    private final By PRODUCT_CONTAINER = new By.ByClassName("product-image-container");
+    private final By SORT_DROP_DOWN = new By.ById("uniform-selectProductSort");
+    private final By DROP_DOWN_SPAN = new By.ByTagName("span");
 
     public SearchPage(WebDriver webDriver, String expected_url) {
         super(webDriver, null);
@@ -36,87 +41,46 @@ public class SearchPage extends Page {
         return new SearchPage(webDriver, null);
     }
 
-    public SearchPage sortByPriceLowestToHighest(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("price:asc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
+    public String getSelectedSortByAsString(){
+        return webDriver.findElement(SORT_DROP_DOWN)
+                .findElement(DROP_DOWN_SPAN)
+                .getText();
     }
 
-    public SearchPage sortByPriceHighestToLowest(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
+    /**
+     *
+     * @param choice - Options: "price:asc", "price:desc", "name:asc", "name:desc", "quantity:desc", "reference:asc", "reference:desc"
+     * @return
+     */
+    public SearchPage sortByGivenChoice(String choice){
+        try {
+            webDriver.findElement(SORT_BY_DROP_DOWN).click();
+            List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("price:desc")){
-                element.click();
+            for (WebElement element : sortOptions) {
+                if (element.getAttribute("value").equals(choice)){
+                    element.click();
+                }
             }
+            return new SearchPage(webDriver, null);
+        } catch (StaleElementReferenceException e){
+            webDriver.findElement(SORT_BY_DROP_DOWN).click();
+            List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
+
+            for (WebElement element : sortOptions) {
+                if (element.getAttribute("value").equals(choice)){
+                    element.click();
+                }
+            }
+            return new SearchPage(webDriver, null);
         }
-        return new SearchPage(webDriver, null);
     }
 
-    public SearchPage sortByProductNameAToZ(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("name:asc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
+    public String getTextOfNumberOfSearchResults(){
+        return webDriver.findElement(SEARCH_RESULTS_TEXT).getText();
     }
 
-    public SearchPage sortByProductNameZToA(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("name:desc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
-    }
-
-    public SearchPage sortByQuantityInDesc(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("quantity:desc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
-    }
-
-    public SearchPage sortByReferenceLowestFirst(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("reference:asc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
-    }
-
-    public SearchPage sortByReferenceHighestFirst(){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
-
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals("reference:desc")){
-                element.click();
-            }
-        }
-        return new SearchPage(webDriver, null);
+    public int getNumberOfItemsInSearchResults(){
+        return webDriver.findElements(PRODUCT_CONTAINER).size();
     }
 }

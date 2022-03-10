@@ -19,6 +19,7 @@ public class ProductPage extends Page{
             BIG_PICTURE = new By.ById("bigpic"),
             NEXT_BUTTON = new By.ByClassName("fancybox-next"),
             PREVIOUS_BUTTON = new By.ByClassName("fancybox-previous"),
+            ADD_TO_CART = new By.ById("add_to_cart"),
             CLOSE_BUTTON = new By.ByClassName("fancybox-close");
 
     public ProductPage(WebDriver webDriver, String url) {
@@ -71,6 +72,16 @@ public class ProductPage extends Page{
         webDriver.findElement(ADD_TO_WISHLIST).click();
         return this;
     }
+
+    /**
+     * Clicks the "Add to Cart" button
+     * @return productSelection
+     */
+    public ProductSelection addToCart(){
+        webDriver.findElement(ADD_TO_CART).click();
+        return new ProductSelection(webDriver, this);
+    }
+
 
     /**
      * Inputs the given details into the "send to a friend" form

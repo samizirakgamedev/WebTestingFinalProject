@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom;
 
+import org.carefulchameleons.pageelements.CategoryMenu;
 import org.openqa.selenium.WebDriver;
 
 public abstract class Page {
@@ -33,8 +34,11 @@ public abstract class Page {
         return webDriver.getCurrentUrl();
     }
 
+    public CategoryMenu getCategoryMenu(){
+        return new CategoryMenu(webDriver);
+    }
+
     public boolean isUrlCorrect() {
         return getCurrentURL().equals(EXPECTED_URL);
     }
-
 }

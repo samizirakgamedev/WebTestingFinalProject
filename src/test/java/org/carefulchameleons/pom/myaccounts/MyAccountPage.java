@@ -36,6 +36,11 @@ public class MyAccountPage extends Page {
         return new MyWishListsPage(webDriver);
     }
 
+    public MyWishListsPage goToMyCreditSlipsPage() {
+        webDriver.findElement(MY_ACCOUNT_LIST).findElement(By.xpath("//a[@title='Credit slips']")).click();
+        return new MyWishListsPage(webDriver);
+    }
+
     public IndexPage clickHomeButtonTop() {
         webDriver.findElement(TOP_HOME_BUTTON).click();
         return new IndexPage(webDriver);
@@ -44,11 +49,5 @@ public class MyAccountPage extends Page {
     public IndexPage clickHomeButtonBottom() {
         webDriver.findElement(BOTTOM_HOME_BUTTON).click();
         return new IndexPage(webDriver);
-    }
-
-    public void goToMyCreditSlipsPage() {
-    }
-
-    public void goToMyWishListPage() {
     }
 }

@@ -68,5 +68,4 @@ public class SignInPage extends Page {
     public MyAccountPage goToMyAccountPage() {
         return new MyAccountPage(webDriver);
     }
-
 }

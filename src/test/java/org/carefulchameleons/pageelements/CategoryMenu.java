@@ -1,6 +1,5 @@
 package org.carefulchameleons.pageelements;
 
-
 import org.carefulchameleons.pom.category.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 public class CategoryMenu{
-
 
     private WebDriver webDriver;
     private By dressesNav;
@@ -64,6 +62,5 @@ public class CategoryMenu{
     public CategoryMenu assignWomen(By women) {
         this.womenNav = womenNav;
         return this;
-
     }
 }

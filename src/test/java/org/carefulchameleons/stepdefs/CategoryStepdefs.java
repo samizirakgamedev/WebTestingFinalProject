@@ -1,23 +1,42 @@
 package org.carefulchameleons.stepdefs;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
-import org.carefulchameleons.pom.ProductSelection;
 import org.carefulchameleons.pom.category.CategoryPage;
+
 public class CategoryStepdefs {
+
     private static WebDriver webDriver;
-    String url = webDriver.getCurrentUrl();
-    //this part might be added to CategoryPage.java
-    String subUrl = url.substring(url.indexOf("=") + 1);
-    String catID = subUrl.substring(0, subUrl.indexOf("&"));
-    int cat = Integer.parseInt(catID);
-    //until here
-    CategoryPage categoryPage = new CategoryPage(webDriver, cat);
+    private  static WebDriverManager driverManager;
+
+    private CategoryPage categoryPage;
+
+    @Before("@categories")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@categories")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown register");
+        }
+    }
+
     @Given("I am on the category 3 page")
     public void iAmOnTheCategoryPage() {
-        catID = "3";
+        categoryPage = new CategoryPage(webDriver, 3);
+        String catID = "3";
         webDriver.navigate().to("http://automationpractice.com/index.php?id_category=" + catID + "&controller=category");
     }
 

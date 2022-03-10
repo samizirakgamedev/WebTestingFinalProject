@@ -3,6 +3,7 @@ package org.carefulchameleons.pom;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.carefulchameleons.pom.information.ContactUs;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -25,9 +26,20 @@ public class PageHeader {
     private final By CART_SHIPPING_COST = new By.ByClassName("ajax_cart_shipping_cost");
     private final By CART_TOTAL_COST = new By.ByClassName("ajax_block_cart_total");
     private final By CART_CHECKOUT_BUTTON = new By.ById("button_order_cart");
+    private final By SIGN_OUT_BUTTON = new By.ByClassName("logout");
+    private final By MY_ACCOUNT_BUTTON = new By.ByClassName("account");
 
     public PageHeader(WebDriver webDriver) {
         this.webDriver = webDriver;
+    }
+
+    public void clickSignOutButton(){
+        webDriver.findElement(SIGN_OUT_BUTTON).click();
+    }
+
+    public MyAccountPage clickMyAccountButton(){
+        webDriver.findElement(MY_ACCOUNT_BUTTON).click();
+        return new MyAccountPage(webDriver);
     }
 
     public void clickHeaderImage() {
@@ -37,13 +49,11 @@ public class PageHeader {
     public ContactUs clickContactUsButton() {
         webDriver.findElement(CONTACT_US_LINK).click();
         return new ContactUs();
-        // TODO - Need to update arguments when contact us page is done
     }
 
-    public MyAccountPage clickSignInButton() {
+    public SignInPage clickSignInButton() {
         webDriver.findElement(SIGN_IN).click();
-        return new MyAccountPage(webDriver);
-        // TODO - Need to update arguments when my account page is done
+        return new SignInPage(webDriver, "");
     }
 
     public void clickLogo() {
@@ -57,18 +67,17 @@ public class PageHeader {
     public SearchPage clickSearchButton() {
         webDriver.findElement(SEARCH_BUTTON).click();
         return new SearchPage(webDriver, "");
-        // TODO - Need to update arguments when search page is done
     }
 
     public void hoverCartButton() {
         Actions action = new Actions(webDriver);
         action.moveToElement(webDriver.findElement(CART_BUTTON));
+        action.perform();
     }
 
     public CartSummaryPage clickCartButton() {
         webDriver.findElement(CART_BUTTON).click();
         return new CartSummaryPage(webDriver);
-        // TODO - Need to update arguments when cart summary page is done
     }
 
     public void clickCartItemImageAtIndex(int index) {
@@ -76,7 +85,6 @@ public class PageHeader {
         webDriver.findElements(CART_ITEM_IMAGES)
                 .get(index)
                 .click();
-        // TODO - return product specific page
     }
 
     public Integer getCartQuantity() {
@@ -111,6 +119,5 @@ public class PageHeader {
         hoverCartButton();
         webDriver.findElement(CART_CHECKOUT_BUTTON).click();
         return new CartSummaryPage(webDriver);
-        // TODO - Need to update arguments when cart summary page is done
     }
 }

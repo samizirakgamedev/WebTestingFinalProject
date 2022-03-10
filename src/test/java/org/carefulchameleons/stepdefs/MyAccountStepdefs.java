@@ -1,35 +1,70 @@
 package org.carefulchameleons.stepdefs;
-import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import org.carefulchameleons.pom.myaccounts.*;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.carefulchameleons.pom.myaccounts.MyAccountPage;
-import org.carefulchameleons.pom.myaccounts.AddressDetailsPage;
-import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
-import org.carefulchameleons.pom.myaccounts.MyAddressPage;
+
+import java.time.Duration;
 
 public class MyAccountStepdefs {
+
     private static WebDriver webDriver;
-    private MyAccountPage myAccountPage = new MyAccountPage(webDriver);
-    private AddressDetailsPage addressDetailsPage = new AddressDetailsPage(webDriver);
-    private MyOrderHistoryPage myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
-    private MyPersonalInfoPage myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
-    private MyAddressPage myAddressPage = new MyAddressPage(webDriver);
+    private  static WebDriverManager driverManager;
+    private MyAccountPage myAccountPage;
+    private AddressDetailsPage addressDetailsPage;
+    private MyOrderHistoryPage myOrderHistoryPage;
+    private MyPersonalInfoPage myPersonalInfoPage;
+    private MyAddressPage myAddressPage;
+    private SignInPage signinPage;
+
+    @Before("@myaccount")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@myaccount")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown my account");
+        }
+    }
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
+        myAccountPage = new MyAccountPage(webDriver);
+        myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
+        addressDetailsPage = new AddressDetailsPage(webDriver);
+        myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
+        myAddressPage = new MyAddressPage(webDriver);
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        signinPage.enterLoginEmail("finalproject@test.com");
+        signinPage.enterLoginPassword("SpartaGlobal");
+        signinPage.clickLoginButton();
+
         boolean myAccountPageOpen = false;
-        webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
         if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
+
         return myAccountPageOpen;
     }
 
     @When("I click the Sign out link")
     public void iClickTheSignOutLink() {
-        //myAccountPage.clickSignoutLink();
+        myAccountPage.getPageHeader().clickSignOutButton();
     }
 
     @And("The registration page opens")
@@ -46,7 +81,7 @@ public class MyAccountStepdefs {
 
     @And("I click any link")
     public void iClickAnyLink() {
-        //clickity click
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         myAccountPage.goToMyOrderHistoryPage();
     }
 
@@ -71,8 +106,7 @@ public class MyAccountStepdefs {
 
     @When("I click on the Credit Slips button")
     public void iClickOnTheCreditSlipsButton() {
-        //myAccountPage.goToMyCreditSlipsPage();
-        webDriver.findElement(By.linkText("My credit slips")).click();
+        myAccountPage.goToMyCreditSlipsPage();
     }
 
     @Then("The Credit Slips page should open")
@@ -125,7 +159,7 @@ public class MyAccountStepdefs {
 
     @When("I click the Back to your account. button")
     public void iClickTheBackToYourAccountButton() {
-        //clickity click Back to your account.
+        myOrderHistoryPage.clickTopNavigationMyAccount();
     }
 
     @Then("I should be on My Account page")
@@ -142,7 +176,7 @@ public class MyAccountStepdefs {
 
     @When("I click the Add a new address button")
     public void iClickTheAddANewAddressButton() {
-        //addressDetailsPage.clickNewAddress();
+        myAddressPage.addNewAddressDetails();
     }
 
     @Then("The page to add new address should open")
@@ -154,22 +188,22 @@ public class MyAccountStepdefs {
 
     @When("I click the Delete button")
     public void iClickTheDeleteButton() {
-        //addressDetailsPage.clickDeleteButton();
+        myAddressPage.deleteAddress(0);
     }
 
     @And("I confirm the deletion")
     public void iConfirmTheDeletion() {
-        //not a clue
+        myAddressPage.confirmDeleteAddress(0);
     }
 
     @Then("The address should be deleted")
     public void theAddressShouldBeDeleted() {
-        //again not a clue
+        Assertions.assertEquals(0, myAddressPage.getAddressSize());
     }
 
     @When("I click the Update button")
     public void iClickTheUpdateButton() {
-        //myAddressPage.updateAddressDetails(???);
+        myAddressPage.updateAddressDetails(0);
     }
 
     @Then("The page to update the address should open")
@@ -224,13 +258,13 @@ public class MyAccountStepdefs {
 
     @And("I click the button Save")
     public void iClickTheButtonSave() {
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         myPersonalInfoPage.clickSaveButton();
     }
 
     @Then("the first name should be updated")
     public boolean theFirstNameShouldBeUpdated() {
         boolean firstNameUpdated = false;
-        //if (myPersonalInfoPage.getFIRST_NAME().equals("test")) firstNameUpdated = true;
         return firstNameUpdated;
     }
 
@@ -242,7 +276,6 @@ public class MyAccountStepdefs {
     @Then("the last name should be updated")
     public boolean theLastNameShouldBeUpdated() {
         boolean lastNameUpdated = false;
-        //if (myPersonalInfoPage.getLAST_NAME().equals("test")) lastNameUpdated = true;
         return lastNameUpdated;
     }
 
@@ -254,7 +287,6 @@ public class MyAccountStepdefs {
     @Then("the email address should be updated")
     public boolean theEmailAddressShouldBeUpdated() {
         boolean emailAddressUpdated = false;
-        //if (myPersonalInfoPage.getEmail().equals("test@test.com")) emailAddressUpdated = true;
         return emailAddressUpdated;
     }
 
@@ -265,7 +297,6 @@ public class MyAccountStepdefs {
 
     @Then("an error message should be displayed")
     public void anErrorMessageShouldBeDisplayed() {
-        //locator for error message
     }
 
     @When("I fill the new password field")
@@ -280,7 +311,6 @@ public class MyAccountStepdefs {
 
     @Then("the password should be updated")
     public void thePasswordShouldBeUpdated() {
-        //not a clue
     }
 
     @And("the confirmation password field with different password")
@@ -290,7 +320,6 @@ public class MyAccountStepdefs {
 
     @Then("the error The password and confirmation do not match. should be displayed")
     public void theErrorThePasswordAndConfirmationDoNotMatchShouldBeDisplayed() {
-        //locator for error message
     }
 
     @Given("I am on My Wishlist page")
@@ -341,7 +370,7 @@ public class MyAccountStepdefs {
 
     @When("I click on Order Reference link")
     public void iClickOnOrderReferenceLink() {
-        myOrderHistoryPage.clickDetailsButton();
+        myOrderHistoryPage.clickDetailsButton(1);
     }
 
     @Then("the order details should load")

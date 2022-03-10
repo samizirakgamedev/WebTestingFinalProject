@@ -1,89 +1,184 @@
 package org.carefulchameleons.stepdefs;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.carefulchameleons.pom.cart.CartPage;
+import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.ProductSelection;
+import org.carefulchameleons.pom.cart.CartAddressPage;
+import org.carefulchameleons.pom.cart.CartShippingPage;
+import org.carefulchameleons.pom.cart.CartSignInPage;
+import org.carefulchameleons.pom.cart.CartSummaryPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class CartStepDefs {
-    private static WebDriver webDriver;
-    private static CartPage cartPage;
+    private static WebDriver driver;
+    private static WebDriverManager driverManager;
+    private static CartSummaryPage cartSummaryPage;
+    private static IndexPage indexPage;
+    private static ProductSelection productSelection;
+    private static CartSignInPage cartSignInPage;
+    private static CartAddressPage cartAddressPage;
+    private static CartShippingPage cartShippingPage;
 
-    @Before
-    public void setup() {
-
+    @Before("@cart")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        driver = driverManager.getDriver();
+        driver.get("http://automationpractice.com/index.php");
     }
-
 
     @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
-        webDriver.get("http://automationpractice.com/index.php?controller=order");
+        driver.get("http://automationpractice.com/index.php?controller=order");
+        cartSummaryPage = new CartSummaryPage(driver);
     }
-    
-    @And("No items have been added")
-    public void noItemsHaveBeenAdded() {
 
-    }
+    @And("No items have been added")
+    public void noItemsHaveBeenAdded() {}
 
     @Then("Cart should be empty")
     public void cartShouldBeEmpty() {
-        
-        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Assertions.assertTrue(cartSummaryPage.isCartEmpty());
     }
 
-    @And("{string} should appear")
-    public void shouldAppear(String arg0) {
-        
+    @And("Your shopping cart is empty. should appear")
+    public void shouldAppear() {
+        String message = cartSummaryPage.getEmptyAlert();
+        Assertions.assertEquals("Your shopping cart is empty.", message);
     }
 
     @And("An item has been added")
     public void anItemHasBeenAdded() {
-        
+    }
+
+    @Given("I have added an item to the cart")
+    public void iHaveAddedAnItemToTheCart() {
+        driver.get("http://automationpractice.com/index.php");
+        indexPage = new IndexPage(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        productSelection =  indexPage.featuredItems();
+        productSelection.addItemToCart(0);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[1]")));
+    }
+
+    @When("I go to the Cart Page")
+    public void iGoToTheCartPage() {
+        cartSummaryPage = productSelection.proceedToCheckout();
     }
 
     @Then("Item should be shown in the page")
     public void itemShouldBeShownInThePage() {
+        int products = cartSummaryPage.getCartSize();
+        Assertions.assertEquals(1, products);
     }
 
-    @When("I click on the remove item button next to the item")
+    @And("I click on the remove item button next to the item")
     public void iClickOnTheRemoveItemButtonNextToTheItem() {
-        
+        cartSummaryPage.removeProductFromCart(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on the minus button next to the item")
     public void iClickOnTheMinusButtonNextToTheItem() {
-        
+        cartSummaryPage.decrementQuantity(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on the plus button next to the item")
     public void iClickOnThePlusButtonNextToTheItem() {
+        cartSummaryPage.incrementQuantity(0);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("Item's quantity should increase from {int} to {int}")
     public void itemSQuantityShouldIncreaseFromTo(int arg0, int arg1) {
-    }
-
-    @And("An item has been added and its quantity increased")
-    public void anItemHasBeenAddedAndItsQuantityIncreased() {
+        double totalProducts = cartSummaryPage.getProductQuantity(0);
+        Assertions.assertEquals(arg1, totalProducts);
     }
 
     @Then("Item's quantity should be {int}")
     public void itemSQuantityShouldBe(int arg0) {
-        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        double totalProducts = cartSummaryPage.getProductQuantity(0);
+        Assertions.assertEquals(arg0, totalProducts);
     }
 
-    @When("I edit quantity text box with number {int}")
-    public void iEditQuantityTextBoxWithNumber(int arg0) {
+    @When("I click on the continue shopping button on the summary page")
+    public void iClickOnTheContinueShoppingButtonOnTheSummaryPage() {
+        cartSummaryPage.continueShopping();
     }
 
-    @Then("Item's quantity should be {int} and total should be updated")
-    public void itemSQuantityShouldBeAndTotalShouldBeUpdated(int arg0) {
+    @And("I go to the Cart address Page")
+    public void iGoToTheCartAddressPage() {
+        cartSummaryPage = new CartSummaryPage(driver);
+        cartAddressPage = cartSummaryPage.proceedToCheckoutLoggedIn();
     }
 
-    @And("Total number of products should be {int}")
-    public void totalNumberOfProductsShouldBe(int arg0) {
+    @When("I click on the continue shopping button on the address page")
+    public void iClickOnTheContinueShoppingButtonOnTheAddressPage() {
+        cartAddressPage.continueShopping();
+    }
+
+    @And("I click on the proceed to checkout button on the summary page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
+        cartSignInPage = cartSummaryPage.proceedToCheckoutNotLoggedIn();
+    }
+
+    @When("I click on the continue shopping button on the shipping page")
+    public void iClickOnTheContinueShoppingButtonOnTheShippingPage() {
+        cartShippingPage.continueShopping();
+    }
+
+    @And("I log in with {string} and {string}")
+    public void iLogInWithAnd(String email, String password) {
+        cartSignInPage.enterLoginEmail(email);
+        cartSignInPage.enterLoginPassword(password);
+        cartSignInPage.clickLoginButton();
+        cartAddressPage = new CartAddressPage(driver);
+    }
+
+    @Then("I should be taken to the index page")
+    public void iShouldBeTakenToTheIndexPage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php", driverManager.getDriver().getCurrentUrl());
+    }
+
+    @After("@cart")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
+    }
+
+    @And("I click on the proceed to checkout button on the address page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
+        cartAddressPage = new CartAddressPage(driver);
+        cartShippingPage = cartAddressPage.proceedToCheckout();
     }
 }

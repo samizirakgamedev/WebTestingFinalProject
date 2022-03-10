@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-
 public class SuppliersBlock{
     private WebDriver webDriver;
     private WebElement root;
@@ -29,8 +28,6 @@ public class SuppliersBlock{
     public SearchPage selectFashionSupplier(){
         new Select(root.findElement(By.tagName("select"))).selectByIndex(1);
         return new SearchPage(webDriver, "");
-
     }
-
 }
 

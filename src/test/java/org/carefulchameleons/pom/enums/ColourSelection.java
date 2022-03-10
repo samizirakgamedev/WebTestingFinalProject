@@ -22,6 +22,5 @@ public enum ColourSelection {
 
     public void clickCheckbox(WebDriver webDriver){
         webDriver.findElement(new By.ById(String.format("layered_id_attribute_group_%d", ID))).click();
-
     }
 }

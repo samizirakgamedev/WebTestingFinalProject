@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.category;
 
+import org.carefulchameleons.pageelements.CategoryMenu;
 import org.carefulchameleons.pom.enums.ColourSelection;
 import org.carefulchameleons.pom.Page;
 import org.carefulchameleons.pom.ProductSelection;
@@ -150,5 +151,7 @@ public class CategoryPage extends Page {
         return this;
     }
 
-
+    public CategoryMenu getCategoryMenu(){
+        return new CategoryMenu(webDriver);
+    }
 }

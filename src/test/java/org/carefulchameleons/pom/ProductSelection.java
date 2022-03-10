@@ -6,11 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
 import java.util.List;
 
 public class ProductSelection {
     private WebDriver webDriver;
     private Page sourcePage;
+    private By productsContainer;
     private static final By
             PRODUCT_CONTAINER = new By.ByClassName("product-container"),
             PRODUCT_NAME = new By.ByClassName("product-name"),
@@ -18,10 +20,10 @@ public class ProductSelection {
             PRICE = new By.ByClassName("product-price"),
             CONTINUE_SHOPPING = new By.ByClassName("continue"),
             PROCEED_TO_CHECKOUT = new By.ByLinkText("Proceed to checkout");
-
     public ProductSelection(WebDriver webDriver, Page sourcePage) {
         this.webDriver = webDriver;
         this.sourcePage = sourcePage;
+        this.productsContainer = PRODUCT_CONTAINER;
     }
 
     /**
@@ -118,5 +120,48 @@ public class ProductSelection {
      */
     private String getProductName(WebElement product) {
         return product.findElement(PRODUCT_NAME).getText();
+    }
+
+    public ProductFancyPage clickOnEye(int index){
+        webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("quick-view-mobile")).get(index).click();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+
+        return new ProductFancyPage(webDriver);
+    }
+
+
+    public ProductPage clickOnTitle(int index){
+        webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-name")).get(index).click();
+        return new ProductPage(webDriver, "");
+    }
+
+    public String getTitle(int index){
+        return webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-name")).get(index).getText();
+
+    }
+
+
+    public String getPrice(int index){
+        return webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-price")).get(index).getText();
+    }
+
+    public ProductSelection hoverOverProduct(int index){
+        Actions actions = new Actions(webDriver);
+        WebElement element = webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-name")).get(index);
+        actions.moveToElement(element, 10, 10);
+        actions.perform();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        return this;
+    }
+
+    public ProductPage clickOnMore(int index){
+        webDriver.findElement(PRODUCT_CONTAINER).findElements(By.partialLinkText("More")).get(index).click();
+        return new ProductPage(webDriver, "");
+    }
+
+    public ProductSelection addItemToCart(int index){
+        webDriver.findElement(PRODUCT_CONTAINER).findElements(By.partialLinkText("Add to cart")).get(index).click();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        return this;
     }
 }

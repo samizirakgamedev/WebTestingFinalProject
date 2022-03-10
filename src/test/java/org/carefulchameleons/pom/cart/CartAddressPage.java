@@ -1,8 +1,12 @@
 package org.carefulchameleons.pom.cart;
 
+import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * POM class responsible for handling the address page in the cart.
@@ -18,8 +22,21 @@ public class CartAddressPage extends CartPage {
     }
 
     public boolean isDeliveryAddressBillingAddress() {
-        String value = getWebDriver().findElement(By.className("checked")).getAttribute("value");
-        return "1".equals(value);
+        List<WebElement> checked = getWebDriver().findElement(By.id("uniform-addressesAreEquals"))
+                .findElements(By.className("checked"));
+        if (checked.size() == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public void clickUseDeliveryAsBilling(){
+        getWebDriver().findElement(By.id("addressesAreEquals")).click();
+    }
+
+    public void selectAddress(String address){
+        getWebDriver().findElement(By.className("address_select")).click();
+        getWebDriver().findElement(By.linkText(address)).click();
     }
 
     public MyAddressPage updateDeliveryAddress() {
@@ -45,11 +62,11 @@ public class CartAddressPage extends CartPage {
         return getWebDriver().findElement(By.tagName("textarea")).getText();
     }
 
-    public CartSummaryPage continueShopping() {
+    public IndexPage continueShopping() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
-        return new CartSummaryPage(getWebDriver());
+        return new IndexPage(getWebDriver());
     }
 
     public CartShippingPage proceedToCheckout() {

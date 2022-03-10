@@ -1,136 +1,161 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pageelements.WomenMenu;
+import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.ProductPage;
+import org.carefulchameleons.pom.ProductSelection;
+import org.carefulchameleons.pom.cart.*;
+import org.carefulchameleons.pom.category.CategoryPage;
+import org.carefulchameleons.pom.enums.SizeSelection;
+import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 
 public class OrderStepdefs {
 
     private static WebDriver webDriver;
-    //private Homepage homePage;
-    //private LoginPage loginPage;
-    //private MyAccountPage myAccountPage;
-    //private static WebDriverManager manager;
-    //private CheckoutFinal check;
+    private  static WebDriverManager driverManager;
+    private IndexPage indexPage;
+    private SignInPage signInPage;
+    private MyAccountPage myAccountPage;
+    private CartSummaryPage summaryPage;
+    private CartAddressPage addressPage;
+    private CartShippingPage shippingPage;
+    private CartPaymentPage paymentPage;
+    private CartPaymentConfirmationPage cartPaymentConfirmationPage;
+    private CartBankWirePaymentPage cartBankWirePaymentPage;
+
+    private WomenMenu womenMenu;
+    private CategoryPage categoryPage;
+    private ProductSelection productSelection;
+    private ProductPage productPage;
+
+    @Before("@order")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@order")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown order");
+        }
+    }
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
-        webDriver.get("http://automationpractice.com/index.php");
-
     }
 
     @When("I click on the black Sign in button")
     public void iClickOnTheBlackSignInButton() {
-        //homePage = new homePage(webDriver);
-        //homePage.clickSignInButton();
+        indexPage = new IndexPage(webDriver);
+        indexPage.getPageHeader().clickSignInButton();
     }
 
     @And("I enter the Email Address {string} and  the Password {string}")
     public void iEnterTheEmailAddressAndThePassword(String email, String password) {
-        //loginPage = new LoginPage(webDriver);
-        //loginPage.enterUsername(username);
-        //loginPage.enterPassword(password);
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        signInPage.enterLoginEmail(email);
+        signInPage.enterLoginPassword(password);
     }
 
     @And("I click Sign in green button")
     public void iClickSignInGreenButton() {
-        //loginPage.clickLogInButton();
+        signInPage.clickLoginButton();
     }
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
-        //add the method call
+        myAccountPage = new MyAccountPage(webDriver);
+        womenMenu = myAccountPage.getCategoryMenu().hoverOverWomen();
     }
 
     @And("I click on the sub menu T-shirts")
     public void iClickOnTheSubMenuTShirts() {
-        //WomensPage womensPage = new WomensPage(webdriver);
-        //womensPage.clickTShirts();
+        categoryPage = womenMenu.clickOnTShirts();
     }
 
-    @And("I hover over the first product displayed")
-    public void iHoverOverTheFirstProductDisplayed() {
-        //add the method call
-    }
-
-    @And("I click on the More button")
-    public void iClickOnTheMoreButton() {
-        ////womensPage.clickMore();
+    @And("I hover over and click more on the first product displayed")
+    public void iHoverOverAndClickMoreOnTheFirstProductDisplayed() {
+            categoryPage.getProductSelection().hoverOverProduct(0);
+            productPage = categoryPage.getProductSelection().clickOnMore(0);
     }
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-        //ItemPage itemPage = new ItemPage(webdriver);
-        //itemPage.clickPlus();
+        productPage.increaseQuantity();
     }
 
     @And("I select size M")
     public void iSelectSizeM() {
-        //itemPage.clickSizeDropdown();
-        //itemPage.clickM();
+        productPage.selectSize(SizeSelection.M);
     }
 
     @And("I click on the Add to cart blue button")
     public void iClickOnTheAddToCartBlueButton() {
-        //itemPage.clickAddToCart();
+        productSelection = productPage.addToCart();
     }
 
     @And("I click on the green Proceed to checkout button")
     public void iClickOnTheGreenProceedToCheckoutButton() {
-        //itemPage.clickProceedToCheckout();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        productSelection.proceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
-        //SummaryPage summaryPage = new SummaryPage(webdriver);
-        //summaryPage.clickProceedToCheckout();
+        summaryPage = new CartSummaryPage(webDriver);
+        summaryPage.proceedToCheckoutLoggedIn();
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
-        //AddressPage addressPage = new AddressPage(webdriver);
-        //addressPage.clickProceedToCheckout();
+        addressPage = new CartAddressPage(webDriver);
+         addressPage.proceedToCheckout();
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        //ShippingPage shippingPage = new ShippingPage(webdriver);
-        //shippingPage.clickTermsAndConditions();
+        shippingPage = new CartShippingPage(webDriver);
+        shippingPage.acceptTOS();
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
     public void iClickOnTheProceedToCheckoutButtonOnTheShippingPage() {
-        //shippingPage.clickProceedToCheckout();
+        shippingPage.proceedToCheckout();
     }
 
     @And("I click on the Pay by bank wire button")
     public void iClickOnThePayByBankWireButton() {
-
-        //paymentPage.clickPayByBankWire();
+        paymentPage = new CartPaymentPage(webDriver);
+        cartBankWirePaymentPage = paymentPage.payByBankWire();
     }
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        //PaymentPage paymentPage = new PaymentPage(webdriver);
-        //paymentPage.clickConfirmMyOrder();
+        cartPaymentConfirmationPage =
+                cartBankWirePaymentPage.confirmOrder();
     }
 
-    @Then("Your order on My Store is complete. should be displayed")
-    public void yourOrderOnMyStoreIsCompleteShouldBeDisplayed() {
-        //CheckoutFinal checkoutFinal = new CheckoutFinal(webdriver);
-        //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle());
+    @Then("I should be on the Cart Payment Confirmation page")
+    public void iShouldBeOnTheCartPaymentConfirmationPage() {
+        Assertions.assertTrue(cartPaymentConfirmationPage.getCurrentURL().contains("controller=order-confirmation"));
     }
 
-    @After
-    public static void tearDown() {
-        if(webDriver != null) {
-            //    manager.quitDriver();
-            System.out.println("tearDown login");
-        }
-    }
 }

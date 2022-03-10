@@ -146,7 +146,4 @@ public class MyOrderHistoryPage extends MyAccountSharedPage {
     public int getOrderHistorySize() {
         return webDriver.findElements(ORDER_LIST).size();
     }
-
-
-
 }
