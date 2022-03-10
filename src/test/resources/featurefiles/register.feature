@@ -20,7 +20,6 @@ Feature: As a customer, I want to be able to register an acccount on automationp
       | test        | Invalid email address.  |
       | test@test   | Invalid email address.  |
       | test.com    | Invalid email address.  |
-      |             | Invalid email address.  |
 
   Scenario Outline: As a customer I can't create another account with the same email address
     Given The registration page is open
@@ -42,24 +41,3 @@ Feature: As a customer, I want to be able to register an acccount on automationp
     And I type my mobile phone
     And I click the Register button
     Then The My Account page should open
-
-    Scenario Outline: As a customer I shouldn't be able to create an account if one of the required fields is missing
-      Given The Create an account page is open
-      When I type my <firstname> first name
-      And I type my <lastname> last name
-      And I type my <address> address
-      And I type my <city> city
-      And I choose my <state> state
-      And I type my <zipcode> zipcode
-      And I type my <mobilephone> mobile phone
-      And I click the Register button
-      Then The <errormessage> message should be displayed
-      Examples:
-        | firstname | lastname | address | city | state   | zipcode | mobilephone | errormessage                                                                    |
-        | test      | test     | test    | test |         | 12345   | 12345678    | This country requires you to choose a State.                                    |
-        | test      | test     | test    | test | Florida | 12345   | 12345678    | firstname is required.                                                          |
-        | test      |          | test    | test | Florida | 12345   | 12345678    | lastname is required.                                                           |
-        | test      | test     |         | test | Florida | 12345   | 12345678    | address1 is required.                                                           |
-        | test      | test     | test    |      | Florida | 12345   | 12345678    | city is required.                                                               |
-        | test      | test     | test    | test | Florida |         | 12345678    | The Zip/Postal code you've entered is invalid. It must follow this format: 00000|
-        | test      | test     | test    | test | Florida | 12345   |             | You must register at least one phone number.                                    |
