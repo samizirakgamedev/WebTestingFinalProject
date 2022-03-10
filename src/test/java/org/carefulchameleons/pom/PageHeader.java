@@ -74,6 +74,7 @@ public class PageHeader {
     public void hoverCartButton() {
         Actions action = new Actions(webDriver);
         action.moveToElement(webDriver.findElement(CART_BUTTON));
+        action.perform();
     }
 
     public CartSummaryPage clickCartButton() {
