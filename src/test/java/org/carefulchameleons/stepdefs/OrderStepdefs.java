@@ -57,7 +57,6 @@ public class OrderStepdefs {
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
         myAccountPage = signInPage.goToMyAccountPage();
-
     }
 
     @And("I click on the sub menu T-shirts")
@@ -107,7 +106,7 @@ public class OrderStepdefs {
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
         summaryPage = new CartSummaryPage(webDriver);
-        //summaryPage.clickProceedToCheckout(); Need this method
+        summaryPage.
     }
 
     @And("I click on the Proceed to checkout button on the address page")
