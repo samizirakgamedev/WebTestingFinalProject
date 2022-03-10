@@ -12,11 +12,11 @@ import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 
 public class CartStepDefs {
+
     private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private static CartPage cartPage;
-
-
+    
     @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
@@ -88,7 +88,7 @@ public class CartStepDefs {
     public void totalNumberOfProductsShouldBe(int arg0) {
     }
 
-    @After
+    @After("@cart")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

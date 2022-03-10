@@ -95,7 +95,7 @@ public class LoginStepdefs {
         signinPage.enterLoginPassword("SpartaGlobal1");
     }
 
-    @After
+    @After("@login")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

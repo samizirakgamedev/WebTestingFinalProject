@@ -82,7 +82,7 @@ public class InformationStepDefs {
     public void iAmTakenToTheSitemapPage() {
     }
 
-    @After
+    @After("@information")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

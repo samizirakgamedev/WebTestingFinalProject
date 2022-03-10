@@ -18,7 +18,7 @@ public class IndexStepDefs {
     private static WebDriver webDriver;
     private IndexPage indexPage;
 
-    @Before
+    @Before("@index")
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
         System.out.println("setup");
@@ -201,7 +201,7 @@ public class IndexStepDefs {
 
     }
 
-    @After
+    @After("@index")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

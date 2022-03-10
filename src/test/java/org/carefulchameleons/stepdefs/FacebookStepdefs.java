@@ -46,7 +46,7 @@ public class FacebookStepdefs {
         Assertions.assertEquals("https://www.facebook.com/groups/525066904174158/", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
-    @After
+    @After("@facebook")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();
