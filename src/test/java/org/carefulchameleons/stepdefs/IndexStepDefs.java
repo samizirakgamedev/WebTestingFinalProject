@@ -7,20 +7,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 public class IndexStepDefs {
-
+    private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private IndexPage indexPage;
-
-    //private Homepage homePage;
-    //private LoginPage loginPage;
-    //private MyAccountPage myAccountPage;
-    //private static WebDriverManager manager;
-
-    //@Before will only be staying in one StepDef
 
     @Before
     public void setup() {
@@ -28,12 +24,12 @@ public class IndexStepDefs {
         System.out.println("setup");
     }
 
-
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
         Assertions.assertEquals("http://automationpractice.com/index.php", indexPage.getCurrentURL());
-
     }
 
     @Given("I am on the website")
@@ -207,11 +203,9 @@ public class IndexStepDefs {
 
     @After
     public static void tearDown() {
-        if (webDriver != null) {
-            //    manager.quitDriver();
-            System.out.println("tearDown home");
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown index");
         }
     }
-
-
 }
