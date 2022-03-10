@@ -82,7 +82,7 @@ public class RegisterStepdefs {
         signInPage.clickCreateButton();
         Thread.sleep(3000);
         signInPage.clickCreateButton();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")) createAccountPageOpen = true;
         return createAccountPageOpen;
     }

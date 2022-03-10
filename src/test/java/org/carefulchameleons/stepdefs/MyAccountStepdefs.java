@@ -4,6 +4,7 @@ import org.carefulchameleons.pom.myaccounts.*;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.time.Duration;
 
 public class MyAccountStepdefs {
 
@@ -21,6 +24,7 @@ public class MyAccountStepdefs {
     private MyOrderHistoryPage myOrderHistoryPage;
     private MyPersonalInfoPage myPersonalInfoPage;
     private MyAddressPage myAddressPage;
+    private SignInPage signinPage;
 
 
     @Given("I am on my account page")
@@ -32,6 +36,12 @@ public class MyAccountStepdefs {
         addressDetailsPage = new AddressDetailsPage(webDriver);
         myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
         myAddressPage = new MyAddressPage(webDriver);
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        signinPage.enterLoginEmail("finalproject@test.com");
+        signinPage.enterLoginPassword("SpartaGlobal");
+        signinPage.clickLoginButton();
 
         boolean myAccountPageOpen = false;
         webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
