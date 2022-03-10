@@ -4,19 +4,21 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 import org.carefulchameleons.pom.myaccounts.RegistrationPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.pom.PageHeader;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegisterStepdefs {
     private  static WebDriverManager driverManager;
     private static WebDriver webDriver;
     private RegistrationPage registrationPage;
     private PageHeader pageHeader;
+    private SignInPage signInPage;
 
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
@@ -35,13 +37,17 @@ public class RegisterStepdefs {
     @Given("The registration page is open")
     public boolean theRegistrationPageIsOpen() {
         boolean theRegistrationPageOpen = false;
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        registrationPage = new RegistrationPage(webDriver);
+        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication");
         if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication")) theRegistrationPageOpen = true;
         return theRegistrationPageOpen;
     }
 
     @And("I click the Create an account button")
     public void iClickTheCreateAnAccountButton() {
-        registrationPage.clickRegisterButton();
+        signInPage.clickCreateButton();
     }
 
     @Then("The Create an account page should open")
@@ -60,12 +66,23 @@ public class RegisterStepdefs {
 
     @When("I type a valid test@test.com email address")
     public void iTypeAValidEmailAddress() {
-        registrationPage.enterTextInEmailTextBox("test@test.com");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test@test.com");
     }
 
     @Given("The Create an account page is open")
-    public boolean theCreateAnAccountPageIsOpen() {
+    public boolean theCreateAnAccountPageIsOpen() throws InterruptedException {
         boolean createAccountPageOpen = false;
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        registrationPage = new RegistrationPage(webDriver);
+        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test@test.comment");
+        signInPage.clickCreateButton();
+        Thread.sleep(3000);
+        signInPage.clickCreateButton();
+        Thread.sleep(3000);
         if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")) createAccountPageOpen = true;
         return createAccountPageOpen;
     }
@@ -112,7 +129,7 @@ public class RegisterStepdefs {
 
     @And("I select my state from the list")
     public void iSelectMyState() {
-        registrationPage.selectStateAtIndex(0);
+        registrationPage.selectStateAtIndex(8);
     }
 
     @And("I choose my Florida state")
@@ -159,27 +176,32 @@ public class RegisterStepdefs {
 
     @When("I type a valid email address")
     public void iTypeAValidEmail() {
-        registrationPage.enterTextInEmailTextBox("test@test.com");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test@test.commment");
     }
 
     @When("I type an invalid test email")
     public void iTypeAnInvalidEmail() {
-        registrationPage.enterTextInEmailTextBox("test");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test");
     }
 
     @When("I type an invalid email")
-    public void iTypeAnInvalidEmptyEmail() {
-        registrationPage.enterTextInEmailTextBox("");
+    public void i_type_an_invalid_email() {
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("");
     }
 
     @When("I type an invalid test@test email")
     public void iTypeAnInvalidTestAtTestEmail() {
-        registrationPage.enterTextInEmailTextBox("test@test");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test@test");
     }
 
     @When("I type an invalid test.com email")
     public void iTypeAnInvalidTestDotComEmail() {
-        registrationPage.enterTextInEmailTextBox("test.com");
+        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
+        signInPage.enterCreateEmail("test.com");
     }
 
     @Then("The error Invalid email address. should be displayed")
@@ -227,7 +249,7 @@ public class RegisterStepdefs {
     @After
     public static void tearDown() {
         if(webDriver != null) {
-            driverManager.quitDriver();
+            //driverManager.quitDriver();
             System.out.println("tearDown register");
         }
     }
