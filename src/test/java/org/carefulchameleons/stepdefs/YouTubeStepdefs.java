@@ -26,7 +26,7 @@ public class YouTubeStepdefs {
     private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
-    @Before("@myaccount")
+    @Before("@youtube")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();

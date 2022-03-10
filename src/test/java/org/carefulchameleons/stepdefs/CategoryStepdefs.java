@@ -27,7 +27,7 @@ public class CategoryStepdefs {
     @After("@categories")
     public static void tearDown() {
         if(webDriver != null) {
-            //driverManager.quitDriver();
+            driverManager.quitDriver();
             System.out.println("tearDown register");
         }
     }

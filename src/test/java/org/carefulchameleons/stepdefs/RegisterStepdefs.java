@@ -30,7 +30,7 @@ public class RegisterStepdefs {
     @After("@register")
     public static void tearDown() {
         if(webDriver != null) {
-            //driverManager.quitDriver();
+            driverManager.quitDriver();
             System.out.println("tearDown register");
         }
     }

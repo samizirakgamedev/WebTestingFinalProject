@@ -26,7 +26,7 @@ public class CartStepDefs {
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
 
-    @Before
+    @Before("@cart")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();

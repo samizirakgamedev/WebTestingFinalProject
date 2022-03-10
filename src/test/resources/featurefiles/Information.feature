@@ -26,12 +26,6 @@ Feature: As a customer I want to be able to navigate through the different infor
     Then I am taken to the Our Stores page
 
   @information
-  Scenario: As a customer I want to navigate to Contact us Page
-    Given I am on the Home page
-    When I click on the Contact us link
-    Then I am taken to the Contact us page
-
-  @information
   Scenario: As a customer I want to navigate to Terms and conditions of use Page
     Given Im on the Home page
     When I click on the Terms and conditions of use link

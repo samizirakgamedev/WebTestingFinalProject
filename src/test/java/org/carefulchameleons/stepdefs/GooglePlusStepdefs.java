@@ -27,7 +27,7 @@ public class GooglePlusStepdefs {
     private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
-    @Before("@facebook")
+    @Before("@google")
     public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();

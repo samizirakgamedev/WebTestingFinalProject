@@ -25,7 +25,7 @@ public class LoginStepdefs {
     private SignInPage signinPage;
     private MyAccountPage myAccountPage;
 
-    @Before("@google")
+    @Before("@login")
     public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
