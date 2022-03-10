@@ -54,11 +54,23 @@ Feature: As a customer I want to be able to access and manipulate Cart page
   @cart
   Scenario Outline: Continuing shopping from the address cart page
     Given I have added an item to the cart
-    And I click on the Sign in button
-    And I enter Email Address "<email>" and Password "<password>"
-    And I click Sign in button
-    And I go to the Cart address Page
+    And I go to the Cart Page
+    And I click on the proceed to checkout button on the summary page
+    And I log in with "<email>" and "<password>"
     When I click on the continue shopping button on the address page
+    Then I should be taken to the index page
+    Examples:
+      | email                 | password     |
+      | finalproject@test.com | SpartaGlobal |
+
+  @cart
+  Scenario Outline: Continuing shopping from the shipping cart page
+    Given I have added an item to the cart
+    And I go to the Cart Page
+    And I click on the proceed to checkout button on the summary page
+    And I log in with "<email>" and "<password>"
+    And I click on the proceed to checkout button on the address page
+    When I click on the continue shopping button on the shipping page
     Then I should be taken to the index page
     Examples:
       | email                 | password     |

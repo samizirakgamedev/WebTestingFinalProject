@@ -29,7 +29,7 @@ public class CartStepDefs {
     private static CartSummaryPage cartSummaryPage;
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
-    private static SignInPage signInPage;
+    private static CartSignInPage cartSignInPage;
     private static CartAddressPage cartAddressPage;
     private static CartShippingPage cartShippingPage;
 
@@ -123,6 +123,7 @@ public class CartStepDefs {
 
     @Then("Item's quantity should be {int}")
     public void itemSQuantityShouldBe(int arg0) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         double totalProducts = cartSummaryPage.getProductQuantity(0);
         Assertions.assertEquals(arg0, totalProducts);
     }
@@ -135,7 +136,7 @@ public class CartStepDefs {
     @And("I go to the Cart address Page")
     public void iGoToTheCartAddressPage() {
         cartSummaryPage = new CartSummaryPage(driver);
-        cartSummaryPage.proceedToCheckoutLoggedIn();
+        cartAddressPage = cartSummaryPage.proceedToCheckoutLoggedIn();
     }
 
     @When("I click on the continue shopping button on the address page")
@@ -143,23 +144,22 @@ public class CartStepDefs {
         cartAddressPage.continueShopping();
     }
 
-    @And("I click on the Sign in button")
-    public void iClickOnTheSignInButton() {
-        indexPage = new IndexPage(driver);
-        indexPage.getPageHeader().clickSignInButton();
+    @And("I click on the proceed to checkout button on the summary page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
+        cartSignInPage = cartSummaryPage.proceedToCheckoutNotLoggedIn();
     }
 
-    @And("I enter Email Address {string} and Password {string}")
-    public void iEnterEmailAddressAndPassword(String email, String password) {
-        signInPage = new SignInPage(driver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        signInPage.enterLoginEmail(email);
-        signInPage.enterLoginPassword(password);
+    @When("I click on the continue shopping button on the shipping page")
+    public void iClickOnTheContinueShoppingButtonOnTheShippingPage() {
+        cartShippingPage.continueShopping();
     }
 
-    @And("I click Sign in button")
-    public void iClickSignInButton() {
-        signInPage.clickLoginButton();
+    @And("I log in with {string} and {string}")
+    public void iLogInWithAnd(String email, String password) {
+        cartSignInPage.enterLoginEmail(email);
+        cartSignInPage.enterLoginPassword(password);
+        cartSignInPage.clickLoginButton();
+        cartAddressPage = new CartAddressPage(driver);
     }
 
     @Then("I should be taken to the index page")
@@ -173,5 +173,11 @@ public class CartStepDefs {
             driverManager.quitDriver();
             System.out.println("tearDown cart");
         }
+    }
+
+    @And("I click on the proceed to checkout button on the address page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
+        cartAddressPage = new CartAddressPage(driver);
+        cartShippingPage = cartAddressPage.proceedToCheckout();
     }
 }
