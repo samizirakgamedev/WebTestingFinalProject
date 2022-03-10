@@ -52,8 +52,8 @@ public class OrderStepdefs {
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
-        myAccountPage = new MyAccountPage(webDriver);
-        //myAccountPage.METHOD??    hovering to women tab {in page header class}
+        myAccountPage = signInPage.goToMyAccountPage();
+
     }
 
     @And("I click on the sub menu T-shirts")
