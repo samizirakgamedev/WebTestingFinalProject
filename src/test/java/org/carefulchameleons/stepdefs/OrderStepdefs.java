@@ -12,6 +12,7 @@ import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 public class OrderStepdefs {
@@ -27,7 +28,6 @@ public class OrderStepdefs {
     private CartPaymentPage paymentPage;
     private CartPaymentConfirmationPage cartPaymentConfirmationPage;
     private CartBankWirePaymentPage cartBankWirePaymentPage;
-
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
@@ -56,7 +56,7 @@ public class OrderStepdefs {
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
-        myAccountPage = signInPage.goToMyAccountPage();
+        //myAccountPage
     }
 
     @And("I click on the sub menu T-shirts")
@@ -105,30 +105,29 @@ public class OrderStepdefs {
 
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
-        summaryPage = new CartSummaryPage(webDriver);
-        summaryPage.
+        summaryPage.proceedToCheckoutLoggedIn();
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
-         addressPage = new CartAddressPage(webDriver);
-        //addressPage.clickProceedToCheckout();  Need this method
+         addressPage.proceedToCheckout();
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        shippingPage = new CartShippingPage(webDriver);
-        //shippingPage.clickTermsAndConditions();  Need this method
+        //??check the tos box
+
+        shippingPage.isTOSChecked();
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
     public void iClickOnTheProceedToCheckoutButtonOnTheShippingPage() {
-        //shippingPage.clickProceedToCheckout(); Need this method
+        shippingPage.proceedToCheckout();
     }
 
     @And("I click on the Pay by bank wire button")
     public void iClickOnThePayByBankWireButton() {
-    paymentPage = new CartPaymentPage(webDriver);
+    paymentPage.payByBankWire();
 
     //cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
 
@@ -137,7 +136,6 @@ public class OrderStepdefs {
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
         cartBankWirePaymentPage.confirmOrder();
     }
 
@@ -146,8 +144,8 @@ public class OrderStepdefs {
         //url is different in CartPageConfirmationPage
         //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
 
-        //CartPageConfirmationPage checkoutFinal = new CartPageConfirmationPage(webdriver);
-        //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle()); Need this method
+        CartPaymentConfirmationPage cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
+        Assertions.assertEquals("Your order on My Store is complete.", cartPaymentConfirmationPage.getOrderCompleteText());
     }
 
     @After
