@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,11 +26,24 @@ public class TwitterStepdefs {
     private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
-    @Given("I am on the Home Page")
-    public void iAmOnTheHomePage() {
+    @Before("@twitter")
+    public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@twitter")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown twitter");
+        }
+    }
+
+    @Given("I am on the Home Page")
+    public void iAmOnTheHomePage() {
+
     }
 
     @When("I click on TWITTER icon")
@@ -45,11 +59,4 @@ public class TwitterStepdefs {
         Assertions.assertEquals("https://twitter.com/seleniumfrmwrk", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
-    @After("@twitter")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown twitter");
-        }
-    }
 }

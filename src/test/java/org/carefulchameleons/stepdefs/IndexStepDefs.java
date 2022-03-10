@@ -38,6 +38,14 @@ public class IndexStepDefs {
 
     }
 
+    @After("@index")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown index");
+        }
+    }
+
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
         Assertions.assertEquals("http://automationpractice.com/index.php", indexPage.getCurrentURL());
@@ -227,14 +235,6 @@ public class IndexStepDefs {
     public void iAmTakenToTheContactUsPage() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=contact", indexPage.getCurrentURL());
 
-    }
-
-    @After("@index")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown index");
-        }
     }
 
     @When("I enter my email address and submit it")

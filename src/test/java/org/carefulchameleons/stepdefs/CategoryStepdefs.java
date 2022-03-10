@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,10 +17,23 @@ public class CategoryStepdefs {
 
     private CategoryPage categoryPage;
 
-    @Given("I am on the category 3 page")
-    public void iAmOnTheCategoryPage() {
+    @Before("@categories")
+    public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@categories")
+    public static void tearDown() {
+        if(webDriver != null) {
+            //driverManager.quitDriver();
+            System.out.println("tearDown register");
+        }
+    }
+
+    @Given("I am on the category 3 page")
+    public void iAmOnTheCategoryPage() {
         categoryPage = new CategoryPage(webDriver, 3);
         String catID = "3";
         webDriver.navigate().to("http://automationpractice.com/index.php?id_category=" + catID + "&controller=category");
@@ -176,11 +190,4 @@ public class CategoryStepdefs {
         return isConditionNewSelected;
     }
 
-    @After("@categories")
-    public static void tearDown() {
-        if(webDriver != null) {
-            //driverManager.quitDriver();
-            System.out.println("tearDown register");
-        }
-    }
 }

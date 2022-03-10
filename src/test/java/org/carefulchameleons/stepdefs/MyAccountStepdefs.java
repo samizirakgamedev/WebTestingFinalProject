@@ -1,5 +1,6 @@
 package org.carefulchameleons.stepdefs;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import org.carefulchameleons.pom.myaccounts.*;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
@@ -22,11 +23,24 @@ public class MyAccountStepdefs {
     private MyPersonalInfoPage myPersonalInfoPage;
     private MyAddressPage myAddressPage;
 
+    @Before("@myaccount")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@myaccount")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown my account");
+        }
+    }
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
+
         myAccountPage = new MyAccountPage(webDriver);
         myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
         addressDetailsPage = new AddressDetailsPage(webDriver);
@@ -34,8 +48,8 @@ public class MyAccountStepdefs {
         myAddressPage = new MyAddressPage(webDriver);
 
         boolean myAccountPageOpen = false;
-        webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
         if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
+
         return myAccountPageOpen;
     }
 
@@ -381,13 +395,4 @@ public class MyAccountStepdefs {
     public void theInvoicePdfShouldOpen() {
         //it's actually downloading for me
     }
-
-    @After("@myaccount")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown my account");
-        }
-    }
-
 }
