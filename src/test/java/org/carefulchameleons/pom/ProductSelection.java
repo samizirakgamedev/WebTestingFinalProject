@@ -135,6 +135,11 @@ public class ProductSelection {
         return new ProductPage(webDriver, "");
     }
 
+    public String getTitle(int index){
+        return webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-name")).get(index).getText();
+
+    }
+
 
     public String getPrice(int index){
         return webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-price")).get(index).getText();
