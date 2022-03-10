@@ -10,6 +10,7 @@ import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 import org.carefulchameleons.pom.myaccounts.RegistrationPage;
 import org.carefulchameleons.pom.PageHeader;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegisterStepdefs {
     private  static WebDriverManager driverManager;
