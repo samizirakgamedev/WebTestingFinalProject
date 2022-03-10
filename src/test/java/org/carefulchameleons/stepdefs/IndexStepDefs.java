@@ -28,8 +28,12 @@ public class IndexStepDefs {
     public void setup() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
+
         indexPage = new IndexPage(webDriver);
+        indexPage.getPageHeader().clickSignInButton().login("dpbtest@test.com", "password");
+
         webDriver.navigate().to("http://automationpractice.com/");
+        
     }
 
     @Given("I am on the home page")

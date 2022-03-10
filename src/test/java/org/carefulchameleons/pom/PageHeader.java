@@ -3,6 +3,7 @@ package org.carefulchameleons.pom;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
 import org.carefulchameleons.pom.information.ContactUs;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -51,9 +52,9 @@ public class PageHeader {
         // TODO - Need to update arguments when contact us page is done
     }
 
-    public MyAccountPage clickSignInButton() {
+    public SignInPage clickSignInButton() {
         webDriver.findElement(SIGN_IN).click();
-        return new MyAccountPage(webDriver);
+        return new SignInPage(webDriver, "");
         // TODO - Need to update arguments when my account page is done
     }
 
