@@ -18,7 +18,7 @@ public class InformationStepDefs {
     private static WebDriverManager driverManager;
     private static PageFooter pageFooter;
 
-    @Before
+    @Before("@information")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();
