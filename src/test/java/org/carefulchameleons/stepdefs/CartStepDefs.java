@@ -132,11 +132,6 @@ public class CartStepDefs {
         cartSummaryPage.continueShopping();
     }
 
-    @Then("I should be taken to the index page")
-    public void iShouldBeTakenToTheIndexPage() {
-        Assertions.assertEquals("http://automationpractice.com/index.php", driverManager.getDriver().getCurrentUrl());
-    }
-
     @And("I go to the Cart address Page")
     public void iGoToTheCartAddressPage() {
         cartSummaryPage = new CartSummaryPage(driver);
@@ -157,6 +152,7 @@ public class CartStepDefs {
     @And("I enter Email Address {string} and Password {string}")
     public void iEnterEmailAddressAndPassword(String email, String password) {
         signInPage = new SignInPage(driver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         signInPage.enterLoginEmail(email);
         signInPage.enterLoginPassword(password);
     }
@@ -164,6 +160,11 @@ public class CartStepDefs {
     @And("I click Sign in button")
     public void iClickSignInButton() {
         signInPage.clickLoginButton();
+    }
+
+    @Then("I should be taken to the index page")
+    public void iShouldBeTakenToTheIndexPage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php", driverManager.getDriver().getCurrentUrl());
     }
 
     @After("@cart")
