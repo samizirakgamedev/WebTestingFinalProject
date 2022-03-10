@@ -68,7 +68,7 @@ public class MyAccountStepdefs {
 
     @And("I click any link")
     public void iClickAnyLink() {
-        //clickity click
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         myAccountPage.goToMyOrderHistoryPage();
     }
 
