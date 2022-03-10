@@ -79,9 +79,8 @@ public class OrderStepdefs {
 
     @And("I click on the first product displayed")
     public void iClickOnTheFirstProductDisplayed() {
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-         categoryPage.getProductSelection().clickOnMore(0);
+            categoryPage.getProductSelection().hoverOverProduct(0);
+            productPage = categoryPage.getProductSelection().clickOnMore(0);
     }
 
 //    @And("I click on the More button")
@@ -91,7 +90,7 @@ public class OrderStepdefs {
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-        productPage = new ProductPage(webDriver, "http://automationpractice.com/index.php?id_product=1&controller=product");
+        //productPage = new ProductPage(webDriver, "http://automationpractice.com/index.php?id_product=1&controller=product");
                 //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
         productPage.increaseQuantity();
     }
