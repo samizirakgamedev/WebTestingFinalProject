@@ -2,6 +2,9 @@ package org.carefulchameleons.pom.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * POM class responsible for handling the shipping page in the cart.
@@ -12,12 +15,20 @@ public class CartShippingPage extends CartPage {
     }
 
     public boolean isTOSChecked() {
-        String value = getWebDriver().findElement(By.id("cgv")).getAttribute("value");
-        return "1".equals(value);
+        List<WebElement> checked = getWebDriver().findElement(By.id("uniform-cgv"))
+                .findElements(By.className("checked"));
+        if (checked.size() == 1)
+            return true;
+        else
+            return false;
     }
 
-    public void clickTOS() {
+    public void displayTOS() {
         getWebDriver().findElement(By.className("iframe")).click();
+    }
+
+    public void acceptTOS(){
+        getWebDriver().findElement(By.id("cgv")).click();
     }
 
     // only works after using clickTOS()
