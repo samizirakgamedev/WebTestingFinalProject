@@ -1,5 +1,6 @@
 package org.carefulchameleons.stepdefs;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,7 +11,6 @@ import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
 import org.carefulchameleons.pom.myaccounts.RegistrationPage;
-import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.pom.PageHeader;
 
 public class RegisterStepdefs {
@@ -20,11 +20,11 @@ public class RegisterStepdefs {
     private PageHeader pageHeader;
     private SignInPage signInPage;
 
-    @After("@register")
-    public static void setUp() {
+    @Before("@register")
+    public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
-        webDriver.navigate().to("http://automationpractice.com/");
+        webDriver.get("http://automationpractice.com/index.php");
     }
 
     @After("@register")
@@ -39,12 +39,13 @@ public class RegisterStepdefs {
     @Given("I open the Home Page")
     public void iOpenTheHomePage() {
         registrationPage = new RegistrationPage(webDriver);
-        pageHeader = new PageHeader(webDriver);
+//        signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
     @When("I click on Sign in button")
     public void iClickOnSignInButton() {
-        pageHeader.clickSignInButton();
+//        pageHeader.clickSignInButton();
+//        registrationPage.getPageHeader().clickSignInButton();
     }
 
     @Given("The registration page is open")
@@ -77,6 +78,7 @@ public class RegisterStepdefs {
 
     @When("I type a valid test@test.com email address")
     public void iTypeAValidEmailAddress() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("test@test.com");
     }
@@ -90,8 +92,6 @@ public class RegisterStepdefs {
         signInPage.enterCreateEmail("test@test.comment");
         signInPage.clickCreateButton();
         Thread.sleep(3000);
-        signInPage.clickCreateButton();
-        Thread.sleep(5000);
         if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")) createAccountPageOpen = true;
         return createAccountPageOpen;
     }
@@ -185,30 +185,35 @@ public class RegisterStepdefs {
 
     @When("I type a valid email address")
     public void iTypeAValidEmail() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("test@test.commment");
     }
 
     @When("I type an invalid test email")
     public void iTypeAnInvalidEmail() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("test");
     }
 
     @When("I type an invalid email")
     public void i_type_an_invalid_email() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("");
     }
 
     @When("I type an invalid test@test email")
     public void iTypeAnInvalidTestAtTestEmail() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("test@test");
     }
 
     @When("I type an invalid test.com email")
     public void iTypeAnInvalidTestDotComEmail() {
+        registrationPage.getPageHeader().clickSignInButton();
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage.enterCreateEmail("test.com");
     }

@@ -57,7 +57,7 @@ public class GooglePlusStepdefs {
     @Then("I will go to the Google plus page")
     public void iWillGoToTheGooglePlusPage() {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Assertions.assertEquals("https://accounts.google.com/ServiceLogin?passive=1209600&osid=1&continue=https://plus.google.com/111979135243110831526/posts&followup=https://plus.google.com/111979135243110831526/posts", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
+        Assertions.assertEquals("https://accounts.google.com/signin/v2/identifier?passive=1209600&osid=1&continue=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&followup=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&flowName=GlifWebSignIn&flowEntry=ServiceLogin", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
 
     }
 

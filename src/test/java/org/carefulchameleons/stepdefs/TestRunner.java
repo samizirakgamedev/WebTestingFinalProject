@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         //tags can be used to run tests based on the individual scenarios
         //one scenario at a time
 
-        tags = "@test1",
+        tags = "",
         publish = true
 )
 public class TestRunner { }

@@ -77,7 +77,7 @@ public class IndexStepDefs {
 
     @Then("I am sent to the women's department")
     public void iAmSentToTheWomenSDepartment() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=3&controller=category", indexPage.getCurrentURL());
 
     }
 
@@ -101,10 +101,9 @@ public class IndexStepDefs {
 
     @Then("I can see the best selling items")
     public void iCanSeeTheBestSellingItems() {
-
-        indexPage.clickBestSellerButton().featuredItems().getTitle(0);
-        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String title = indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        Assertions.assertEquals("Printed Chiffon Dress",  title);
 
     }
 
@@ -245,5 +244,10 @@ public class IndexStepDefs {
     @Then("I will register myself for the email newsletter")
     public void iWillRegisterMyselfForTheEmailNewsletter() {
         Assertions.assertTrue((BooleanSupplier) webDriver.findElement(By.className("alert_alert-success")));
+    }
+
+    @Then("I am sent to the women's dresses department")
+    public void iAmSentToTheWomenSDressesDepartment() {
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
     }
 }

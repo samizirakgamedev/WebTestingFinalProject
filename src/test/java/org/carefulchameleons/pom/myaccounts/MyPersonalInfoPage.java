@@ -22,7 +22,7 @@ public class MyPersonalInfoPage extends MyAccountSharedPage {
     private final By CONFIRM_PASSWORD_TEXT_BOX = new By.ById("confirmation");
     private final By NEWSLETTER_TICK_BOX = new By.ById("newsletter");
     private final By SPECIAL_OFFERS_TICK_BOX = new By.ById("optin");
-    private final By SAVE_BUTTON = new By.ByName("submitIdentity");
+    private final By SAVE_BUTTON = new By.ById("submitWishlist");
 
     public MyPersonalInfoPage(WebDriver webDriver) {
         super(webDriver, "http://automationpractice.com/index.php?controller=identity");

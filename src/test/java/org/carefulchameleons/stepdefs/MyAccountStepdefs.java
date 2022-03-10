@@ -82,7 +82,7 @@ public class MyAccountStepdefs {
 
     @And("I click any link")
     public void iClickAnyLink() {
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         myAccountPage.goToMyOrderHistoryPage();
     }
 
@@ -262,6 +262,7 @@ public class MyAccountStepdefs {
 
     @And("I click the button Save")
     public void iClickTheButtonSave() {
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         myPersonalInfoPage.clickSaveButton();
     }
 

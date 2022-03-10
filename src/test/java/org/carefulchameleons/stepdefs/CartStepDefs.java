@@ -51,6 +51,7 @@ public class CartStepDefs {
 
     @Then("Cart should be empty")
     public void cartShouldBeEmpty() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertTrue(cartSummaryPage.isCartEmpty());
     }
 
@@ -68,6 +69,7 @@ public class CartStepDefs {
     public void iHaveAddedAnItemToTheCart() {
         driver.get("http://automationpractice.com/index.php");
         indexPage = new IndexPage(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         productSelection =  indexPage.featuredItems();
         productSelection.addItemToCart(0);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
