@@ -38,7 +38,6 @@ public class OrderStepdefs {
     private WomenMenu womenMenu;
     private CategoryPage categoryPage;
     private ProductSelection productSelection;
-    //private ProductFancyPage
     private ProductPage productPage;
 
     @Given("I am on the homepage")
@@ -57,6 +56,7 @@ public class OrderStepdefs {
     @And("I enter the Email Address {string} and  the Password {string}")
     public void iEnterTheEmailAddressAndThePassword(String email, String password) {
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         signInPage.enterLoginEmail(email);
         signInPage.enterLoginPassword(password);
     }
@@ -77,21 +77,14 @@ public class OrderStepdefs {
         categoryPage = womenMenu.clickOnTShirts();
     }
 
-    @And("I click on the first product displayed")
-    public void iClickOnTheFirstProductDisplayed() {
+    @And("I hover over and click more on the first product displayed")
+    public void iHoverOverAndClickMoreOnTheFirstProductDisplayed() {
             categoryPage.getProductSelection().hoverOverProduct(0);
             productPage = categoryPage.getProductSelection().clickOnMore(0);
     }
 
-//    @And("I click on the More button")
-//    public void iClickOnTheMoreButton() {
-//    //categoryPage.
-//    }
-
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-        //productPage = new ProductPage(webDriver, "http://automationpractice.com/index.php?id_product=1&controller=product");
-                //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
         productPage.increaseQuantity();
     }
 
@@ -107,22 +100,25 @@ public class OrderStepdefs {
 
     @And("I click on the green Proceed to checkout button")
     public void iClickOnTheGreenProceedToCheckoutButton() {
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         productSelection.proceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
+        summaryPage = new CartSummaryPage(webDriver);
         summaryPage.proceedToCheckoutLoggedIn();
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
+        addressPage = new CartAddressPage(webDriver);
          addressPage.proceedToCheckout();
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        //shippingPage.
+        shippingPage = new CartShippingPage(webDriver);
         shippingPage.acceptTOS();
     }
 
@@ -133,26 +129,19 @@ public class OrderStepdefs {
 
     @And("I click on the Pay by bank wire button")
     public void iClickOnThePayByBankWireButton() {
-    paymentPage.payByBankWire();
-
-    //cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
-
-        //paymentPage.clickPayByBankWire(); Need this method
+        paymentPage = new CartPaymentPage(webDriver);
+        cartBankWirePaymentPage = paymentPage.payByBankWire();
     }
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        cartPaymentConfirmationPage = cartBankWirePaymentPage.confirmOrder();
+        cartPaymentConfirmationPage =
+                cartBankWirePaymentPage.confirmOrder();
     }
 
-    @Then("Your order on My Store is complete. should be displayed")
-    public void yourOrderOnMyStoreIsCompleteShouldBeDisplayed() {
-        //url is different in CartPageConfirmationPage
-        //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
-
-        //cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
-
-        Assertions.assertEquals("Your order on My Store is complete.", cartPaymentConfirmationPage.getOrderCompleteText());
+    @Then("I should be on the Cart Payment Confirmation page")
+    public void iShouldBeOnTheCartPaymentConfirmationPage() {
+        Assertions.assertTrue(cartPaymentConfirmationPage.getCurrentURL().contains("controller=order-confirmation"));
     }
 
     @After("@order")
