@@ -1,4 +1,6 @@
 Feature: As a customer I want to be able to navigate through categories and filter products by various attributes
+
+  @categories
   Scenario Outline: As a customer I want to filter the products by composition
     Given I am on the category <category> page
     When I select a composition <composition>
@@ -9,6 +11,7 @@ Feature: As a customer I want to be able to navigate through categories and filt
       | 3        | polyester    |
       | 3        | viscose      |
 
+  @categories
   Scenario Outline: As a customer I want to filter the products by style
     Given I am on the category <category> page
     When I select a style <style>
@@ -19,6 +22,7 @@ Feature: As a customer I want to be able to navigate through categories and filt
       | 3        | dressy     |
       | 3        | girly      |
 
+  @categories
   Scenario Outline: As a customer I want to filter the products by size
     Given I am on the category <category> page
     When I select a size <size>
@@ -29,6 +33,7 @@ Feature: As a customer I want to be able to navigate through categories and filt
       | 3        | m          |
       | 3        | l          |
 
+  @categories
   Scenario Outline: As a customer I want to filter by category
     Given I am on the category <category> page
     When I select category <categories>
@@ -38,6 +43,7 @@ Feature: As a customer I want to be able to navigate through categories and filt
       | 3        | tops       |
       | 3        | dresses    |
 
+  @categories
   Scenario Outline: As a customer I want to filter by properties
     Given I am on the category <category> page
     When I select property <property>
@@ -50,16 +56,19 @@ Feature: As a customer I want to be able to navigate through categories and filt
       | 3        | maxi dress       |
       | 3        | short dress      |
 
+  @categories
   Scenario: As a customer I want to select only products in stock
     Given I am on the category 3 page
     When I select in stock option
     Then only products in stock should appear
 
+  @categories
   Scenario: As a customer I want to select only products from a manufacturer
     Given I am on the category 3 page
     When I select the manufacturer
     Then only products from the manufacturer should appear
 
+  @categories
   Scenario: As a customer I want to select the condition of the products
     Given I am on the category 3 page
     When I select the condition new
