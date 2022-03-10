@@ -7,30 +7,32 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
-import org.carefulchameleons.pom.ItemPage;
-import org.carefulchameleons.pom.ProductPage;
 import org.carefulchameleons.pom.ProductSelection;
-import org.carefulchameleons.pom.cart.CartPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CartStepDefs {
-    private static WebDriver webDriver;
+    private static WebDriver driver;
+    private static WebDriverManager driverManager;
     private static CartSummaryPage cartSummaryPage;
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
 
     @Before
     public void setUp() {
-        webDriver = new ChromeDriver();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        driver = driverManager.getDriver();
+        driver.get("http://automationpractice.com/index.php");
     }
 
     @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
-        webDriver.get("http://automationpractice.com/index.php?controller=order");
-        cartSummaryPage = new CartSummaryPage(webDriver);
+        driver.get("http://automationpractice.com/index.php?controller=order");
+        cartSummaryPage = new CartSummaryPage(driver);
     }
 
     @And("No items have been added")
@@ -53,8 +55,8 @@ public class CartStepDefs {
 
     @Given("I have added an item to the cart")
     public void iHaveAddedAnItemToTheCart() {
-        webDriver.get("http://automationpractice.com/index.php");
-        indexPage = new IndexPage(webDriver);
+        driver.get("http://automationpractice.com/index.php");
+        indexPage = new IndexPage(driver);
         productSelection =  indexPage.featuredItems();
         productSelection.addItemToCart(0);
         try {
@@ -119,6 +121,6 @@ public class CartStepDefs {
 
     @After
     public void cleanUp() {
-        webDriver.quit();
+        driverManager.quitDriver();
     }
 }

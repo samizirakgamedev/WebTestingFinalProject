@@ -5,16 +5,13 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.PageFooter;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.sql.DriverManager;
 
 public class InformationStepDefs {
     private static WebDriver driver;
@@ -28,7 +25,7 @@ public class InformationStepDefs {
         driver.get("http://automationpractice.com/index.php");
     }
 
-    @Given("I am on the Home page")
+    @Given("Im on the Home page")
     public void IAmOnTheHomePage(){
         pageFooter = new PageFooter(driver);
     }
