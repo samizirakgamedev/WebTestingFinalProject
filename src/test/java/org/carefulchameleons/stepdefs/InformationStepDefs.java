@@ -18,7 +18,7 @@ public class InformationStepDefs {
     private static WebDriverManager driverManager;
     private static PageFooter pageFooter;
 
-    @Before
+    @Before("@information")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();
@@ -107,8 +107,11 @@ public class InformationStepDefs {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", currentUrl);
     }
 
-    @After
-    public void cleanUp() {
-        driverManager.quitDriver();
+    @After("@information")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown information");
+        }
     }
 }

@@ -3,6 +3,7 @@ Feature: As a user I would like to see results of searching word so that I can u
   Background: Setting up the Browser
     Given I am on the Index page
 
+  @search
   Scenario Outline: As a user I want to use the search box and be able to see the results of: "<search input>"
     When I enter the word "<search input>"
     And I click on search button
@@ -16,7 +17,7 @@ Feature: As a user I would like to see results of searching word so that I can u
       | Blouse        | 1                |
       | !@#$%^        | 0                |
 
-
+  @search
   Scenario Outline: As a user I want to use the search box and be able to see results sorted by: "<sort by>"
     When I enter the word "<search input>"
     And I click on search button
@@ -35,12 +36,14 @@ Feature: As a user I would like to see results of searching word so that I can u
       | Printed Dress | 5                | Reference: Lowest first  | Reference: Lowest first  |
       | Printed Dress | 5                | Reference: Highest first | Reference: Highest first |
 
+  @search
   Scenario: As a user I want to use the search box and be able to discover the stores
     When I enter any word in the search bar
     And I click on search button
     And I click on black Discover our stores button
     Then I will go to the Our stores page
 
+  @search
   Scenario: As a user I want to use the search box and be able to navigate to the Fashion Supplier page
     When I enter any word in the search bar
     And I click on search button

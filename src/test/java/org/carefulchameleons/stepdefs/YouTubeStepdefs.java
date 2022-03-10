@@ -45,7 +45,7 @@ public class YouTubeStepdefs {
         Assertions.assertEquals("https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCHl59sI3SRjQ-qPcTrgt0tA%3Fcbrd%3D1&gl=GB&m=0&pc=yt&uxe=23983171&hl=en&src=1", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
-    @After
+    @After("@youtube")
     public static void tearDown() {
         if(webDriver != null) {
             driverManager.quitDriver();

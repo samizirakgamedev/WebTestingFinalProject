@@ -17,7 +17,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class CartStepDefs {
@@ -27,7 +26,7 @@ public class CartStepDefs {
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
 
-    @Before
+    @Before("@cart")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();
@@ -121,8 +120,13 @@ public class CartStepDefs {
         Assertions.assertEquals(arg0, totalProducts);
     }
 
-    @After
-    public void cleanUp() {
-        driverManager.quitDriver();
+
+    @After("@cart")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
     }
+
 }

@@ -246,7 +246,7 @@ public class RegisterStepdefs {
         return registrationPage.isPhoneNumberErrorPresent();
     }
 
-    @After
+    @After("@register")
     public static void tearDown() {
         if(webDriver != null) {
             //driverManager.quitDriver();

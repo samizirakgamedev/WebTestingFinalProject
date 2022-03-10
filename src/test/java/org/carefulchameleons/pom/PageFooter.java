@@ -24,9 +24,9 @@ public class PageFooter {
     private final By ABOUT_US_LINK = new By.ByLinkText("About us");
     private final By SITEMAP = new By.ByLinkText("Sitemap");
     private final By MY_ACCOUNT_LINK = new By.ByLinkText("My account");
-    private final By MY_ORDERS_LINK = new By.ByLinkText("MY orders");
+    private final By MY_ORDERS_LINK = new By.ByLinkText("My orders");
     private final By MY_ADDRESSES_LINK = new By.ByLinkText("My addresses");
-    private final By MY_PERSONAL_INFO = new By.ByLinkText("My Personal info");
+    private final By MY_PERSONAL_INFO = new By.ByLinkText("My personal info");
     private final By FACEBOOK_ICON = new By.ByClassName("facebook");
     private final By TWITTER_ICON = new By.ByClassName("twitter");
     private final By YOUTUBE_ICON = new By.ByClassName("youtube");

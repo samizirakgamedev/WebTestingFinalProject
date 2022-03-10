@@ -14,15 +14,7 @@ public class CategoryStepdefs {
     private static WebDriver webDriver;
     private  static WebDriverManager driverManager;
 
-//    String url = webDriver.getCurrentUrl();
-//
-//    //this part might be added to CategoryPage.java
-//    String subUrl = url.substring(url.indexOf("=") + 1);
-//    String catID = subUrl.substring(0, subUrl.indexOf("&"));
-//    int cat = Integer.parseInt(catID);
-
-    //until here
-    CategoryPage categoryPage;
+    private CategoryPage categoryPage;
 
     @Given("I am on the category 3 page")
     public void iAmOnTheCategoryPage() {
@@ -184,7 +176,7 @@ public class CategoryStepdefs {
         return isConditionNewSelected;
     }
 
-    @After
+    @After("@categories")
     public static void tearDown() {
         if(webDriver != null) {
             //driverManager.quitDriver();

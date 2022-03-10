@@ -3,6 +3,7 @@ Feature: As a registered user with valid email and password I will be able to pl
   Background:
     Given I am on the homepage
 
+  @order
   Scenario Outline: Buying products successfully
     When I click on the black Sign in button
     And I enter the Email Address "<email>" and  the Password "<password>"
