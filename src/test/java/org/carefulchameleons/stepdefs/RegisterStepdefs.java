@@ -20,13 +20,26 @@ public class RegisterStepdefs {
     private PageHeader pageHeader;
     private SignInPage signInPage;
 
-    @Given("I open the Home Page")
-    public void iOpenTheHomePage() {
+    @After("@register")
+    public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
+        webDriver.navigate().to("http://automationpractice.com/");
+    }
+
+    @After("@register")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown register");
+        }
+    }
+
+
+    @Given("I open the Home Page")
+    public void iOpenTheHomePage() {
         registrationPage = new RegistrationPage(webDriver);
         pageHeader = new PageHeader(webDriver);
-        webDriver.navigate().to("http://automationpractice.com/");
     }
 
     @When("I click on Sign in button")
@@ -37,10 +50,8 @@ public class RegisterStepdefs {
     @Given("The registration page is open")
     public boolean theRegistrationPageIsOpen() {
         boolean theRegistrationPageOpen = false;
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
         registrationPage = new RegistrationPage(webDriver);
-        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication");
+
         if (webDriver.getCurrentUrl().contains("http://automationpractice.com/index.php?controller=authentication")) theRegistrationPageOpen = true;
         return theRegistrationPageOpen;
     }
@@ -73,8 +84,6 @@ public class RegisterStepdefs {
     @Given("The Create an account page is open")
     public boolean theCreateAnAccountPageIsOpen() throws InterruptedException {
         boolean createAccountPageOpen = false;
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
         registrationPage = new RegistrationPage(webDriver);
         webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
         signInPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation");
@@ -246,11 +255,4 @@ public class RegisterStepdefs {
         return registrationPage.isPhoneNumberErrorPresent();
     }
 
-    @After("@register")
-    public static void tearDown() {
-        if(webDriver != null) {
-            //driverManager.quitDriver();
-            System.out.println("tearDown register");
-        }
-    }
 }

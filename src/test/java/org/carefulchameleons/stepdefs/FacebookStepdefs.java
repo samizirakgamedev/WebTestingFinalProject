@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -25,12 +26,23 @@ public class FacebookStepdefs {
     private MyAccountPage myAccountPage;
     private PageFooter pageFooter;
 
-
-    @Given("I am on the Home page")
-    public void iAmOnTheHomePage() {
+    @Before("@facebook")
+    public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@facebook")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown facebook");
+        }
+    }
+
+    @Given("I am on the Home page")
+    public void iAmOnTheHomePage() {
 
     }
 
@@ -47,11 +59,4 @@ public class FacebookStepdefs {
         Assertions.assertEquals("https://www.facebook.com/groups/525066904174158/", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
 
-    @After("@facebook")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown facebook");
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -35,16 +36,29 @@ public class OrderStepdefs {
     private CartPaymentPage paymentPage;
     private CartPaymentConfirmationPage cartPaymentConfirmationPage;
     private CartBankWirePaymentPage cartBankWirePaymentPage;
+
     private WomenMenu womenMenu;
     private CategoryPage categoryPage;
     private ProductSelection productSelection;
     private ProductPage productPage;
 
-    @Given("I am on the homepage")
-    public void iAmOnTheHomepage() {
+    @Before("@order")
+    public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@order")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown order");
+        }
+    }
+
+    @Given("I am on the homepage")
+    public void iAmOnTheHomepage() {
     }
 
     @When("I click on the black Sign in button")
@@ -144,11 +158,4 @@ public class OrderStepdefs {
         Assertions.assertTrue(cartPaymentConfirmationPage.getCurrentURL().contains("controller=order-confirmation"));
     }
 
-    @After("@order")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown order");
-        }
-    }
 }

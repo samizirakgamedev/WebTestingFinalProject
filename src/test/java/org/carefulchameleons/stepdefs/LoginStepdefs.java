@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,12 +25,23 @@ public class LoginStepdefs {
     private SignInPage signinPage;
     private MyAccountPage myAccountPage;
 
-    @Given("I am on the login page")
-    public void iAmOnTheLoginPage() {
+    @Before("@login")
+    public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
 
+    @After("@login")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown login");
+        }
+    }
+
+    @Given("I am on the login page")
+    public void iAmOnTheLoginPage() {
         indexPage = new IndexPage(webDriver);
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         indexPage.getPageHeader().clickSignInButton();
@@ -95,11 +107,4 @@ public class LoginStepdefs {
         signinPage.enterLoginPassword("SpartaGlobal1");
     }
 
-    @After("@login")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown login");
-        }
-    }
 }

@@ -33,6 +33,14 @@ public class CartStepDefs {
         driver.get("http://automationpractice.com/index.php");
     }
 
+    @After("@cart")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
+    }
+
     @Given("I am on the Cart Page")
     public void iAmInTheCartPage() {
         driver.get("http://automationpractice.com/index.php?controller=order");
@@ -118,15 +126,6 @@ public class CartStepDefs {
     public void itemSQuantityShouldBe(int arg0) {
         double totalProducts = cartSummaryPage.getProductQuantity(0);
         Assertions.assertEquals(arg0, totalProducts);
-    }
-
-
-    @After("@cart")
-    public static void tearDown() {
-        if (driverManager.getDriver() != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown cart");
-        }
     }
 
 }

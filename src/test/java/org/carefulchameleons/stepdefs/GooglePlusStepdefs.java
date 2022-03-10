@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,11 +27,24 @@ public class GooglePlusStepdefs {
     private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
-    @Given("I am on the HomePage")
-    public void iAmOnTheHomePage() {
+    @Before("@google")
+    public static void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@google")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown googlePlus");
+        }
+    }
+
+    @Given("I am on the HomePage")
+    public void iAmOnTheHomePage() {
+
     }
 
     @When("I click on Google plus icon")
@@ -46,11 +60,5 @@ public class GooglePlusStepdefs {
         Assertions.assertEquals("https://accounts.google.com/signin/v2/identifier?passive=1209600&osid=1&continue=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&followup=https%3A%2F%2Fplus.google.com%2F111979135243110831526%2Fposts&flowName=GlifWebSignIn&flowEntry=ServiceLogin", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
 
     }
-    @After("@google")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown googlePlus");
-        }
-    }
+
 }
