@@ -127,15 +127,6 @@ public class CartStepDefs {
         Assertions.assertEquals(arg0, totalProducts);
     }
 
-
-    @After("@cart")
-    public static void tearDown() {
-        if (driverManager.getDriver() != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown cart");
-        }
-    }
-
     @When("I click on the continue shopping button on the summary page")
     public void iClickOnTheContinueShoppingButtonOnTheSummaryPage() {
         cartSummaryPage.continueShopping();
@@ -173,5 +164,13 @@ public class CartStepDefs {
     @And("I click Sign in button")
     public void iClickSignInButton() {
         signInPage.clickLoginButton();
+    }
+
+    @After("@cart")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
     }
 }

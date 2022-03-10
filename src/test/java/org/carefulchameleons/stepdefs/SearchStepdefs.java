@@ -1,6 +1,7 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -28,11 +29,24 @@ public class SearchStepdefs {
     private OurStores ourStores;
     private FashionSupplierPage fashionSupplierPage;
 
-    @Given("I am on the Index page")
-    public void iAmOnTheIndexPage() {
+    @Before("@search")
+    public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@search")
+    public static void tearDown() {
+        if (webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown searchPage");
+        }
+    }
+
+    @Given("I am on the Index page")
+    public void iAmOnTheIndexPage() {
+
     }
 
     @When("I enter the word {string}")
@@ -49,7 +63,7 @@ public class SearchStepdefs {
     @Then("I will see the number of results equal to {string}")
     public void iWillSeeTheNumberOfResultsEqualTo(String expectedResult) {
         searchPage = new SearchPage(webDriver, "http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=Printed+dress&submit_search=");
-        //Assertions.assertEquals(expectedResult, searchPage.getTheNumberOfResultsFound().toString());
+        Assertions.assertEquals(expectedResult, searchPage.getTextOfNumberOfSearchResults()); //?
     }
 
     //opt
@@ -108,11 +122,4 @@ public class SearchStepdefs {
         Assertions.assertEquals("http://automationpractice.com/index.php?id_supplier=1&controller=supplier", fashionSupplierPage.getCurrentURL());
     }
 
-    @After("@search")
-    public static void tearDown() {
-        if (webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown searchPage");
-        }
-    }
 }

@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 
 
 public class InformationStepDefs {
+
     private static WebDriver driver;
     private static WebDriverManager driverManager;
     private static PageFooter pageFooter;
@@ -23,6 +24,14 @@ public class InformationStepDefs {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();
         driver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@information")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown information");
+        }
     }
 
     @Given("Im on the Home page")
@@ -105,13 +114,5 @@ public class InformationStepDefs {
     public void iAmTakenToTheSitemapPage() {
         String currentUrl = driver.getCurrentUrl();
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=sitemap", currentUrl);
-    }
-
-    @After("@information")
-    public static void tearDown() {
-        if (driverManager.getDriver() != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown information");
-        }
     }
 }

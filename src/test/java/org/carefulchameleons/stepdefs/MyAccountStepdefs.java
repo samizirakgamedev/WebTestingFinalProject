@@ -1,9 +1,11 @@
 package org.carefulchameleons.stepdefs;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import org.carefulchameleons.pom.myaccounts.*;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.time.Duration;
 
 public class MyAccountStepdefs {
 
@@ -21,21 +25,41 @@ public class MyAccountStepdefs {
     private MyOrderHistoryPage myOrderHistoryPage;
     private MyPersonalInfoPage myPersonalInfoPage;
     private MyAddressPage myAddressPage;
+    private SignInPage signinPage;
 
+    @Before("@myaccount")
+    public void setUp() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        webDriver.get("http://automationpractice.com/index.php");
+    }
+
+    @After("@myaccount")
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown my account");
+        }
+    }
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
+
         myAccountPage = new MyAccountPage(webDriver);
         myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
         addressDetailsPage = new AddressDetailsPage(webDriver);
         myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
         myAddressPage = new MyAddressPage(webDriver);
+        signinPage = new SignInPage(webDriver, "http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.navigate().to("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        signinPage.enterLoginEmail("finalproject@test.com");
+        signinPage.enterLoginPassword("SpartaGlobal");
+        signinPage.clickLoginButton();
 
         boolean myAccountPageOpen = false;
-        webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
         if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
+
         return myAccountPageOpen;
     }
 
@@ -58,7 +82,7 @@ public class MyAccountStepdefs {
 
     @And("I click any link")
     public void iClickAnyLink() {
-        //clickity click
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         myAccountPage.goToMyOrderHistoryPage();
     }
 
@@ -381,13 +405,4 @@ public class MyAccountStepdefs {
     public void theInvoicePdfShouldOpen() {
         //it's actually downloading for me
     }
-
-    @After("@myaccount")
-    public static void tearDown() {
-        if(webDriver != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown my account");
-        }
-    }
-
 }
