@@ -145,6 +145,15 @@ public class ProductSelection {
         return webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-price")).get(index).getText();
     }
 
+    public ProductSelection hoverOverProduct(int index){
+        Actions actions = new Actions(webDriver);
+        WebElement element = webDriver.findElement(PRODUCT_CONTAINER).findElements(By.partialLinkText("More")).get(index);
+        actions.moveToElement(element, 10, 10);
+        actions.perform();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        return this;
+    }
+
     public ProductPage clickOnMore(int index){
         webDriver.findElement(PRODUCT_CONTAINER).findElements(By.partialLinkText("More")).get(index).click();
         return new ProductPage(webDriver, "");
