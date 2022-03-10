@@ -18,4 +18,8 @@ public class CartPaymentConfirmationPage extends CartPage {
                 .findElement(By.className("button-exclusive")).click();
         return new MyOrderHistoryPage(getWebDriver());
     }
+
+    public String getOrderCompleteText(){
+        return getWebDriver().findElement(By.className("dark")).getText();
+    }
 }

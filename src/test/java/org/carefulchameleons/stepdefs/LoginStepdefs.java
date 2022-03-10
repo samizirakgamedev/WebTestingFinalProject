@@ -1,7 +1,6 @@
 package org.carefulchameleons.stepdefs;
 
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,33 +8,26 @@ import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
 public class LoginStepdefs {
 
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
     private IndexPage indexPage;
     private SignInPage signinPage;
     private MyAccountPage myAccountPage;
-    //private static WebDriverManager manager;
-
-    //@Before will only be staying in one StepDef
-
-//    @Before
-//    public void setup() {
-//        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-//        System.out.println("setup");
-//    }
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
-        webDriver = new ChromeDriver();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
 
         indexPage = new IndexPage(webDriver);
@@ -106,7 +98,7 @@ public class LoginStepdefs {
     @After
     public static void tearDown() {
         if(webDriver != null) {
-                webDriver.quit();
+            driverManager.quitDriver();
             System.out.println("tearDown login");
         }
     }
