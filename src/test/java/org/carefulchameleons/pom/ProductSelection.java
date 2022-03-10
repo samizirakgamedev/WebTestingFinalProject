@@ -147,7 +147,7 @@ public class ProductSelection {
 
     public ProductSelection hoverOverProduct(int index){
         Actions actions = new Actions(webDriver);
-        WebElement element = webDriver.findElement(PRODUCT_CONTAINER).findElements(By.partialLinkText("More")).get(index);
+        WebElement element = webDriver.findElement(PRODUCT_CONTAINER).findElements(By.className("product-name")).get(index);
         actions.moveToElement(element, 10, 10);
         actions.perform();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
