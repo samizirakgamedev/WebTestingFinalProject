@@ -3,20 +3,30 @@ package org.carefulchameleons.stepdefs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.openqa.selenium.WebDriver;
-import org.carefulchameleons.pom.ProductSelection;
 import org.carefulchameleons.pom.category.CategoryPage;
 public class CategoryStepdefs {
+
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
     String url = webDriver.getCurrentUrl();
+
     //this part might be added to CategoryPage.java
     String subUrl = url.substring(url.indexOf("=") + 1);
     String catID = subUrl.substring(0, subUrl.indexOf("&"));
     int cat = Integer.parseInt(catID);
+
     //until here
-    CategoryPage categoryPage = new CategoryPage(webDriver, cat);
+    CategoryPage categoryPage;
+
     @Given("I am on the category 3 page")
     public void iAmOnTheCategoryPage() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        categoryPage = new CategoryPage(webDriver, cat);
         catID = "3";
         webDriver.navigate().to("http://automationpractice.com/index.php?id_category=" + catID + "&controller=category");
     }

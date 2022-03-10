@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.cart;
 
+import org.carefulchameleons.pageelements.CategoryMenu;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.Page;
 import org.openqa.selenium.By;
@@ -48,5 +49,9 @@ public abstract class CartPage extends Page {
     public CartPaymentPage clickPaymentButton() {
         getWebDriver().findElement(By.className("last")).click();
         return new CartPaymentPage(getWebDriver());
+    }
+
+    public CategoryMenu getCategoryMenu(){
+        return new CategoryMenu(webDriver);
     }
 }

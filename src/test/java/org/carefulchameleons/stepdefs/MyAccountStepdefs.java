@@ -1,5 +1,9 @@
 package org.carefulchameleons.stepdefs;
-import org.carefulchameleons.pom.myaccounts.MyPersonalInfoPage;
+import io.cucumber.java.After;
+import org.carefulchameleons.pom.myaccounts.*;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,23 +11,28 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.carefulchameleons.pom.myaccounts.MyAccountPage;
-import org.carefulchameleons.pom.myaccounts.AddressDetailsPage;
-import org.carefulchameleons.pom.myaccounts.MyOrderHistoryPage;
-import org.carefulchameleons.pom.myaccounts.MyAddressPage;
 
 public class MyAccountStepdefs {
 
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
+    private MyAccountPage myAccountPage;
+    private AddressDetailsPage addressDetailsPage;
+    private MyOrderHistoryPage myOrderHistoryPage;
+    private MyPersonalInfoPage myPersonalInfoPage;
+    private MyAddressPage myAddressPage;
 
-    private MyAccountPage myAccountPage = new MyAccountPage(webDriver);
-    private AddressDetailsPage addressDetailsPage = new AddressDetailsPage(webDriver);
-    private MyOrderHistoryPage myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
-    private MyPersonalInfoPage myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
-    private MyAddressPage myAddressPage = new MyAddressPage(webDriver);
 
     @Given("I am on my account page")
     public boolean iAmOnMyAccountPage() {
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        myAccountPage = new MyAccountPage(webDriver);
+        myOrderHistoryPage = new MyOrderHistoryPage(webDriver);
+        addressDetailsPage = new AddressDetailsPage(webDriver);
+        myPersonalInfoPage = new MyPersonalInfoPage(webDriver);
+        myAddressPage = new MyAddressPage(webDriver);
+
         boolean myAccountPageOpen = false;
         webDriver.navigate().to("http://automationpractice.com/index.php?controller=my-account");
         if (webDriver.getCurrentUrl().equals("http://automationpractice.com/index.php?controller=my-account")) myAccountPageOpen = true;
@@ -371,6 +380,14 @@ public class MyAccountStepdefs {
     @Then("the invoice pdf should open")
     public void theInvoicePdfShouldOpen() {
         //it's actually downloading for me
+    }
+
+    @After
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown my account");
+        }
     }
 
 }

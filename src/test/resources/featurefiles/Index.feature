@@ -50,32 +50,46 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     When I click on the "<Name>" link
     Then I am taken to the "<Account Detail>" page
     Examples:
-      | Name | Account Detail |
-      |      |                |
+      | Name             | Account Detail   |
+      | My orders        | My orders        |
+      | My credit slips  | My credit slips  |
+      | My addresses     | My addresses     |
+      | My personal info | My personal info |
 
   @navigation
   Scenario Outline: I want to access the information available from the footer of the website
     When I click on the "<Name>" link
     Then I am taken to the "<Information Page>" section.
     Examples:
-      | Name | Information Page |
-      |      |                  |
-
-
+      | Name                        | Information Page            |
+      | Specials                    | Specials                    |
+      | New products                | New products                |
+      | Best sellers                | Best sellers                |
+      | Our stores                  | Our stores                  |
+      | Terms and conditions of use | Terms and conditions of use |
+      | About us                    | About us                    |
+      | Sitemap                     | Sitemap                     |
 
 Feature: As a customer, I want to be able to sign up for the newsletter using my e-mail address to stay updated.
 
   Background: Setting up the Browser
     Given I am on the home page
 
-  #todo
 
-Feature: As a customer, I want to add products displayed on the home page that I find attractive to the cart and then checkout.
+  @newsletter
+  Scenario: I want to sign up for the newsletter
+    When I enter my email address
+    And I click on the newsletter button
+    Then I will register myself for the email newsletter
 
-  Background: Setting up the Browser
-    Given I am on the home page
+#Feature: As a customer, I want to add products displayed on the home page that I find attractive to the cart and then checkout.
 
-  #todo
+  # Background: Setting up the Browser
+  #  Given I am on the home page
+  # When I hover over the first product displayed
+  #  And I click on the Add to cart blue button
+  # Then
+  ##todo
 
 Feature: As a customer, I want to be able to contact help if I have any struggles regarding the website.
 
@@ -87,7 +101,7 @@ Feature: As a customer, I want to be able to contact help if I have any struggle
     When I click on the contact us button
     Then I am taken to the contact us page
 
-  @contact
-  Scenario: I want to contact customer service regarding an inquiry
+  #  @contact
+  #  Scenario: I want to contact customer service regarding an inquiry
 
-        #Todo
+  ##Todo
