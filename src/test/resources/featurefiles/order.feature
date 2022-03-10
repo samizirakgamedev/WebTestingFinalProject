@@ -9,8 +9,8 @@ Feature: As a registered user with valid email and password I will be able to pl
     And I click Sign in green button
     And I move my cursor to the WOMEN tab
     And I click on the sub menu T-shirts
-    And I hover over the first product displayed
-    And I click on the More button
+    And I click on the first product displayed
+
     And I click on the plus button to increase the quantity to two
     And I select size M
     And I click on the Add to cart blue button

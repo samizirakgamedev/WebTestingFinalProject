@@ -5,8 +5,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.carefulchameleons.pageelements.WomenMenu;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.ProductPage;
+import org.carefulchameleons.pom.ProductSelection;
 import org.carefulchameleons.pom.cart.*;
+import org.carefulchameleons.pom.category.CategoryPage;
+import org.carefulchameleons.pom.enums.SizeSelection;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
@@ -28,6 +33,11 @@ public class OrderStepdefs {
     private CartPaymentPage paymentPage;
     private CartPaymentConfirmationPage cartPaymentConfirmationPage;
     private CartBankWirePaymentPage cartBankWirePaymentPage;
+    private WomenMenu womenMenu;
+    private CategoryPage categoryPage;
+    private ProductSelection productSelection;
+    //private ProductFancyPage
+    private ProductPage productPage;
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
@@ -56,45 +66,39 @@ public class OrderStepdefs {
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
-        //myAccountPage
+        womenMenu = myAccountPage.getCategoryMenu().hoverOverWomen();
     }
 
     @And("I click on the sub menu T-shirts")
     public void iClickOnTheSubMenuTShirts() {
-        //myAccountPage.clickTShirts();   //url for T-shirts page: http://automationpractice.com/index.php?id_category=5&controller=category
-
-        //{selecting Tshirts option from the hovered result ? in page header class?}
+        categoryPage = womenMenu.clickOnTShirts();
     }
 
-    @And("I hover over the first product displayed")
-    public void iHoverOverTheFirstProductDisplayed() {
-        //initialise tshirts page?
-
-        //{ hovering over Faded short sleeve Tshirt }
+    @And("I click on the first product displayed")
+    public void iClickOnTheFirstProductDisplayed() {
+        categoryPage.getProductSelection().clickOnMore(0);
     }
 
-    @And("I click on the More button")
-    public void iClickOnTheMoreButton() {
-        // { on the hovered thing
-        //{ ?Page.clickMore();
-    }
+//    @And("I click on the More button")
+//    public void iClickOnTheMoreButton() {
+//    //categoryPage.
+//    }
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-          //initialise this page (Faded short sleeve Tshirt)?                                              //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
-
-        //thisPage.clickPlus();
+                                                     //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
+        productPage.increaseQuantity();
     }
 
     @And("I select size M")
     public void iSelectSizeM() {
-        //thisPage.clickSizeDropdown();
-        //thisPage.clickM();
+        productPage.selectSize(SizeSelection.M);
     }
 
     @And("I click on the Add to cart blue button")
     public void iClickOnTheAddToCartBlueButton() {
-        //thisPage.clickAddToCart();
+
+        //productPage.addToCart();
     }
 
     @And("I click on the green Proceed to checkout button")
@@ -115,9 +119,8 @@ public class OrderStepdefs {
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        //??check the tos box
-
-        shippingPage.isTOSChecked();
+        shippingPage.clickTOS();
+        //shippingPage.isTOSChecked();
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
@@ -144,7 +147,7 @@ public class OrderStepdefs {
         //url is different in CartPageConfirmationPage
         //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
 
-        CartPaymentConfirmationPage cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
+        cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
         Assertions.assertEquals("Your order on My Store is complete.", cartPaymentConfirmationPage.getOrderCompleteText());
     }
 
