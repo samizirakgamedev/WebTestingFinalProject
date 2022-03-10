@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
 import java.util.function.BooleanSupplier;
 
 public class IndexStepDefs {
@@ -62,7 +63,7 @@ public class IndexStepDefs {
 
     @Then("I am sent to the women's department")
     public void iAmSentToTheWomenSDepartment() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=3&controller=category", indexPage.getCurrentURL());
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
 
     }
 
@@ -88,6 +89,7 @@ public class IndexStepDefs {
     public void iCanSeeTheBestSellingItems() {
 
         indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
 
     }
@@ -167,27 +169,35 @@ public class IndexStepDefs {
         switch (name) {
             case ("Specials"):
                 indexPage.pageFooter().goToSpecials();
+                break;
             case ("New products"):
                 indexPage.pageFooter().goToNewProducts();
+                break;
             case ("Best sellers"):
                 indexPage.pageFooter().goToBestSellers();
+                break;
             case ("Our stores"):
                 indexPage.pageFooter().goToOurStores();
+                break;
             case ("Terms and conditions of use"):
                 indexPage.pageFooter().goToTermsAndConditions();
+                break;
             case ("About us"):
                 indexPage.pageFooter().goToAboutUs();
+                break;
             case ("Sitemap"):
                 indexPage.pageFooter().goToSitemap();
-
+                break;
             case ("My orders"):
-                indexPage.pageFooter().goToMyOrders();
             case ("My credit slips"):
                 indexPage.pageFooter().goToMyOrders();
+                break;
             case ("My addresses"):
                 indexPage.pageFooter().goToMyAddresses();
+                break;
             case ("My personal info"):
                 indexPage.pageFooter().goToMyPersonalInfo();
+                break;
         }
 
     }

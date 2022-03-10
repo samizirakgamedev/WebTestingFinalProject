@@ -32,6 +32,7 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     When I click on the search button
     Then I am taken to my search results
 
+
   @index
   Scenario Outline: I want to search the various categories that are advertised on the front of the home page.
     When I click on the "<Name>" panel
@@ -45,6 +46,7 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     When I click on the button within the Call Us section
     Then I am taken to the organization's website
 
+  # need to be logged
   @index
   Scenario Outline: I want to access the details of my account using the footer navigation bar
     When I click on the "<Name>" link
@@ -69,12 +71,6 @@ Feature: As a customer I want to be able navigate around the website. This inclu
       | Terms and conditions of use | Terms and conditions of use |
       | About us                    | About us                    |
       | Sitemap                     | Sitemap                     |
-
-  @index
-  Scenario: I want to sign up for the newsletter
-    When I enter my email address
-    And I click on the newsletter button
-    Then I will register myself for the email newsletter
 
   @index
   Scenario: I want to access the contact and support page
