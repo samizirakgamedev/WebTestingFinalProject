@@ -63,7 +63,7 @@ public class SearchStepdefs {
     @Then("I will see the number of results equal to {string}")
     public void iWillSeeTheNumberOfResultsEqualTo(String expectedResult) {
         searchPage = new SearchPage(webDriver, "http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=Printed+dress&submit_search=");
-        //Assertions.assertEquals(expectedResult, searchPage.getTheNumberOfResultsFound().toString());
+        Assertions.assertEquals(expectedResult, searchPage.getTextOfNumberOfSearchResults()); //?
     }
 
     //opt
