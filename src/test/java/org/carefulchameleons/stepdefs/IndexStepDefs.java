@@ -7,6 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
+import org.carefulchameleons.pom.PageHeader;
+import org.carefulchameleons.pom.myaccounts.RegistrationPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -20,15 +22,14 @@ public class IndexStepDefs {
 
     @Before("@index")
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        System.out.println("setup");
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
+        indexPage = new IndexPage(webDriver);
+        webDriver.navigate().to("http://automationpractice.com/");
     }
 
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
-        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        webDriver = driverManager.getDriver();
-        webDriver.get("http://automationpractice.com/index.php");
         Assertions.assertEquals("http://automationpractice.com/index.php", indexPage.getCurrentURL());
     }
 
