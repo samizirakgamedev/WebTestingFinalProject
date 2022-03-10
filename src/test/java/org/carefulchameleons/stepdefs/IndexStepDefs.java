@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.PageHeader;
 import org.carefulchameleons.pom.myaccounts.RegistrationPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -28,12 +29,14 @@ public class IndexStepDefs {
     public void setup() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
+        webDriver.navigate().to("http://automationpractice.com/");
 
         indexPage = new IndexPage(webDriver);
-        indexPage.getPageHeader().clickSignInButton().login("dpbtest@test.com", "password");
 
-        webDriver.navigate().to("http://automationpractice.com/");
-        
+        SignInPage signInPage = indexPage.getPageHeader().clickSignInButton();
+        signInPage.login("dpbtest@test.com", "password");
+        signInPage.clickHomeButtonTop();
+
     }
 
     @Given("I am on the home page")
