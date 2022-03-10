@@ -1,6 +1,7 @@
 package org.carefulchameleons.pom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -52,15 +53,27 @@ public class SearchPage extends Page {
      * @return
      */
     public SearchPage sortByGivenChoice(String choice){
-        webDriver.findElement(SORT_BY_DROP_DOWN).click();
-        List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
+        try {
+            webDriver.findElement(SORT_BY_DROP_DOWN).click();
+            List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
 
-        for (WebElement element : sortOptions) {
-            if (element.getAttribute("value").equals(choice)){
-                element.click();
+            for (WebElement element : sortOptions) {
+                if (element.getAttribute("value").equals(choice)){
+                    element.click();
+                }
             }
+            return new SearchPage(webDriver, null);
+        } catch (StaleElementReferenceException e){
+            webDriver.findElement(SORT_BY_DROP_DOWN).click();
+            List<WebElement> sortOptions = webDriver.findElements(SORT_BY_OPTIONS);
+
+            for (WebElement element : sortOptions) {
+                if (element.getAttribute("value").equals(choice)){
+                    element.click();
+                }
+            }
+            return new SearchPage(webDriver, null);
         }
-        return new SearchPage(webDriver, null);
     }
 
     public String getTextOfNumberOfSearchResults(){
