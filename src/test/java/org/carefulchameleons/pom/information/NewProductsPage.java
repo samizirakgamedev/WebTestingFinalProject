@@ -48,7 +48,6 @@ public class NewProductsPage extends Page {
     public LeftColumn leftColumn(){
         return new LeftColumn(webDriver);
     }
-
 }
 
 

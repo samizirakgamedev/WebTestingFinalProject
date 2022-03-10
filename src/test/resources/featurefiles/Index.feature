@@ -19,13 +19,8 @@ Feature: As a customer I want to be able navigate around the website. This inclu
   Scenario: I want to explore the Women's Dresses section of the website.
     Given I am on the website
     When I click on the dresses category
-    Then I am sent to the women's department
+    Then I am sent to the women's dresses department
     And I am sent to the dress section
-
-  @index
-  Scenario: I want to be able to see the Best Selling clothing from the home page.
-    When I click on the Best Sellers tab
-    Then I can see the best selling items
 
   @index
   Scenario: I want to be able to search for products using the search tab
@@ -40,11 +35,6 @@ Feature: As a customer I want to be able navigate around the website. This inclu
     Examples:
       | Name | Category |
       |      |          |
-
-  @index
-  Scenario: I want to be able to contact the organization of the website.
-    When I click on the button within the Call Us section
-    Then I am taken to the organization's website
 
   # need to be logged
   @index

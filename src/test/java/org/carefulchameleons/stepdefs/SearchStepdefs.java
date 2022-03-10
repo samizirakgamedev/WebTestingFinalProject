@@ -14,6 +14,8 @@ import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
+
 public class SearchStepdefs {
 
     private static WebDriver webDriver;
@@ -57,12 +59,12 @@ public class SearchStepdefs {
     @And("I can see numbers of results equals to {string}")
     public void iCanSeeNumbersOfResultsEqualsTo(String expectedResult) {
         searchPage = new SearchPage(webDriver, "http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=Printed+dress&submit_search=");
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertTrue(searchPage.getTextOfNumberOfSearchResults().contains(expectedResult));
     }
 
     @And("I click on the dropdown Sort by")
     public void iClickOnTheDropdownSortBy() {
-        //it will click in the next condition
     }
 
     @And("I click on {string}")

@@ -26,7 +26,6 @@ public class CategoriesBlock {
         List<WebElement> elements = root.findElements(new By.ByClassName("grower")) ;
         elements.forEach(e -> e.click());
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-
     }
 
     public CategoryPage clickOnWomen(){

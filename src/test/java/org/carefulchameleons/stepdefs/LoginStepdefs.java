@@ -106,5 +106,4 @@ public class LoginStepdefs {
     public void iInsertAnInvalidPassword() {
         signinPage.enterLoginPassword("SpartaGlobal1");
     }
-
 }

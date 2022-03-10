@@ -1,15 +1,6 @@
 Feature: As a customer I would like to navigate through my account pages and edit information after logging in
 
   @myaccount
-  Scenario: As a customer I would like to safely logout from my account
-    Given I am on my account page
-    When I click the Sign out link
-    And The registration page opens
-    And I click back on my browser
-    And I click any link
-    Then I should see the authentication form
-
-  @myaccount
   Scenario: As a customer I want to be able to see my order history
     Given I am on my account page
     When I click on the Order History And Details button

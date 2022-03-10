@@ -12,7 +12,6 @@ import org.carefulchameleons.pom.cart.CartAddressPage;
 import org.carefulchameleons.pom.cart.CartShippingPage;
 import org.carefulchameleons.pom.cart.CartSignInPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
-import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -51,6 +50,7 @@ public class CartStepDefs {
 
     @Then("Cart should be empty")
     public void cartShouldBeEmpty() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertTrue(cartSummaryPage.isCartEmpty());
     }
 
@@ -68,6 +68,7 @@ public class CartStepDefs {
     public void iHaveAddedAnItemToTheCart() {
         driver.get("http://automationpractice.com/index.php");
         indexPage = new IndexPage(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         productSelection =  indexPage.featuredItems();
         productSelection.addItemToCart(0);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));

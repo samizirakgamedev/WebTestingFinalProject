@@ -35,7 +35,6 @@ public class IndexStepDefs {
         SignInPage signInPage = indexPage.getPageHeader().clickSignInButton();
         signInPage.login("rlovecetest@hotmail.co.uk", "password1");
         signInPage.clickHomeButtonTop();
-
     }
 
     @After("@index")
@@ -72,26 +71,21 @@ public class IndexStepDefs {
     public void iClickOnTheWomenSCategory() {
 
         indexPage.categoryMenu().clickWomen();
-
     }
 
     @Then("I am sent to the women's department")
     public void iAmSentToTheWomenSDepartment() {
-        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
-
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=3&controller=category", indexPage.getCurrentURL());
     }
 
     @When("I click on the dresses category")
     public void iClickOnTheDressesCategory() {
-
         indexPage.categoryMenu().clickDresses();
-
     }
 
     @And("I am sent to the dress section")
     public void iAmSentToTheDressSection() {
         Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
-
     }
 
     @When("I click on the Best Sellers tab")
@@ -101,35 +95,27 @@ public class IndexStepDefs {
 
     @Then("I can see the best selling items")
     public void iCanSeeTheBestSellingItems() {
-
-        indexPage.clickBestSellerButton().featuredItems().getTitle(0);
-        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
-
+        indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        String title = indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        Assertions.assertEquals("Printed Chiffon Dress",  title);
     }
 
     @When("I click on the search button")
     public void iClickOnTheSearchButton() {
         indexPage.doSearch("dress");
-
     }
 
     @Then("I am taken to my search results")
     public void iAmTakenToMySearchResults() {
-
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=dress&submit_search=", indexPage.getCurrentURL());
-
     }
 
     @When("I click on the {string} panel")
     public void iClickOnThePanel(String name) {
-
-
     }
 
     @Then("I am taken to the {string} page")
     public void iAmTakenToThePage(String name) {
-
         indexPage.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         switch (name) {
@@ -143,7 +129,6 @@ public class IndexStepDefs {
                 Assertions.assertEquals("http://automationpractice.com/index.php?controller=identity", indexPage.getCurrentURL());
                 break;
         }
-
     }
 
 
@@ -176,20 +161,15 @@ public class IndexStepDefs {
 
     @When("I click on the button within the Call Us section")
     public void iClickOnTheButtonWithinTheCallUsSection() {
-
-      //  indexPage.
-
     }
 
     @Then("I am taken to the organization's website")
     public void iAmTakenToTheOrganizationSWebsite() {
         Assertions.assertEquals("http://www.seleniumframework.com/", indexPage.getCurrentURL());
-
     }
 
     @When("I click on the {string} link")
     public void iClickOnTheLink(String name) {
-
         switch (name) {
             case ("Specials"):
                 indexPage.pageFooter().goToSpecials();
@@ -222,19 +202,16 @@ public class IndexStepDefs {
                 indexPage.pageFooter().goToMyPersonalInfo();
                 break;
         }
-
     }
 
     @When("I click on the contact us button")
     public void iClickOnTheContactUsButton() {
         indexPage.getPageHeader().clickContactUsButton();
-
     }
 
     @Then("I am taken to the contact us page")
     public void iAmTakenToTheContactUsPage() {
         Assertions.assertEquals("http://automationpractice.com/index.php?controller=contact", indexPage.getCurrentURL());
-
     }
 
     @When("I enter my email address and submit it")
@@ -245,5 +222,10 @@ public class IndexStepDefs {
     @Then("I will register myself for the email newsletter")
     public void iWillRegisterMyselfForTheEmailNewsletter() {
         Assertions.assertTrue((BooleanSupplier) webDriver.findElement(By.className("alert_alert-success")));
+    }
+
+    @Then("I am sent to the women's dresses department")
+    public void iAmSentToTheWomenSDressesDepartment() {
+        Assertions.assertEquals("http://automationpractice.com/index.php?id_category=8&controller=category", indexPage.getCurrentURL());
     }
 }

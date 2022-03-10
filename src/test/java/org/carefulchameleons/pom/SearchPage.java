@@ -83,6 +83,4 @@ public class SearchPage extends Page {
     public int getNumberOfItemsInSearchResults(){
         return webDriver.findElements(PRODUCT_CONTAINER).size();
     }
-
-
 }

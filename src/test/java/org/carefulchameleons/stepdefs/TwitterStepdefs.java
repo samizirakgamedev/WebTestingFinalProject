@@ -43,7 +43,6 @@ public class TwitterStepdefs {
 
     @Given("I am on the Home Page")
     public void iAmOnTheHomePage() {
-
     }
 
     @When("I click on TWITTER icon")
@@ -58,5 +57,4 @@ public class TwitterStepdefs {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Assertions.assertEquals("https://twitter.com/seleniumfrmwrk", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
-
 }

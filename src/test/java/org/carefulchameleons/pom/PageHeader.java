@@ -49,13 +49,11 @@ public class PageHeader {
     public ContactUs clickContactUsButton() {
         webDriver.findElement(CONTACT_US_LINK).click();
         return new ContactUs();
-        // TODO - Need to update arguments when contact us page is done
     }
 
     public SignInPage clickSignInButton() {
         webDriver.findElement(SIGN_IN).click();
         return new SignInPage(webDriver, "");
-        // TODO - Need to update arguments when my account page is done
     }
 
     public void clickLogo() {
@@ -69,7 +67,6 @@ public class PageHeader {
     public SearchPage clickSearchButton() {
         webDriver.findElement(SEARCH_BUTTON).click();
         return new SearchPage(webDriver, "");
-        // TODO - Need to update arguments when search page is done
     }
 
     public void hoverCartButton() {
@@ -81,7 +78,6 @@ public class PageHeader {
     public CartSummaryPage clickCartButton() {
         webDriver.findElement(CART_BUTTON).click();
         return new CartSummaryPage(webDriver);
-        // TODO - Need to update arguments when cart summary page is done
     }
 
     public void clickCartItemImageAtIndex(int index) {
@@ -89,7 +85,6 @@ public class PageHeader {
         webDriver.findElements(CART_ITEM_IMAGES)
                 .get(index)
                 .click();
-        // TODO - return product specific page
     }
 
     public Integer getCartQuantity() {
@@ -124,6 +119,5 @@ public class PageHeader {
         hoverCartButton();
         webDriver.findElement(CART_CHECKOUT_BUTTON).click();
         return new CartSummaryPage(webDriver);
-        // TODO - Need to update arguments when cart summary page is done
     }
 }

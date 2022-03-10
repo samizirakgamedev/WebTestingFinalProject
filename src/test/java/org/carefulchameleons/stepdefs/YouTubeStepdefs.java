@@ -21,9 +21,6 @@ public class YouTubeStepdefs {
 
     private static WebDriver webDriver;
     private IndexPage indexPage;
-    private SignInPage signInPage;
-    private MyAccountPage myAccountPage;
-    private PageFooter pageFooter;
     private  static WebDriverManager driverManager;
 
     @Before("@youtube")
@@ -57,5 +54,4 @@ public class YouTubeStepdefs {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         Assertions.assertEquals("https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCHl59sI3SRjQ-qPcTrgt0tA%3Fcbrd%3D1&gl=GB&m=0&pc=yt&uxe=23983171&hl=en-GB&src=1", webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1)).getCurrentUrl());
     }
-
 }

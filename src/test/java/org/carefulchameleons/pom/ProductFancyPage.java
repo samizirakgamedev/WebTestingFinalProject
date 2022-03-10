@@ -38,13 +38,11 @@ public class ProductFancyPage {
         return this;
     }
 
-
     public ProductPage clickAddToCart(){
         webDriver.findElement(By.id("add_to_cart")).click();
         webDriver.switchTo().defaultContent();
         return new ProductPage(webDriver, "");
     }
-
 
     public ProductFancyPage clickAddToWishList(){
         webDriver.findElement(By.id("wishlist_button")).click();
@@ -77,5 +75,4 @@ public class ProductFancyPage {
         webDriver.findElement(By.className("btn-pinterest")).click();
         return this;
     }
-
 }

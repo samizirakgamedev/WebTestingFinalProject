@@ -1,6 +1,5 @@
 package org.carefulchameleons.pom.myaccounts;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -147,5 +146,4 @@ public class MyAddressPage extends MyAccountSharedPage {
     public int getAddressSize() {
         return webDriver.findElements(ADDRESSES).size();
     }
-
 }

@@ -16,7 +16,5 @@ public enum CategorySelection {
 
     public void clickCheckbox(WebDriver webDriver){
         webDriver.findElement(new By.ById(ID)).click();
-
-
     }
 }

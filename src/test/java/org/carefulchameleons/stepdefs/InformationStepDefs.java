@@ -12,7 +12,6 @@ import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
-
 public class InformationStepDefs {
 
     private static WebDriver driver;

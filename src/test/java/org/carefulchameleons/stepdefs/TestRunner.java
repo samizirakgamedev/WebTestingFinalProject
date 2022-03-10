@@ -1,6 +1,5 @@
 package org.carefulchameleons.stepdefs;
 
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -13,7 +12,7 @@ import org.junit.runner.RunWith;
         //tags can be used to run tests based on the individual scenarios
         //one scenario at a time
 
-        tags = "@test1",
+        tags = "",
         publish = true
 )
 public class TestRunner { }

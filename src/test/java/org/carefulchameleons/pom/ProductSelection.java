@@ -164,5 +164,4 @@ public class ProductSelection {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         return this;
     }
-
 }

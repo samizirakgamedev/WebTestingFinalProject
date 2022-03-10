@@ -50,5 +50,4 @@ public class MyAccountPage extends Page {
         webDriver.findElement(BOTTOM_HOME_BUTTON).click();
         return new IndexPage(webDriver);
     }
-
 }
