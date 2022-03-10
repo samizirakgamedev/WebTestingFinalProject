@@ -35,7 +35,7 @@ public class OrderStepdefs {
     @When("I click on the black Sign in button")
     public void iClickOnTheBlackSignInButton() {
         indexPage = new IndexPage(webDriver);
-        //indexPage.clickSignInButton();
+        indexPage.getPageHeader().clickSignInButton();
     }
 
     @And("I enter the Email Address {string} and  the Password {string}")
@@ -53,29 +53,32 @@ public class OrderStepdefs {
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
         myAccountPage = new MyAccountPage(webDriver);
-        //myAccountPage.METHOD?? hovering to women tab
+        //myAccountPage.METHOD??    hovering to women tab {in page header class}
     }
 
     @And("I click on the sub menu T-shirts")
     public void iClickOnTheSubMenuTShirts() {
         //myAccountPage.clickTShirts();   //url for T-shirts page: http://automationpractice.com/index.php?id_category=5&controller=category
+
+        //{selecting Tshirts option from the hovered result ? in page header class?}
     }
 
     @And("I hover over the first product displayed")
     public void iHoverOverTheFirstProductDisplayed() {
         //initialise tshirts page?
-        //hovering over Faded short sleeve Tshirt  //TshirtPage.METHOD??
+
+        //{ hovering over Faded short sleeve Tshirt }
     }
 
     @And("I click on the More button")
     public void iClickOnTheMoreButton() {
-        //on the dynamic thing
-        //TshirtPage.clickMore();
+        // { on the hovered thing
+        //{ ?Page.clickMore();
     }
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-          //initialise this page?                                                      //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
+          //initialise this page (Faded short sleeve Tshirt)?                                              //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
 
         //thisPage.clickPlus();
     }
@@ -100,24 +103,24 @@ public class OrderStepdefs {
     @And("I click on the Proceed to checkout button on the summary page")
     public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
         summaryPage = new CartSummaryPage(webDriver);
-        //summaryPage.clickProceedToCheckout();
+        //summaryPage.clickProceedToCheckout(); Need this method
     }
 
     @And("I click on the Proceed to checkout button on the address page")
     public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
          addressPage = new CartAddressPage(webDriver);
-        //addressPage.clickProceedToCheckout();
+        //addressPage.clickProceedToCheckout();  Need this method
     }
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
         shippingPage = new CartShippingPage(webDriver);
-        //shippingPage.clickTermsAndConditions();
+        //shippingPage.clickTermsAndConditions();  Need this method
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
     public void iClickOnTheProceedToCheckoutButtonOnTheShippingPage() {
-        //shippingPage.clickProceedToCheckout();
+        //shippingPage.clickProceedToCheckout(); Need this method
     }
 
     @And("I click on the Pay by bank wire button")
@@ -126,7 +129,7 @@ public class OrderStepdefs {
 
     //cartBankWirePaymentPage = new CartBankWirePaymentPage(webDriver);
 
-        //paymentPage.clickPayByBankWire();
+        //paymentPage.clickPayByBankWire(); Need this method
     }
 
     @And("I click on the I confirm my order button on the payment page")
@@ -141,7 +144,7 @@ public class OrderStepdefs {
         //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
 
         //CartPageConfirmationPage checkoutFinal = new CartPageConfirmationPage(webdriver);
-        //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle());
+        //Assertions.assertEquals("Your order on My Store is complete.", checkoutFinal.getTitle()); Need this method
     }
 
     @After
