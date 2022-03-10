@@ -8,14 +8,17 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.function.BooleanSupplier;
 
 public class IndexStepDefs {
 
     private static WebDriver webDriver;
     private IndexPage indexPage;
 
-    //private Homepage homePage;
+//private Homepage homePage;
     //private LoginPage loginPage;
     //private MyAccountPage myAccountPage;
     //private static WebDriverManager manager;
@@ -27,7 +30,6 @@ public class IndexStepDefs {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
         System.out.println("setup");
     }
-
 
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
@@ -87,9 +89,8 @@ public class IndexStepDefs {
     @Then("I can see the best selling items")
     public void iCanSeeTheBestSellingItems() {
 
-
-        // Todo
-
+        indexPage.clickBestSellerButton().featuredItems().getTitle(0);
+        Assertions.assertEquals("Printed Chiffon Dress",  indexPage.clickBestSellerButton().featuredItems().getTitle(0));
 
     }
 
@@ -214,4 +215,13 @@ public class IndexStepDefs {
     }
 
 
+    @When("I enter my email address and submit it")
+    public void iEnterMyEmailAddress() {
+        indexPage.getPageFooter().enterNewsletterEmailAndClickSubmit("dpbtest@test.com");
+    }
+
+    @Then("I will register myself for the email newsletter")
+    public void iWillRegisterMyselfForTheEmailNewsletter() {
+        Assertions.assertTrue((BooleanSupplier) webDriver.findElement(By.className("alert_alert-success")));
+    }
 }
