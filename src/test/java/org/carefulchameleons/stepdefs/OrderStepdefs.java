@@ -20,6 +20,8 @@ import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
+
 public class OrderStepdefs {
 
     private static WebDriver webDriver;
@@ -66,6 +68,7 @@ public class OrderStepdefs {
 
     @And("I move my cursor to the WOMEN tab")
     public void iMoveMyCursorToTheWOMENTab() {
+        myAccountPage = new MyAccountPage(webDriver);
         womenMenu = myAccountPage.getCategoryMenu().hoverOverWomen();
     }
 
@@ -76,7 +79,9 @@ public class OrderStepdefs {
 
     @And("I click on the first product displayed")
     public void iClickOnTheFirstProductDisplayed() {
-        categoryPage.getProductSelection().clickOnMore(0);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+         categoryPage.getProductSelection().clickOnMore(0);
     }
 
 //    @And("I click on the More button")
@@ -86,7 +91,8 @@ public class OrderStepdefs {
 
     @And("I click on the plus button to increase the quantity to two")
     public void iClickOnThePlusButtonToIncreaseTheQuantityToTwo() {
-                                                     //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
+        productPage = new ProductPage(webDriver, "http://automationpractice.com/index.php?id_product=1&controller=product");
+                //this page's url: http://automationpractice.com/index.php?id_product=1&controller=product
         productPage.increaseQuantity();
     }
 
@@ -97,14 +103,12 @@ public class OrderStepdefs {
 
     @And("I click on the Add to cart blue button")
     public void iClickOnTheAddToCartBlueButton() {
-
-        //productPage.addToCart();
+        productSelection = productPage.addToCart();
     }
 
     @And("I click on the green Proceed to checkout button")
     public void iClickOnTheGreenProceedToCheckoutButton() {
-        //from the popped up thing
-        //thisPage.clickProceedToCheckout();
+        productSelection.proceedToCheckout();
     }
 
     @And("I click on the Proceed to checkout button on the summary page")
@@ -119,8 +123,8 @@ public class OrderStepdefs {
 
     @And("I click on the agree to terms and conditions")
     public void iClickOnTheAgreeToTermsAndConditions() {
-        shippingPage.clickTOS();
-        //shippingPage.isTOSChecked();
+        //shippingPage.
+        shippingPage.acceptTOS();
     }
 
     @And("I click on the Proceed to checkout button on the shipping page")
@@ -139,7 +143,7 @@ public class OrderStepdefs {
 
     @And("I click on the I confirm my order button on the payment page")
     public void iClickOnTheIConfirmMyOrderButtonOnThePaymentPage() {
-        cartBankWirePaymentPage.confirmOrder();
+        cartPaymentConfirmationPage = cartBankWirePaymentPage.confirmOrder();
     }
 
     @Then("Your order on My Store is complete. should be displayed")
@@ -147,7 +151,8 @@ public class OrderStepdefs {
         //url is different in CartPageConfirmationPage
         //url for order confirmation page: http://automationpractice.com/index.php?controller=order-confirmation&id_cart=4308278&id_module=3&id_order=408994&key=bb5ced91d4f2089035d2b0d9f38876f5
 
-        cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
+        //cartPaymentConfirmationPage = new CartPaymentConfirmationPage(webDriver);
+
         Assertions.assertEquals("Your order on My Store is complete.", cartPaymentConfirmationPage.getOrderCompleteText());
     }
 
