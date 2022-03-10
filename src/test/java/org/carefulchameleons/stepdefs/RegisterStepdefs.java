@@ -1,5 +1,5 @@
 package org.carefulchameleons.stepdefs;
-import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,16 +17,12 @@ public class RegisterStepdefs {
     private RegistrationPage registrationPage;
     private PageHeader pageHeader;
 
-    @Before
-    public void setup() {
+    @Given("I open the Home Page")
+    public void iOpenTheHomePage() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         webDriver = driverManager.getDriver();
         registrationPage = new RegistrationPage(webDriver);
         pageHeader = new PageHeader(webDriver);
-    }
-
-    @Given("I open the Home Page")
-    public void iOpenTheHomePage() {
         webDriver.navigate().to("http://automationpractice.com/");
     }
 
@@ -225,5 +221,13 @@ public class RegisterStepdefs {
     @Then("The You must register at least one phone number. message should be displayed")
     public boolean theErrorMessagePhoneNumberShouldBeShown() {
         return registrationPage.isPhoneNumberErrorPresent();
+    }
+
+    @After
+    public static void tearDown() {
+        if(webDriver != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown register");
+        }
     }
 }

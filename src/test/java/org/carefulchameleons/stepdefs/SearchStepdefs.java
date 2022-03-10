@@ -11,26 +11,27 @@ import org.carefulchameleons.pom.information.FashionSupplierPage;
 import org.carefulchameleons.pom.information.OurStores;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class SearchStepdefs {
 
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
     private IndexPage indexPage;
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
     private SearchPage searchPage;
     private OurStores ourStores;
     private FashionSupplierPage fashionSupplierPage;
-    //private static WebDriverManager manager;
 
     @Given("I am on the Index page")
     public void iAmOnTheIndexPage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
-        webDriver = new ChromeDriver();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
     }
 
@@ -110,7 +111,7 @@ public class SearchStepdefs {
     @After
     public static void tearDown() {
         if (webDriver != null) {
-                webDriver.quit();
+            driverManager.quitDriver();
             System.out.println("tearDown searchPage");
         }
     }

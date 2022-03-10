@@ -8,26 +8,27 @@ import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.PageFooter;
 import org.carefulchameleons.pom.myaccounts.MyAccountPage;
 import org.carefulchameleons.pom.myaccounts.SignInPage;
+import org.carefulchameleons.webdrivers.WebDriverFactory;
+import org.carefulchameleons.webdrivers.model.WebDriverManager;
+import org.carefulchameleons.webdrivers.model.WebDriverType;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 import java.util.ArrayList;
 
 public class FacebookStepdefs {
 
     private static WebDriver webDriver;
+    private  static WebDriverManager driverManager;
     private IndexPage indexPage;
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
     private PageFooter pageFooter;
-    //private static WebDriverManager manager;
 
     @Given("I am on the Home page")
     public void iAmOnTheHomePage() {
-        //manager = WebDriverFactory.getManager(WebDriverType.CHROME);
-        //webDriver = manager.getDriver();
-        webDriver = new ChromeDriver();
+        driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
+        webDriver = driverManager.getDriver();
         webDriver.get("http://automationpractice.com/index.php");
 
     }
@@ -48,7 +49,7 @@ public class FacebookStepdefs {
     @After
     public static void tearDown() {
         if(webDriver != null) {
-               webDriver.quit();
+            driverManager.quitDriver();
             System.out.println("tearDown facebook");
         }
     }

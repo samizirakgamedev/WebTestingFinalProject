@@ -4,17 +4,20 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.carefulchameleons.pom.ProductSelection;
 import org.carefulchameleons.pom.category.CategoryPage;
 public class CategoryStepdefs {
+
     private static WebDriver webDriver;
     String url = webDriver.getCurrentUrl();
+
     //this part might be added to CategoryPage.java
     String subUrl = url.substring(url.indexOf("=") + 1);
     String catID = subUrl.substring(0, subUrl.indexOf("&"));
     int cat = Integer.parseInt(catID);
+
     //until here
     CategoryPage categoryPage = new CategoryPage(webDriver, cat);
+
     @Given("I am on the category 3 page")
     public void iAmOnTheCategoryPage() {
         catID = "3";
