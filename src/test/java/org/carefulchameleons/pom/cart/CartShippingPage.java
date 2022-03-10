@@ -1,5 +1,6 @@
 package org.carefulchameleons.pom.cart;
 
+import org.carefulchameleons.pom.IndexPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,11 +42,11 @@ public class CartShippingPage extends CartPage {
         return title;
     }
 
-    public CartSummaryPage continueShopping() {
+    public IndexPage continueShopping() {
         getWebDriver().findElement(By.className("cart_navigation"))
                 .findElement(By.className("button-exclusive"))
                 .click();
-        return new CartSummaryPage(getWebDriver());
+        return new IndexPage(getWebDriver());
     }
 
     public CartPaymentPage proceedToCheckout() {

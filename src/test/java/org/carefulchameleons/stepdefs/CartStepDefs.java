@@ -8,7 +8,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.carefulchameleons.pom.IndexPage;
 import org.carefulchameleons.pom.ProductSelection;
+import org.carefulchameleons.pom.cart.CartAddressPage;
+import org.carefulchameleons.pom.cart.CartShippingPage;
+import org.carefulchameleons.pom.cart.CartSignInPage;
 import org.carefulchameleons.pom.cart.CartSummaryPage;
+import org.carefulchameleons.pom.myaccounts.SignInPage;
 import org.carefulchameleons.webdrivers.WebDriverFactory;
 import org.carefulchameleons.webdrivers.model.WebDriverManager;
 import org.carefulchameleons.webdrivers.model.WebDriverType;
@@ -25,20 +29,15 @@ public class CartStepDefs {
     private static CartSummaryPage cartSummaryPage;
     private static IndexPage indexPage;
     private static ProductSelection productSelection;
+    private static CartSignInPage cartSignInPage;
+    private static CartAddressPage cartAddressPage;
+    private static CartShippingPage cartShippingPage;
 
     @Before("@cart")
     public void setUp() {
         driverManager = WebDriverFactory.getManager(WebDriverType.CHROME);
         driver = driverManager.getDriver();
         driver.get("http://automationpractice.com/index.php");
-    }
-
-    @After("@cart")
-    public static void tearDown() {
-        if (driverManager.getDriver() != null) {
-            driverManager.quitDriver();
-            System.out.println("tearDown cart");
-        }
     }
 
     @Given("I am on the Cart Page")
@@ -124,8 +123,61 @@ public class CartStepDefs {
 
     @Then("Item's quantity should be {int}")
     public void itemSQuantityShouldBe(int arg0) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         double totalProducts = cartSummaryPage.getProductQuantity(0);
         Assertions.assertEquals(arg0, totalProducts);
     }
 
+    @When("I click on the continue shopping button on the summary page")
+    public void iClickOnTheContinueShoppingButtonOnTheSummaryPage() {
+        cartSummaryPage.continueShopping();
+    }
+
+    @And("I go to the Cart address Page")
+    public void iGoToTheCartAddressPage() {
+        cartSummaryPage = new CartSummaryPage(driver);
+        cartAddressPage = cartSummaryPage.proceedToCheckoutLoggedIn();
+    }
+
+    @When("I click on the continue shopping button on the address page")
+    public void iClickOnTheContinueShoppingButtonOnTheAddressPage() {
+        cartAddressPage.continueShopping();
+    }
+
+    @And("I click on the proceed to checkout button on the summary page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheSummaryPage() {
+        cartSignInPage = cartSummaryPage.proceedToCheckoutNotLoggedIn();
+    }
+
+    @When("I click on the continue shopping button on the shipping page")
+    public void iClickOnTheContinueShoppingButtonOnTheShippingPage() {
+        cartShippingPage.continueShopping();
+    }
+
+    @And("I log in with {string} and {string}")
+    public void iLogInWithAnd(String email, String password) {
+        cartSignInPage.enterLoginEmail(email);
+        cartSignInPage.enterLoginPassword(password);
+        cartSignInPage.clickLoginButton();
+        cartAddressPage = new CartAddressPage(driver);
+    }
+
+    @Then("I should be taken to the index page")
+    public void iShouldBeTakenToTheIndexPage() {
+        Assertions.assertEquals("http://automationpractice.com/index.php", driverManager.getDriver().getCurrentUrl());
+    }
+
+    @After("@cart")
+    public static void tearDown() {
+        if (driverManager.getDriver() != null) {
+            driverManager.quitDriver();
+            System.out.println("tearDown cart");
+        }
+    }
+
+    @And("I click on the proceed to checkout button on the address page")
+    public void iClickOnTheProceedToCheckoutButtonOnTheAddressPage() {
+        cartAddressPage = new CartAddressPage(driver);
+        cartShippingPage = cartAddressPage.proceedToCheckout();
+    }
 }

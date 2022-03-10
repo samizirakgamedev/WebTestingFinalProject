@@ -25,8 +25,9 @@ public class CartSummaryPage extends CartPage {
 
     public int getProductQuantity(int index) {
         String stringQuantity = getProduct(index).
-                findElement(By.className("cart_quantity_input")).
-                getAttribute("value");
+                findElement(By.className("cart_quantity"))
+                .findElements(By.tagName("input")).get(0)
+                .getAttribute("value");
         return Integer.parseInt(stringQuantity);
     }
 
@@ -122,7 +123,8 @@ public class CartSummaryPage extends CartPage {
     }
 
     public CartSummaryPage incrementQuantity(int index) {
-        getProduct(index).findElement(By.className("cart_quantity"))
+        getProduct(index).findElements(By.className("cart_quantity"))
+                .get(index)
                 .findElement(By.className("cart_quantity_up"))
                 .click();
         return this;
