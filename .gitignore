@@ -1,16 +1,14 @@
-# Compiled class file
-*.class
+# Drivers
+src/test/resources/drivers/*
+*.exe
 
-# Log file
+# IDE
+.idea
+
+# Utility
 *.log
-
-# BlueJ files
+*.iml
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -19,5 +17,23 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Compiled class file
+*.class
+
+# Maven
 hs_err_pid*
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+
